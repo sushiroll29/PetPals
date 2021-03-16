@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "160130937938",
+    "project_id": "flfl-84799",
+    "storage_bucket": "flfl-84799.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160130937938:android:6dc4d5e3a86510c5865b8b",
+        "android_client_info": {
+          "package_name": "com.example.fl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160130937938-ilf8ajq46nk888c6a032drdo22inl9ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlD2z9R0Nzb8d5gKRgD9ZCGBGazid-uLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160130937938-ilf8ajq46nk888c6a032drdo22inl9ua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
