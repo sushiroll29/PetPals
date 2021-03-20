@@ -31,15 +31,33 @@ class _SignUpState extends State<SignUp> {
   final formKey = GlobalKey<FormState>();
   String _email;
   String _password;
-  String _confirm_password;
+  String _name;
+  String _error;
 
-  void submit() async {
+  bool validate() {
     final form = formKey.currentState;
     form.save();
-    final auth = Provider.of(context).auth;
-    String uid = await auth.signUpWithEmailAndPassword(_email, _password);
-    print("Signed up with ID $uid");
-    Navigator.of(context).pushReplacementNamed('/home');
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
+  void submit() async {
+    if (validate()) {
+      try {
+        final auth = Provider.of(context).auth;
+        String uid = await auth.signUpWithEmailAndPassword(_email, _password);
+        print("Signed up with ID $uid");
+        Navigator.of(context).pushReplacementNamed('/home');
+      } catch (e) {
+        print(e);
+        setState(() {
+          _error = e.message;
+        });
+      }
+    }
   }
 
   @override
@@ -53,7 +71,9 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: size.height * 0.01), //1%
+              //SizedBox(height: size.height * 0.005),
+              showError(),
+              SizedBox(height: size.height * 0.03), //1%
               AutoSizeText(
                 'SIGN UP',
                 style: TextStyle(
@@ -95,11 +115,85 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  Widget showError() {
+    if (_error != null) {
+      return Container(
+        color: aPrimaryLightColor,
+        width: double.infinity,
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              child: Icon(Icons.error_outline_rounded),
+              padding: EdgeInsets.only(right: 10.0),
+            ),
+            Expanded(
+              child: AutoSizeText(
+                _error,
+                maxLines: 3,
+                style: TextStyle(
+                  fontFamily: GoogleFonts.manjari(fontWeight: FontWeight.bold)
+                      .fontFamily,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.close_rounded),
+                onPressed: () {
+                  setState(() {
+                    _error = null;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    return SizedBox(height: 0);
+  }
+
   List<Widget> inputsBuilder() {
     List<Widget> inputFields = [];
+
     inputFields.add(
       TextFieldContainer(
         child: TextFormField(
+          onSaved: (value) => _name = value,
+          validator: NameValidator.validate,
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            fontFamily:
+                GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
+            height: 1.3,
+          ),
+          decoration: InputDecoration(
+            errorStyle: TextStyle(
+              fontFamily:
+                  GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
+            ),
+            isDense: true,
+            contentPadding: EdgeInsets.all(10.0),
+            icon: Icon(
+              Icons.person_outline_rounded,
+              size: 15.0,
+              color: aPrimaryColor,
+            ),
+            border: InputBorder.none,
+            hintText: "Name",
+          ),
+        ),
+      ),
+    );
+
+    inputFields.add(
+      TextFieldContainer(
+        child: TextFormField(
+          validator: EmailValidator.validate,
           onSaved: (value) => _email = value,
           style: GoogleFonts.manjari(fontWeight: FontWeight.normal),
           textAlign: TextAlign.left,
@@ -113,7 +207,7 @@ class _SignUpState extends State<SignUp> {
             hintText: "Email",
             border: InputBorder.none,
             icon: Icon(
-              Icons.person_outline_rounded,
+              Icons.alternate_email_rounded,
               color: aPrimaryColor,
             ),
           ),
@@ -123,6 +217,7 @@ class _SignUpState extends State<SignUp> {
     inputFields.add(
       TextFieldContainer(
         child: TextFormField(
+          validator: PasswordValidator.validate,
           obscureText: true,
           onSaved: (value) => _password = value,
           textAlign: TextAlign.left,
@@ -145,35 +240,6 @@ class _SignUpState extends State<SignUp> {
             ),
             border: InputBorder.none,
             hintText: "Password",
-          ),
-        ),
-      ),
-    );
-    inputFields.add(
-      TextFieldContainer(
-        child: TextFormField(
-          obscureText: true,
-          onSaved: (value) => _confirm_password = value,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontFamily:
-                GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
-            height: 1.3,
-          ),
-          decoration: InputDecoration(
-            errorStyle: TextStyle(
-              fontFamily:
-                  GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
-            ),
-            isDense: true,
-            contentPadding: EdgeInsets.all(10.0),
-            icon: Icon(
-              Icons.lock_outline_rounded,
-              size: 15.0,
-              color: aPrimaryColor,
-            ),
-            border: InputBorder.none,
-            hintText: "Confirm password",
           ),
         ),
       ),
