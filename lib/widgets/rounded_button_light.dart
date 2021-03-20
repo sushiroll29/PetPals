@@ -24,14 +24,15 @@ class RoundedButtonLight extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
         child: FlatButton(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           color: color,
           onPressed: press,
           child: Text(
             text,
             style: TextStyle(
               fontFamily:
-              GoogleFonts.manjari(fontWeight: FontWeight.bold).fontFamily,
+                  GoogleFonts.manjari(fontWeight: FontWeight.bold).fontFamily,
               color: Colors.black,
             ),
           ),
