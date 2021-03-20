@@ -30,14 +30,32 @@ class _SignInState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
   String _email;
   String _password;
+  String _error;
 
-  void submit() async {
+  bool validate() {
     final form = formKey.currentState;
     form.save();
-    final auth = Provider.of(context).auth;
-    String uid = await auth.signInWithEmailAndPassword(_email, _password);
-    print("Signed in with ID $uid");
-    Navigator.of(context).pushReplacementNamed('/home');
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
+  void submit() async {
+    if (validate()) {
+      try {
+        final auth = Provider.of(context).auth;
+        String uid = await auth.signInWithEmailAndPassword(_email, _password);
+        print("Signed in with ID $uid");
+        Navigator.of(context).pushReplacementNamed('/home');
+      } catch (e) {
+        print(e);
+        setState(() {
+          _error = e.message;
+        });
+      }
+    }
   }
 
   @override
@@ -51,6 +69,7 @@ class _SignInState extends State<SignIn> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              showError(),
               SizedBox(height: size.height * 0.01), //1%
               AutoSizeText(
                 'SIGN IN',
@@ -93,6 +112,47 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+  Widget showError() {
+    if (_error != null) {
+      return Container(
+        color: aPrimaryLightColor,
+        width: double.infinity,
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              child: Icon(Icons.error_outline_rounded),
+              padding: EdgeInsets.only(right: 10.0),
+            ),
+            Expanded(
+              child: AutoSizeText(
+                _error,
+                maxLines: 3,
+                style: TextStyle(
+                  fontFamily: GoogleFonts.manjari(fontWeight: FontWeight.bold)
+                      .fontFamily,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.close_rounded),
+                onPressed: () {
+                  setState(() {
+                    _error = null;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    return SizedBox(height: 0);
+  }
+
   List<Widget> inputsBuilder() {
     List<Widget> inputFields = [];
     inputFields.add(
@@ -111,7 +171,7 @@ class _SignInState extends State<SignIn> {
             hintText: "Email",
             border: InputBorder.none,
             icon: Icon(
-              Icons.person_outline_rounded,
+              Icons.alternate_email_rounded,
               color: aPrimaryColor,
             ),
           ),
