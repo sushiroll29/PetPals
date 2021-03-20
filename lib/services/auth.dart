@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fl/constants.dart';
 import 'package:flutter/material.dart';
 
 class AuthService {
@@ -50,13 +51,13 @@ class AuthService {
 class NameValidator {
   static String validate(String value) {
     if (value.isEmpty) {
-      return "Name can't be empty";
+      return "name can't be empty";
     }
     if (value.length < 2) {
-      return "Name must be at least 2 characters long";
+      return "name must be at least 2 characters long";
     }
     if (value.length > 50) {
-      return "Name must be less than 50 characters long";
+      return "name must be less than 50 characters long";
     }
     return null;
   }
@@ -65,7 +66,9 @@ class NameValidator {
 class EmailValidator {
   static String validate(String value) {
     if (value.isEmpty) {
-      return "Email can't be empty";
+      return "email can't be empty";
+      //} else if (!emailValidationExp.hasMatch(value)) {
+      //  return "invalid email";
     }
     return null;
   }
@@ -74,7 +77,7 @@ class EmailValidator {
 class PasswordValidator {
   static String validate(String value) {
     if (value.isEmpty) {
-      return "Password can't be empty";
+      return "password can't be empty";
     }
     return null;
   }

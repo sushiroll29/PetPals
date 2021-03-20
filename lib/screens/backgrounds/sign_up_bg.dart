@@ -27,7 +27,7 @@ class Background extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 0,
+              bottom: -20,
               left: 0,
               child: Image.asset(
                 "assets/images/bottom_bubble2.png",
