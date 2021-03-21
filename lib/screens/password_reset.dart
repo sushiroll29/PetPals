@@ -11,7 +11,7 @@ import 'package:fl/components/text_field_container.dart';
 
 //enum AuthFormType { signIn, signUp }
 
-class SignIn extends StatefulWidget {
+class PasswordReset extends StatefulWidget {
   //final AuthFormType authFormType;
 /*
   SignUp({
@@ -19,17 +19,17 @@ class SignIn extends StatefulWidget {
   }) : super(key: key);
 */
   @override
-  _SignInState createState() => _SignInState(//authFormType: this.authFormType
-      );
+  _PasswordResetState createState() =>
+      _PasswordResetState(//authFormType: this.authFormType
+          );
 }
 
-class _SignInState extends State<SignIn> {
+class _PasswordResetState extends State<PasswordReset> {
   //AuthFormType authFormType;
   //_SignUpState({this.authFormType}); //instantiere
 
   final formKey = GlobalKey<FormState>();
   String _email;
-  String _password;
   String _error;
 
   bool validate() {
@@ -47,9 +47,10 @@ class _SignInState extends State<SignIn> {
     if (validate()) {
       try {
         final auth = Provider.of(context).auth;
-        String uid = await auth.signInWithEmailAndPassword(_email, _password);
-        print("Signed in with ID $uid");
-        Navigator.of(context).pushReplacementNamed('/home');
+        await auth.sendPasswordResetEmail(_email);
+        print("Password reset email sent");
+        _error = "Reset link sent to $_email";
+        Navigator.of(context).pushReplacementNamed('/signIn');
       } catch (e) {
         print(e);
         setState(() {
@@ -65,7 +66,6 @@ class _SignInState extends State<SignIn> {
 
     return Scaffold(
       body: Background(
-        //child: SingleChildScrollView(),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
               showError(),
               SizedBox(height: size.height * 0.01), //1%
               AutoSizeText(
-                'SIGN IN',
+                'RESET YOUR PASSWORD',
                 style: TextStyle(
                   fontFamily: GoogleFonts.manjari(fontWeight: FontWeight.bold)
                       .fontFamily,
@@ -94,19 +94,13 @@ class _SignInState extends State<SignIn> {
               ),
 
               RoundedButton(
-                  text: "SIGN IN",
+                  text: "SEND PASSWORD RESET LINK",
                   press: () async {
                     submit();
                     //Navigator.of(context).pushReplacementNamed('/home');
                   }),
               SizedBox(height: size.height * 0.01),
-              showForgotPassword(),
-              ExistingAccountCheck(
-                login: true,
-                press: () {
-                  Navigator.of(context).pushReplacementNamed('/signUp');
-                },
-              ),
+              returnToSignIn(),
             ],
           ),
         ),
@@ -181,44 +175,14 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
-    inputFields.add(
-      TextFieldContainer(
-        child: TextFormField(
-          obscureText: true,
-          validator: PasswordValidator.validate,
-          onSaved: (value) => _password = value,
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontFamily:
-                GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
-            height: 1.3,
-          ),
-          decoration: InputDecoration(
-            errorStyle: TextStyle(
-              fontFamily:
-                  GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
-            ),
-            isDense: true,
-            contentPadding: EdgeInsets.all(10.0),
-            icon: Icon(
-              Icons.lock_outline_rounded,
-              size: 15.0,
-              color: aPrimaryColor,
-            ),
-            border: InputBorder.none,
-            hintText: "Password",
-          ),
-        ),
-      ),
-    );
 
     return inputFields;
   }
 
-  Widget showForgotPassword() {
+  Widget returnToSignIn() {
     return FlatButton(
         child: Text(
-          "Forgot your password?",
+          "Return to sign in",
           style: TextStyle(
             color: aPrimaryColor,
             fontFamily:
@@ -226,7 +190,7 @@ class _SignInState extends State<SignIn> {
           ),
         ),
         onPressed: () {
-          Navigator.of(context).pushReplacementNamed('/passwordReset');
+          Navigator.of(context).pushReplacementNamed('/signIn');
         });
   }
 }
