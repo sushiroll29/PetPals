@@ -38,8 +38,9 @@ class _SignInState extends State<SignIn> {
     if (form.validate()) {
       form.save();
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 
   void submit() async {
@@ -99,6 +100,7 @@ class _SignInState extends State<SignIn> {
                     //Navigator.of(context).pushReplacementNamed('/home');
                   }),
               SizedBox(height: size.height * 0.01),
+              showForgotPassword(),
               ExistingAccountCheck(
                 login: true,
                 press: () {
@@ -159,6 +161,7 @@ class _SignInState extends State<SignIn> {
       TextFieldContainer(
         child: TextFormField(
           onSaved: (value) => _email = value,
+          validator: EmailValidator.validate,
           style: GoogleFonts.manjari(fontWeight: FontWeight.normal),
           textAlign: TextAlign.left,
           decoration: InputDecoration(
@@ -182,6 +185,7 @@ class _SignInState extends State<SignIn> {
       TextFieldContainer(
         child: TextFormField(
           obscureText: true,
+          validator: PasswordValidator.validate,
           onSaved: (value) => _password = value,
           textAlign: TextAlign.left,
           style: TextStyle(
@@ -209,5 +213,20 @@ class _SignInState extends State<SignIn> {
     );
 
     return inputFields;
+  }
+
+  Widget showForgotPassword() {
+    return FlatButton(
+        child: Text(
+          "Forgot your password?",
+          style: TextStyle(
+            color: aPrimaryColor,
+            fontFamily:
+                GoogleFonts.manjari(fontWeight: FontWeight.bold).fontFamily,
+          ),
+        ),
+        onPressed: () {
+          Navigator.of(context).pushReplacementNamed('/passwordReset');
+        });
   }
 }
