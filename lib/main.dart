@@ -1,4 +1,5 @@
 import 'package:fl/screens/home.dart';
+import 'package:fl/screens/password_reset.dart';
 import 'package:fl/screens/sign_in.dart';
 import 'package:fl/screens/sign_up.dart';
 import 'package:fl/screens/welcome.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
             '/home': (BuildContext context) => HomeController(),
             '/welcome': (BuildContext context) =>
                 Welcome(//authFormType: AuthFormType.signUp
+                    ),
+            '/passwordReset': (BuildContext context) =>
+                PasswordReset(//authFormType: AuthFormType.signIn
                     ),
           }),
     );
