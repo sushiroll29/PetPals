@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Spacer(),
                     Text(
-                      Pet.sex,
+                      Pet.gender,
                       style: TextStyle(
                         fontFamily:
                             GoogleFonts.manjari(fontWeight: FontWeight.normal)
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "Found on ${DateFormat('dd/MM/yyyy').format(Pet.found).toString()}",
+                      "Found on ${DateFormat('dd/MM/yyyy').format(Pet.foundOn).toString()}",
                       style: TextStyle(
                         fontFamily:
                             GoogleFonts.manjari(fontWeight: FontWeight.normal)

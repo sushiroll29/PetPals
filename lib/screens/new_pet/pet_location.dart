@@ -26,15 +26,12 @@ class NewPetLocationPage extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
             ),
             Text("Pet Name ${pet.name}"),
-            Text("Pet found on ${pet.found}"),
+            Text("Pet found on ${pet.foundOn}"),
             RoundedButton(
               text: 'FINISH',
               press: () async {
                 //save data to firebase
-                await db.collection("pets").add({
-                  'name': pet.name,
-                  'found on': pet.found,
-                });
+                await db.collection("pets").add(pet.toJson());
 
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },

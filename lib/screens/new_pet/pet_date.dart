@@ -26,7 +26,7 @@ class NewPetDatePage extends StatelessWidget {
             RoundedButton(
               text: 'CONTINUE',
               press: () {
-                pet.found = DateTime.now();
+                pet.foundOn = DateTime.now();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
