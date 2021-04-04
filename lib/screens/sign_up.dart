@@ -48,7 +48,8 @@ class _SignUpState extends State<SignUp> {
     if (validate()) {
       try {
         final auth = Provider.of(context).auth;
-        String uid = await auth.signUpWithEmailAndPassword(_email, _password);
+        String uid =
+            await auth.createUserWithEmailAndPassword(_email, _password, _name);
         print("Signed up with ID $uid");
         Navigator.of(context).pushReplacementNamed('/home');
       } catch (e) {
