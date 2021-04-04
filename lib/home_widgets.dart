@@ -66,12 +66,12 @@ class _HomeState extends State<Home> {
         backgroundColor: Color.fromRGBO(220, 222, 221, 1.0),
         selectedLabelStyle: TextStyle(
           fontFamily:
-              GoogleFonts.manjari(fontWeight: FontWeight.w800).fontFamily,
+              GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,
           decoration: TextDecoration.none,
         ),
         unselectedLabelStyle: TextStyle(
           fontFamily:
-              GoogleFonts.manjari(fontWeight: FontWeight.w300).fontFamily,
+              GoogleFonts.raleway(fontWeight: FontWeight.w300).fontFamily,
           decoration: TextDecoration.none,
         ),
         currentIndex: _currentIndex,

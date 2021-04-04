@@ -37,6 +37,7 @@ dependencies:
   auto_size_text: ^2.0.2
   font_awesome_flutter: ^8.8.1
   intl: 0.15.7
+  date_range_picker: ^1.0.3
 
 dev_dependencies:
   flutter_test:

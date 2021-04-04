@@ -31,7 +31,7 @@ class RoundedButton extends StatelessWidget {
             text,
             style: TextStyle(
               fontFamily:
-                  GoogleFonts.manjari(fontWeight: FontWeight.bold).fontFamily,
+                  GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,
               color: Colors.white,
             ),
           ),

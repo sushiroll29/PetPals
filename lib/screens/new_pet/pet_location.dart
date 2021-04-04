@@ -3,6 +3,7 @@ import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
 import 'package:fl/widgets/provider.dart';
+import 'package:intl/intl.dart';
 
 class NewPetLocationPage extends StatelessWidget {
   final db = Firestore.instance;
@@ -27,7 +28,8 @@ class NewPetLocationPage extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
             ),
             Text("Pet Name ${pet.name}"),
-            Text("Pet found on ${pet.foundOn}"),
+            Text(
+                "Pet found on ${DateFormat('dd/MM/yyyy').format(pet.foundOn).toString()}"),
             RoundedButton(
               text: 'FINISH',
               press: () async {

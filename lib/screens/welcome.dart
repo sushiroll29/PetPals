@@ -19,8 +19,8 @@ class Welcome extends StatelessWidget {
               "Saving a life will change your own.\nAdopt a pet today.",
               style: TextStyle(
                 fontFamily:
-                    GoogleFonts.manjari(fontWeight: FontWeight.w100).fontFamily,
-                fontSize: 22,
+                    GoogleFonts.raleway(fontWeight: FontWeight.w400).fontFamily,
+                fontSize: 21,
                 color: Colors.black,
                 decoration: TextDecoration.none,
               ),

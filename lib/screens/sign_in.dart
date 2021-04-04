@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
               AutoSizeText(
                 'SIGN IN',
                 style: TextStyle(
-                  fontFamily: GoogleFonts.manjari(fontWeight: FontWeight.bold)
+                  fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
                       .fontFamily,
                   fontSize: 19,
                 ),
@@ -162,7 +162,7 @@ class _SignInState extends State<SignIn> {
         child: TextFormField(
           onSaved: (value) => _email = value,
           validator: EmailValidator.validate,
-          style: GoogleFonts.manjari(fontWeight: FontWeight.normal),
+          style: GoogleFonts.raleway(fontWeight: FontWeight.normal),
           textAlign: TextAlign.left,
           decoration: InputDecoration(
             errorStyle: TextStyle(
@@ -190,7 +190,7 @@ class _SignInState extends State<SignIn> {
           textAlign: TextAlign.left,
           style: TextStyle(
             fontFamily:
-                GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
+                GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
             height: 1.3,
           ),
           decoration: InputDecoration(
@@ -222,7 +222,7 @@ class _SignInState extends State<SignIn> {
           style: TextStyle(
             color: aPrimaryColor,
             fontFamily:
-                GoogleFonts.manjari(fontWeight: FontWeight.bold).fontFamily,
+                GoogleFonts.raleway(fontWeight: FontWeight.bold).fontFamily,
           ),
         ),
         onPressed: () {
