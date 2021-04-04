@@ -8,6 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fl/Pet.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fl/widgets/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,29 +17,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Pet> PetsList = [
-    Pet("Dog", "Bernie", "M", "Timisoara", "5", DateTime.now()),
-    Pet("Cat", "Tom", "F", "Mosnita", "?", DateTime.now()),
-    Pet("Parrot", "Coco", "F", "Dumbravita", "10", DateTime.now()),
-    Pet("Hamster", "Laurentiu", "M", "Timisoara", "?", DateTime.now())
-  ];
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
       //child: SingleChildScrollView(
-      child: new ListView.builder(
-        itemCount: PetsList.length,
-        itemBuilder: (BuildContext context, int index) =>
-            buildPetsCard(context, index),
-      ),
+      child: StreamBuilder(
+          stream: getUsersPets(context),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return const Text("Loading...");
+            return new ListView.builder(
+              itemCount: snapshot.data.documents.length,
+              itemBuilder: (BuildContext context, int index) =>
+                  buildPetsCard(context, snapshot.data.documents[index]),
+            );
+          }),
     );
     //);
   }
 
-  Widget buildPetsCard(BuildContext context, int index) {
-    final Pet = PetsList[index];
+  Stream<QuerySnapshot> getUsersPets(BuildContext context) async* {
+    final uid = await Provider.of(context).auth.getCurrentUID();
+    yield* Firestore.instance
+        .collection("petsStream")
+        //.document()
+        //.collection("pets")
+        .snapshots();
+  }
+
+  Widget buildPetsCard(BuildContext context, DocumentSnapshot pet) {
     return new Container(
       child: Card(
         child: Padding(
@@ -49,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      Pet.name,
+                      pet['name'],
                       style: TextStyle(
                         fontSize: 22,
                         fontFamily:
@@ -59,15 +67,15 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Spacer(),
-                    Text(
-                      "Age: ${Pet.age}",
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.manjari(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
-                      ),
-                    ),
+                    // Text(
+                    //   "Age: ${pet['age']}",
+                    //   style: TextStyle(
+                    //     fontFamily:
+                    //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
+                    //             .fontFamily,
+                    //     height: 1.3,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -75,25 +83,25 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                 child: Row(
                   children: <Widget>[
-                    Text(
-                      Pet.location,
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.manjari(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      Pet.gender,
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.manjari(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
-                      ),
-                    ),
+                    // Text(
+                    //   pet['location'],
+                    //   style: TextStyle(
+                    //     fontFamily:
+                    //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
+                    //             .fontFamily,
+                    //     height: 1.3,
+                    //   ),
+                    // ),
+                    // Spacer(),
+                    // Text(
+                    //   pet['gender'],
+                    //   style: TextStyle(
+                    //     fontFamily:
+                    //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
+                    //             .fontFamily,
+                    //     height: 1.3,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -102,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "Found on ${DateFormat('dd/MM/yyyy').format(Pet.foundOn).toString()}",
+                      "Found on ${DateFormat('dd/MM/yyyy').format(pet['foundOn'].toDate()).toString()}",
                       style: TextStyle(
                         fontFamily:
                             GoogleFonts.manjari(fontWeight: FontWeight.normal)
