@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
+import 'package:fl/widgets/provider.dart';
 
 class NewPetLocationPage extends StatelessWidget {
   final db = Firestore.instance;
@@ -31,8 +32,15 @@ class NewPetLocationPage extends StatelessWidget {
               text: 'FINISH',
               press: () async {
                 //save data to firebase
-                await db.collection("pets").add(pet.toJson());
+                final uid = await Provider.of(context).auth.getCurrentUID();
 
+                await db
+                    .collection("userData")
+                    .document(uid)
+                    .collection("pets")
+                    .add(pet.toJson());
+
+                await db.collection("petsStream").add(pet.toJson());
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
             )
