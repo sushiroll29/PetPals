@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fl/constants.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
 import 'package:fl/widgets/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:fl/screens/backgrounds/add_pet_bg.dart';
 
 class NewPetLocationPage extends StatelessWidget {
   final db = Firestore.instance;
@@ -17,9 +20,24 @@ class NewPetLocationPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a new pet - Location'),
+        toolbarHeight: size.height * 0.08,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(1),
+          ),
+        ),
+        backgroundColor: aPrimaryColor,
+        centerTitle: true,
+        title: Text(
+          "ADD A NEW PET",
+          style: TextStyle(
+            fontFamily:
+                GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,
+            fontSize: 19,
+          ),
+        ),
       ),
-      body: Center(
+      body: Background(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -28,6 +46,7 @@ class NewPetLocationPage extends StatelessWidget {
               padding: const EdgeInsets.all(30.0),
             ),
             Text("Pet Name ${pet.name}"),
+            Text("Pet Gender ${pet.gender}"),
             Text(
                 "Pet found on ${DateFormat('dd/MM/yyyy').format(pet.foundOn).toString()}"),
             RoundedButton(
