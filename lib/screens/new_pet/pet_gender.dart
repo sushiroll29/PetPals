@@ -20,12 +20,13 @@ class NewPetGenderPage extends StatefulWidget {
 }
 
 class _NewPetGenderPageState extends State<NewPetGenderPage> {
-  String _currentSelectedValue;
+  String _currentSelectedGenderValue, _currentSelectedPetValue;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     var _genders = ["Male", "Female"];
+    var _petTypes = ["Dog", "Cat"];
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: size.height * 0.08,
@@ -55,7 +56,7 @@ class _NewPetGenderPageState extends State<NewPetGenderPage> {
               //CustomDropdown(text: "CHOOSE PET TYPE"),
 
               AutoSizeText(
-                "ENTER THE PET'S GENDER",
+                "ENTER PET TYPE",
                 maxLines: 1,
                 style: TextStyle(
                   fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
@@ -79,7 +80,51 @@ class _NewPetGenderPageState extends State<NewPetGenderPage> {
                           fillColor: Colors.red,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(29))),
-                      isEmpty: _currentSelectedValue == '',
+                      isEmpty: _currentSelectedPetValue == '',
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          hint: new Text("SELECT PET TYPE"),
+                          style: TextStyle(
+                            fontFamily:
+                                GoogleFonts.raleway(fontWeight: FontWeight.w700)
+                                    .fontFamily,
+                            fontSize: 14,
+                            color: aPrimaryColor,
+                          ),
+                          value: _currentSelectedPetValue,
+                          isDense: true,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _currentSelectedPetValue = newValue;
+                              state.didChange(newValue);
+                            });
+                          },
+                          items: _petTypes.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 3),
+                width: size.width * 0.78,
+                height: 65,
+                child: FormField<String>(
+                  builder: (FormFieldState<String> state) {
+                    return InputDecorator(
+                      decoration: InputDecoration(
+                          fillColor: Colors.red,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(29))),
+                      isEmpty: _currentSelectedGenderValue == '',
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           hint: new Text("  SELECT PET'S GENDER"),
@@ -90,11 +135,11 @@ class _NewPetGenderPageState extends State<NewPetGenderPage> {
                             fontSize: 14,
                             color: aPrimaryColor,
                           ),
-                          value: _currentSelectedValue,
+                          value: _currentSelectedGenderValue,
                           isDense: true,
                           onChanged: (String newValue) {
                             setState(() {
-                              _currentSelectedValue = newValue;
+                              _currentSelectedGenderValue = newValue;
                               state.didChange(newValue);
                             });
                           },
@@ -114,7 +159,8 @@ class _NewPetGenderPageState extends State<NewPetGenderPage> {
               RoundedButton(
                 text: 'CONTINUE',
                 press: () {
-                  widget.pet.gender = _currentSelectedValue;
+                  widget.pet.gender = _currentSelectedGenderValue;
+                  widget.pet.type = _currentSelectedPetValue;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
