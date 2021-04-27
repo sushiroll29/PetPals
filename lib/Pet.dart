@@ -5,8 +5,10 @@ class Pet {
   String location;
   String age;
   DateTime foundOn;
+  String description;
 
-  Pet(this.type, this.name, this.gender, this.location, this.age, this.foundOn);
+  Pet(this.type, this.name, this.gender, this.location, this.age, this.foundOn,
+      this.description);
 
   Map<String, dynamic> toJson() => {
         'type': type,
@@ -15,5 +17,6 @@ class Pet {
         'location': location,
         'age': age,
         'foundOn': foundOn,
+        'description': description,
       };
 }

@@ -18,9 +18,9 @@ class Welcome extends StatelessWidget {
             AutoSizeText(
               "Saving a life will change your own.\nAdopt a pet today.",
               style: TextStyle(
-                fontFamily:
-                    GoogleFonts.raleway(fontWeight: FontWeight.w400).fontFamily,
-                fontSize: 21,
+                fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w500)
+                    .fontFamily,
+                fontSize: 22,
                 color: Colors.black,
                 decoration: TextDecoration.none,
               ),

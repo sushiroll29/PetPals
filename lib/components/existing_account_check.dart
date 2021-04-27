@@ -21,7 +21,7 @@ class ExistingAccountCheck extends StatelessWidget {
           style: TextStyle(
             color: aPrimaryColor,
             fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
+                GoogleFonts.quicksand(fontWeight: FontWeight.normal).fontFamily,
           ),
         ),
         GestureDetector(
@@ -30,7 +30,7 @@ class ExistingAccountCheck extends StatelessWidget {
             login ? "Sign Up!" : "Sign In!",
             style: TextStyle(
               fontFamily:
-                  GoogleFonts.raleway(fontWeight: FontWeight.bold).fontFamily,
+                  GoogleFonts.quicksand(fontWeight: FontWeight.bold).fontFamily,
               color: aPrimaryColor,
               fontWeight: FontWeight.bold,
             ),

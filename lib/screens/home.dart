@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(
                         fontSize: 22,
                         fontFamily:
-                            GoogleFonts.raleway(fontWeight: FontWeight.w600)
+                            GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                                 .fontFamily,
                         height: 1.3,
                       ),
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                       "Found on ${DateFormat('dd/MM/yyyy').format(pet['foundOn'].toDate()).toString()}",
                       style: TextStyle(
                         fontFamily:
-                            GoogleFonts.raleway(fontWeight: FontWeight.normal)
+                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
                                 .fontFamily,
                         height: 1.3,
                       ),
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                       Pet.title,
                       style: TextStyle(
                         fontFamily:
-                            GoogleFonts.raleway(fontWeight: FontWeight.normal)
+                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
                                 .fontFamily,
                         height: 1.3,
                       ),

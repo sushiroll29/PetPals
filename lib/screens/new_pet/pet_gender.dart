@@ -67,7 +67,7 @@ class _NewPetGenderPageState extends State<NewPetGenderPage> {
               SizedBox(height: size.height * 0.01), //1%
 
               SizedBox(height: size.height * 0.07), //1%
-
+/*
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 3),
@@ -155,12 +155,12 @@ class _NewPetGenderPageState extends State<NewPetGenderPage> {
                   },
                 ),
               ),
-
+*/
               RoundedButton(
                 text: 'CONTINUE',
                 press: () {
-                  widget.pet.gender = _currentSelectedGenderValue;
-                  widget.pet.type = _currentSelectedPetValue;
+                  //widget.pet.gender = _currentSelectedGenderValue;
+                  //widget.pet.type = _currentSelectedPetValue;
                   Navigator.push(
                     context,
                     MaterialPageRoute(

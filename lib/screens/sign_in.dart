@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
               AutoSizeText(
                 'SIGN IN',
                 style: TextStyle(
-                  fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                       .fontFamily,
                   fontSize: 19,
                 ),
@@ -131,7 +131,7 @@ class _SignInState extends State<SignIn> {
                 _error,
                 maxLines: 3,
                 style: TextStyle(
-                  fontFamily: GoogleFonts.manjari(fontWeight: FontWeight.bold)
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.bold)
                       .fontFamily,
                   fontSize: 15,
                 ),
@@ -162,12 +162,12 @@ class _SignInState extends State<SignIn> {
         child: TextFormField(
           onSaved: (value) => _email = value,
           validator: EmailValidator.validate,
-          style: GoogleFonts.raleway(fontWeight: FontWeight.normal),
+          style: GoogleFonts.quicksand(fontWeight: FontWeight.normal),
           textAlign: TextAlign.left,
           decoration: InputDecoration(
             errorStyle: TextStyle(
-              fontFamily:
-                  GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
+              fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                  .fontFamily,
             ),
             isDense: true,
             contentPadding: EdgeInsets.all(10.0),
@@ -190,13 +190,13 @@ class _SignInState extends State<SignIn> {
           textAlign: TextAlign.left,
           style: TextStyle(
             fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
+                GoogleFonts.quicksand(fontWeight: FontWeight.normal).fontFamily,
             height: 1.3,
           ),
           decoration: InputDecoration(
             errorStyle: TextStyle(
-              fontFamily:
-                  GoogleFonts.manjari(fontWeight: FontWeight.normal).fontFamily,
+              fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                  .fontFamily,
             ),
             isDense: true,
             contentPadding: EdgeInsets.all(10.0),
@@ -222,7 +222,7 @@ class _SignInState extends State<SignIn> {
           style: TextStyle(
             color: aPrimaryColor,
             fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.bold).fontFamily,
+                GoogleFonts.quicksand(fontWeight: FontWeight.bold).fontFamily,
           ),
         ),
         onPressed: () {

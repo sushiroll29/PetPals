@@ -78,7 +78,7 @@ class _SignUpState extends State<SignUp> {
               AutoSizeText(
                 'SIGN UP',
                 style: TextStyle(
-                  fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                       .fontFamily,
                   fontSize: 19,
                 ),
@@ -134,7 +134,7 @@ class _SignUpState extends State<SignUp> {
                 _error,
                 maxLines: 3,
                 style: TextStyle(
-                  fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.bold)
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.bold)
                       .fontFamily,
                   fontSize: 15,
                 ),
@@ -169,13 +169,13 @@ class _SignUpState extends State<SignUp> {
           textAlign: TextAlign.left,
           style: TextStyle(
             fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
+                GoogleFonts.quicksand(fontWeight: FontWeight.normal).fontFamily,
             height: 1.3,
           ),
           decoration: InputDecoration(
             errorStyle: TextStyle(
-              fontFamily:
-                  GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
+              fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                  .fontFamily,
             ),
             isDense: true,
             contentPadding: EdgeInsets.all(10.0),
@@ -196,12 +196,12 @@ class _SignUpState extends State<SignUp> {
         child: TextFormField(
           validator: EmailValidator.validate,
           onSaved: (value) => _email = value,
-          style: GoogleFonts.raleway(fontWeight: FontWeight.normal),
+          style: GoogleFonts.quicksand(fontWeight: FontWeight.normal),
           textAlign: TextAlign.left,
           decoration: InputDecoration(
             errorStyle: TextStyle(
-              fontFamily:
-                  GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
+              fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                  .fontFamily,
             ),
             isDense: true,
             contentPadding: EdgeInsets.all(10.0),
@@ -224,13 +224,13 @@ class _SignUpState extends State<SignUp> {
           textAlign: TextAlign.left,
           style: TextStyle(
             fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
+                GoogleFonts.quicksand(fontWeight: FontWeight.normal).fontFamily,
             height: 1.3,
           ),
           decoration: InputDecoration(
             errorStyle: TextStyle(
-              fontFamily:
-                  GoogleFonts.raleway(fontWeight: FontWeight.normal).fontFamily,
+              fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                  .fontFamily,
             ),
             isDense: true,
             contentPadding: EdgeInsets.all(10.0),
