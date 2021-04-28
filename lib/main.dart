@@ -56,7 +56,7 @@ class HomeController extends StatelessWidget {
               .hasData; //if not, it means that there's no user id => not signed in
           return signedIn ? Home() : Welcome();
         }
-        return CircularProgressIndicator();
+        return Container();
       },
     );
   }

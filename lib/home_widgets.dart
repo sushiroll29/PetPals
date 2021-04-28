@@ -1,7 +1,8 @@
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
 import 'package:fl/screens/home.dart';
-import 'package:fl/screens/new_pet/pet_name.dart';
+import 'package:fl/screens/new_pet/new_pet_profile.dart';
+import 'package:fl/screens/new_pet/new_pet_type.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,7 +39,7 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => NewPetNamePage(pet: newPet)));
+                        builder: (context) => NewPetTypePage(pet: newPet)));
               }),
           IconButton(
             icon: Icon(FontAwesomeIcons.signOutAlt, size: 18),

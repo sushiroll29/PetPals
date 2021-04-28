@@ -3,9 +3,9 @@ import 'package:fl/components/announcement_container.dart';
 import 'package:fl/components/description_containter.dart';
 import 'package:fl/constants.dart';
 import 'package:fl/screens/backgrounds/add_pet_bg.dart';
-import 'package:fl/screens/new_pet/pet_date.dart';
-import 'package:fl/screens/new_pet/pet_gender.dart';
-import 'package:fl/screens/new_pet/pet_location.dart';
+import 'package:fl/screens/new_pet/new_pet_date.dart';
+import 'package:fl/screens/new_pet/new_pet_location.dart';
+import 'package:fl/screens/new_pet/new_pet_summary.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/drp.dart';
 import 'package:fl/widgets/rounded_button.dart';
@@ -128,6 +128,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             SizedBox(height: size.height * 0.01), //1%
 
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -149,11 +150,11 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         ),
                         isDense: true,
                         contentPadding: EdgeInsets.all(10.0),
-                        icon: Icon(
-                          FontAwesomeIcons.paw,
-                          size: 16.0,
-                          color: aPrimaryColor,
-                        ),
+                        // icon: Icon(
+                        //   FontAwesomeIcons.paw,
+                        //   size: 16.0,
+                        //   color: aPrimaryColor,
+                        // ),
                         border: InputBorder.none,
                         hintText: "PET'S NAME",
                         hintStyle: TextStyle(fontSize: 14),
@@ -165,76 +166,6 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             ),
             SizedBox(height: size.height * 0.01), //1%
 
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "Type of pet",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: aPrimaryColor,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 3),
-                    width: size.width * 0.978,
-                    height: 63,
-                    child: FormField<String>(
-                      builder: (FormFieldState<String> state) {
-                        return InputDecorator(
-                          decoration: InputDecoration(
-                              //fillColor: Colors.red,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(29))),
-                          isEmpty: _currentSelectedPetValue == '',
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              hint: new Text("SELECT PET TYPE"),
-                              style: TextStyle(
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w400)
-                                    .fontFamily,
-                                fontSize: 14,
-                                color: aPrimaryColor,
-                              ),
-                              value: _currentSelectedPetValue,
-                              isDense: true,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  _currentSelectedPetValue = newValue;
-                                  state.didChange(newValue);
-                                });
-                              },
-                              items: _petTypes.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.01), //1%
             Row(
               children: [
                 Padding(
@@ -255,6 +186,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             ),
 
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -343,6 +275,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             ),
             SizedBox(height: size.height * 0.005),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -364,11 +297,11 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         ),
                         isDense: true,
                         contentPadding: EdgeInsets.all(10.0),
-                        icon: Icon(
-                          FontAwesomeIcons.solidDotCircle,
-                          size: 16.0,
-                          color: aPrimaryColor,
-                        ),
+                        // icon: Icon(
+                        //   FontAwesomeIcons.solidDotCircle,
+                        //   size: 16.0,
+                        //   color: aPrimaryColor,
+                        // ),
                         border: InputBorder.none,
                         hintText: "PET'S AGE",
                         hintStyle: TextStyle(
@@ -400,11 +333,14 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             ),
             SizedBox(height: size.height * 0.005), //1%
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: DescriptionContainer(
                     child: TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
                       textAlign: TextAlign.left,
                       controller: _descriptionController,
                       style: TextStyle(
@@ -424,11 +360,11 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         border: InputBorder.none,
                         hintText: "BRIEFLY DESCRIBE THE PET",
                         hintStyle: TextStyle(fontSize: 14),
-                        icon: Icon(
-                          FontAwesomeIcons.ellipsisH,
-                          size: 16.0,
-                          color: aPrimaryColor,
-                        ),
+                        // icon: Icon(
+                        //   FontAwesomeIcons.ellipsisH,
+                        //   size: 16.0,
+                        //   color: aPrimaryColor,
+                        // ),
                       ),
                     ),
                   ),
@@ -440,7 +376,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
               text: 'CONTINUE',
               press: () {
                 widget.pet.name = _nameController.text;
-                widget.pet.type = _currentSelectedPetValue;
+                //widget.pet.type = _currentSelectedPetValue;
                 widget.pet.gender = _currentSelectedGenderValue;
                 widget.pet.description = _descriptionController.text;
                 widget.pet.age = _ageController.text;

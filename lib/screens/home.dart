@@ -46,7 +46,9 @@ class _HomePageState extends State<HomePage> {
         .snapshots();
   }
 
-  Widget buildPetsCard(BuildContext context, DocumentSnapshot pet) {
+  Widget buildPetsCard(BuildContext context, DocumentSnapshot document) {
+    final pet = Pet.fromSnapshot(document);
+    final petType = pet.types();
     return new Container(
       child: Card(
         child: Padding(
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      pet['name'],
+                      pet.name,
                       style: TextStyle(
                         fontSize: 22,
                         fontFamily:
@@ -111,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      "Found on ${DateFormat('dd/MM/yyyy').format(pet['foundOn'].toDate()).toString()}",
+                      "Found on ${DateFormat('dd/MM/yyyy').format(pet.foundOn).toString()}",
                       style: TextStyle(
                         fontFamily:
                             GoogleFonts.quicksand(fontWeight: FontWeight.normal)
@@ -120,9 +122,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Spacer(),
-                    Icon(
-                      FontAwesomeIcons.dog,
-                    )
+                    (petType.containsKey(pet.type))
+                        ? petType[pet.type]
+                        : petType["dog"],
+
                     /*
                     Text(
                       Pet.title,
