@@ -15,8 +15,8 @@ class NewPetLocationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    TextEditingController _controller = new TextEditingController();
-    _controller.text = pet.location;
+    //TextEditingController _controller = new TextEditingController();
+    //_controller.text = pet.location;
 
     return Scaffold(
       appBar: AppBar(

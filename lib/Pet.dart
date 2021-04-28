@@ -1,8 +1,11 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+
 class Pet {
   String type;
   String name;
   String gender;
-  String location;
+  PickResult location;
   String age;
   DateTime foundOn;
   String description;

@@ -53,7 +53,7 @@ class HomeController extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           //check if data is sending
           final bool signedIn = snapshot
-              .hasData; //if we don't, it means that there's not user id => not signed in
+              .hasData; //if not, it means that there's no user id => not signed in
           return signedIn ? Home() : Welcome();
         }
         return CircularProgressIndicator();

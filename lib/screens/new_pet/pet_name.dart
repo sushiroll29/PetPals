@@ -65,21 +65,6 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: size.height * 0.03), //1%
-
-            //CustomDropdown(text: "CHOOSE PET TYPE"),
-            // Align(
-            //   alignment: Alignment.centerLeft,
-            //   child: AutoSizeText(
-            //     "ENTER THE PET'S NAME",
-            //     maxLines: 1,
-            //     textAlign: TextAlign.left,
-            //     style: TextStyle(
-            //       fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-            //           .fontFamily,
-            //       fontSize: 19,
-            //     ),
-            //   ),
-            // ),
             SizedBox(height: size.height * 0.01), //1%
             Row(
               children: [
@@ -145,7 +130,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
                   child: TextFieldContainer(
                     child: TextFormField(
                       textAlign: TextAlign.left,
@@ -462,7 +447,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NewPetGenderPage(pet: widget.pet)),
+                      builder: (context) => MapScreen(pet: widget.pet)),
                 );
               },
             )

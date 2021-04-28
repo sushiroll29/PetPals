@@ -101,11 +101,11 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.grey[100],
-            label: 'Messages',
+            label: 'Map',
             icon: Padding(
               padding: EdgeInsets.all(4.0),
               child: Icon(
-                FontAwesomeIcons.solidComment,
+                FontAwesomeIcons.solidMap,
                 size: size.width * 0.05,
               ),
             ),
