@@ -63,7 +63,7 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       petTypes[petKeys[index]],
-                      Text(petKeys[index]),
+                      //Text(petKeys[index]),
                     ],
                   ),
                   onPressed: () async {
