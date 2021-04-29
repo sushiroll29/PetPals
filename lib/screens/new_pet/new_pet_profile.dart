@@ -27,11 +27,12 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _ageController = TextEditingController();
+  List genders = ["Male", "Female"];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     String _name;
-    var _genders = ["Male", "Female"];
+
     var _petTypes = ["Dog", "Cat"];
     //final _nameController = TextEditingController();
     //TextEditingController _genderController = new TextEditingController();
@@ -75,7 +76,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     maxLines: 1,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: aPrimaryColor,
+                      color: Colors.black,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w700)
                               .fontFamily,
@@ -95,7 +96,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     maxLines: 1,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: aPrimaryColor,
+                      color: Colors.black,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -114,7 +115,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "If you don't know it, leave empty.",
                     maxLines: 1,
                     style: TextStyle(
-                      color: aPrimaryColor,
+                      color: Colors.black,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -153,7 +154,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         // icon: Icon(
                         //   FontAwesomeIcons.paw,
                         //   size: 16.0,
-                        //   color: aPrimaryColor,
+                        //   color: Colors.black,
                         // ),
                         border: InputBorder.none,
                         hintText: "PET'S NAME",
@@ -174,7 +175,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "Pet's gender",
                     maxLines: 1,
                     style: TextStyle(
-                      color: aPrimaryColor,
+                      color: Colors.black,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -186,56 +187,12 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             ),
 
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 3),
-                    width: size.width * 0.978,
-                    height: 63,
-                    child: FormField<String>(
-                      builder: (FormFieldState<String> state) {
-                        return InputDecorator(
-                          decoration: InputDecoration(
-                              //fillColor: Colors.red,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(29))),
-                          isEmpty: _currentSelectedGenderValue == '',
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              hint: new Text("SELECT PET'S GENDER"),
-                              style: TextStyle(
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w400)
-                                    .fontFamily,
-                                fontSize: 14,
-                                color: aPrimaryColor,
-                              ),
-                              value: _currentSelectedGenderValue,
-                              isDense: true,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  _currentSelectedGenderValue = newValue;
-                                  state.didChange(newValue);
-                                });
-                              },
-                              items: _genders.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
+              children: <Widget>[
+                addRadioButton(0, 'Male'),
+                addRadioButton(1, 'Female'),
               ],
             ),
+
             Row(
               children: [
                 Padding(
@@ -244,7 +201,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "Pet's age",
                     maxLines: 1,
                     style: TextStyle(
-                      color: aPrimaryColor,
+                      color: Colors.black,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -263,7 +220,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "Please mention months/years.",
                     maxLines: 1,
                     style: TextStyle(
-                      color: aPrimaryColor,
+                      color: Colors.black,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -300,7 +257,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         // icon: Icon(
                         //   FontAwesomeIcons.solidDotCircle,
                         //   size: 16.0,
-                        //   color: aPrimaryColor,
+                        //   color: Colors.black,
                         // ),
                         border: InputBorder.none,
                         hintText: "PET'S AGE",
@@ -321,7 +278,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "Pet's description",
                     maxLines: 1,
                     style: TextStyle(
-                      color: aPrimaryColor,
+                      color: Colors.black,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -363,7 +320,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         // icon: Icon(
                         //   FontAwesomeIcons.ellipsisH,
                         //   size: 16.0,
-                        //   color: aPrimaryColor,
+                        //   color: Colors.black,
                         // ),
                       ),
                     ),
@@ -390,6 +347,33 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Row addRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: Colors.grey.shade800,
+          value: genders[btnValue],
+          groupValue: _currentSelectedGenderValue,
+          onChanged: (value) {
+            setState(() {
+              _currentSelectedGenderValue = value;
+            });
+          },
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily:
+                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+            fontSize: 15,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -43,7 +43,7 @@ class Pet {
       };
 
   Map<String, Icon> bigTypes() => {
-        "dog": Icon(FontAwesomeIcons.dog, size: 50),
-        "cat": Icon(FontAwesomeIcons.cat, size: 50),
+        "dog": Icon(FontAwesomeIcons.dog, size: 60),
+        "cat": Icon(FontAwesomeIcons.cat, size: 60),
       };
 }

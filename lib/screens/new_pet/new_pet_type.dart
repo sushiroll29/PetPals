@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/constants.dart';
 import 'package:fl/screens/new_pet/new_pet_profile.dart';
@@ -51,7 +52,18 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Pick the pet type"),
+            SizedBox(height: size.height * 0.25),
+            AutoSizeText(
+              "Pick the pet type",
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w700)
+                    .fontFamily,
+                fontSize: 20,
+              ),
+            ),
             Expanded(
                 child: GridView.count(
               crossAxisCount: 2,
