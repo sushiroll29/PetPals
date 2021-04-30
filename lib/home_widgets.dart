@@ -1,5 +1,6 @@
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
+import 'package:fl/screens/menu.dart';
 import 'package:fl/screens/home.dart';
 import 'package:fl/screens/map.dart';
 import 'package:fl/screens/new_pet/new_pet_profile.dart';
@@ -21,7 +22,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    HomePage(),
+    MenuPage(),
     FavoritesPage(),
     MapPage(),
     ProfilePage(),
@@ -31,6 +32,7 @@ class _HomeState extends State<Home> {
     Size size = MediaQuery.of(context).size;
     final newPet = new Pet(null, null, null, null, null, null, null);
     return Scaffold(
+      /*
       appBar: AppBar(
         backgroundColor: aPrimaryColor,
         title: Text(""),
@@ -56,7 +58,7 @@ class _HomeState extends State<Home> {
             },
           )
         ],
-      ),
+      ),*/
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
