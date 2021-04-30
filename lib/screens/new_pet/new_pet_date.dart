@@ -63,7 +63,7 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
           "ADD A NEW PET",
           style: TextStyle(
             fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,
+                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
             fontSize: 19,
           ),
         ),
@@ -79,9 +79,10 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
                 'WHEN DID YOU FIND THE PET?',
                 maxLines: 1,
                 style: TextStyle(
-                  fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
+                  color: Colors.black,
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w700)
                       .fontFamily,
-                  fontSize: 19,
+                  fontSize: 20,
                 ),
               ),
               SizedBox(height: size.height * 0.003), //1%
@@ -89,17 +90,17 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
                 'Provide the most accurate date you can remember.',
                 maxLines: 1,
                 style: TextStyle(
-                  fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                       .fontFamily,
                   fontSize: 17,
                 ),
               ),
-              SizedBox(height: size.height * 0.05), //1%
+              SizedBox(height: size.height * 0.02), //1%
               // AutoSizeText(
               //   "Pet name: ${widget.pet.name}",
               //   maxLines: 1,
               //   style: TextStyle(
-              //     fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
+              //     fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
               //         .fontFamily,
               //     fontSize: 19,
               //   ),
@@ -108,7 +109,7 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
               // AutoSizeText(
               //   "Enter a date",
               //   style: TextStyle(
-              //     fontFamily: GoogleFonts.raleway(fontWeight: FontWeight.w600)
+              //     fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
               //         .fontFamily,
               //     fontSize: 19,
               //   ),
@@ -129,14 +130,30 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
                     "Found on: ${DateFormat('dd/MM/yyyy').format(_foundOn).toString()}",
                     style: TextStyle(
                       fontFamily:
-                          GoogleFonts.raleway(fontWeight: FontWeight.w600)
+                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
                       fontSize: 17,
                     ),
-                  )
+                  ),
                 ],
               ),
-              SizedBox(height: size.height * 0.005), //1%
+              SizedBox(height: size.height * 0.004), //1%
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  AutoSizeText(
+                    "Is this correct?",
+                    style: TextStyle(
+                      fontFamily:
+                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                              .fontFamily,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: size.height * 0.1), //1%
               RoundedButton(
                 text: 'CONTINUE',
                 press: () {

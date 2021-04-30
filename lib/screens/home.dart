@@ -1,5 +1,6 @@
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
+import 'package:fl/screens/detailed_pet.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,95 +52,101 @@ class _HomePageState extends State<HomePage> {
     final petType = pet.types();
     return new Container(
       child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 40.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      pet.name,
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontFamily:
-                            GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                                .fontFamily,
-                        height: 1.3,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => DetailedPet(pet: pet)));
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 40.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        pet.name,
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontFamily:
+                              GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                                  .fontFamily,
+                          height: 1.3,
+                        ),
                       ),
-                    ),
-                    Spacer(),
-                    // Text(
-                    //   "Age: ${pet['age']}",
-                    //   style: TextStyle(
-                    //     fontFamily:
-                    //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
-                    //             .fontFamily,
-                    //     height: 1.3,
-                    //   ),
-                    // ),
-                  ],
+                      Spacer(),
+                      // Text(
+                      //   "Age: ${pet['age']}",
+                      //   style: TextStyle(
+                      //     fontFamily:
+                      //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
+                      //             .fontFamily,
+                      //     height: 1.3,
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
-                child: Row(
-                  children: <Widget>[
-                    // Text(
-                    //   pet['location'],
-                    //   style: TextStyle(
-                    //     fontFamily:
-                    //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
-                    //             .fontFamily,
-                    //     height: 1.3,
-                    //   ),
-                    // ),
-                    // Spacer(),
-                    // Text(
-                    //   pet['gender'],
-                    //   style: TextStyle(
-                    //     fontFamily:
-                    //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
-                    //             .fontFamily,
-                    //     height: 1.3,
-                    //   ),
-                    // ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
+                  child: Row(
+                    children: <Widget>[
+                      // Text(
+                      //   pet['location'],
+                      //   style: TextStyle(
+                      //     fontFamily:
+                      //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
+                      //             .fontFamily,
+                      //     height: 1.3,
+                      //   ),
+                      // ),
+                      // Spacer(),
+                      // Text(
+                      //   pet['gender'],
+                      //   style: TextStyle(
+                      //     fontFamily:
+                      //         GoogleFonts.manjari(fontWeight: FontWeight.normal)
+                      //             .fontFamily,
+                      //     height: 1.3,
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      "Found on ${DateFormat('dd/MM/yyyy').format(pet.foundOn).toString()}",
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        "Found on ${DateFormat('dd/MM/yyyy').format(pet.foundOn).toString()}",
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.quicksand(
+                                  fontWeight: FontWeight.normal)
+                              .fontFamily,
+                          height: 1.3,
+                        ),
                       ),
-                    ),
-                    Spacer(),
-                    (petType.containsKey(pet.type))
-                        ? petType[pet.type]
-                        : petType["dog"],
+                      Spacer(),
+                      (petType.containsKey(pet.type))
+                          ? petType[pet.type]
+                          : petType["dog"],
 
-                    /*
-                    Text(
-                      Pet.title,
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
-                      ),
-                    ),*/
-                  ],
+                      /*
+                      Text(
+                        Pet.title,
+                        style: TextStyle(
+                          fontFamily:
+                              GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                                  .fontFamily,
+                          height: 1.3,
+                        ),
+                      ),*/
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

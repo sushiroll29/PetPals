@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NewPetNamePage extends StatefulWidget {
   final Pet pet;

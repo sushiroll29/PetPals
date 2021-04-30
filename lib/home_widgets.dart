@@ -1,8 +1,10 @@
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
 import 'package:fl/screens/home.dart';
+import 'package:fl/screens/map.dart';
 import 'package:fl/screens/new_pet/new_pet_profile.dart';
 import 'package:fl/screens/new_pet/new_pet_type.dart';
+import 'package:fl/screens/profile.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,7 +23,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _children = [
     HomePage(),
     FavoritesPage(),
-    MessagesPage(),
+    MapPage(),
     ProfilePage(),
   ];
   @override
@@ -62,9 +64,9 @@ class _HomeState extends State<Home> {
         selectedIconTheme: IconThemeData(
           size: 24,
         ),
-        selectedItemColor: Color.fromRGBO(57, 81, 89, 1.0),
-        unselectedItemColor: Color.fromRGBO(57, 81, 89, 0.6),
-        backgroundColor: Color.fromRGBO(220, 222, 221, 1.0),
+        selectedItemColor: aPrimaryColor,
+        unselectedItemColor: Color.fromRGBO(196, 153, 140, 0.55),
+        backgroundColor: Color.fromRGBO(240, 240, 240, 1.0),
         selectedLabelStyle: TextStyle(
           fontFamily:
               GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,

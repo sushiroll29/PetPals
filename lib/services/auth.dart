@@ -1,6 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl/constants.dart';
-import 'package:flutter/material.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -11,16 +9,12 @@ class AuthService {
 
   // GET UID
   Future<String> getCurrentUID() async {
-    String uid = (await _firebaseAuth.currentUser()).uid;
-    return uid;
+    return (await _firebaseAuth.currentUser()).uid;
   }
-  // String getCurrentUID() {
-  //   return _firebaseAuth.currentUser.uid;
-  // }
 
   // GET CURRENT USER
   Future getCurrentUser() async {
-    return _firebaseAuth.currentUser;
+    return await _firebaseAuth.currentUser();
   }
 
   // Email & Password Sign Up
@@ -30,6 +24,17 @@ class AuthService {
       email: email,
       password: password,
     );
+
+    // Update the username
+    await updateUserName(name, authResult.user);
+    return authResult.user.uid;
+  }
+
+  Future updateUserName(String name, FirebaseUser currentUser) async {
+    var userUpdateInfo = UserUpdateInfo();
+    userUpdateInfo.displayName = name;
+    await currentUser.updateProfile(userUpdateInfo);
+    await currentUser.reload();
   }
 
   // Email & Password Sign In
@@ -42,8 +47,8 @@ class AuthService {
   }
 
   // Sign Out
-  signOut() async {
-    return await _firebaseAuth.signOut();
+  signOut() {
+    return _firebaseAuth.signOut();
   }
 
   // Reset Password
