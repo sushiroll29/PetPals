@@ -12,12 +12,12 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/widgets/provider.dart';
 
-class UpdatedHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _UpdatedHomePageState createState() => _UpdatedHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _UpdatedHomePageState extends State<UpdatedHomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

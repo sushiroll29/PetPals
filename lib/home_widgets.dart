@@ -1,11 +1,11 @@
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
 import 'package:fl/screens/menu.dart';
-import 'package:fl/screens/home.dart';
 import 'package:fl/screens/map.dart';
 import 'package:fl/screens/new_pet/new_pet_profile.dart';
 import 'package:fl/screens/new_pet/new_pet_type.dart';
 import 'package:fl/screens/profile.dart';
+import 'package:fl/screens/home.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,8 +21,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
+  Pet pet;
   final List<Widget> _children = [
-    MenuPage(),
+    HomePage(),
     FavoritesPage(),
     MapPage(),
     ProfilePage(),
@@ -67,7 +68,7 @@ class _HomeState extends State<Home> {
           size: 24,
         ),
         selectedItemColor: aPrimaryColor,
-        unselectedItemColor: Color.fromRGBO(196, 153, 140, 0.55),
+        unselectedItemColor: Colors.grey.shade400,
         backgroundColor: Color.fromRGBO(240, 240, 240, 1.0),
         selectedLabelStyle: TextStyle(
           fontFamily:

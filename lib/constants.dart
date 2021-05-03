@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-const aPrimaryColor = Color.fromRGBO(157, 68, 75, 1.0);
-const aPrimaryStartingColor = Color.fromRGBO(157, 68, 75, 0.98);
-const aPrimaryLightColor = Color.fromRGBO(230, 230, 230, 1.0);
+const aPrimaryColor = Color.fromRGBO(146, 173, 170, 1.0);
+const aPrimaryStartingColor = Color.fromRGBO(146, 173, 170, 1.0);
+const aPrimaryLightColor = Color.fromRGBO(235, 228, 220, 1.0);
+const aLightGreyColor = Color.fromRGBO(239, 237, 237, 1.0);
 const aErrorColor = Colors.red;
 
 final RegExp emailValidationExp =
