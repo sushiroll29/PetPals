@@ -1,7 +1,7 @@
 import 'package:fl/components/text_field_container.dart';
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
-import 'package:fl/screens/detailed_pet.dart';
+import 'package:fl/screens/updated_detailed_pet.dart';
 import 'package:fl/screens/profile.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
@@ -37,7 +37,7 @@ class HomePageState extends State<HomePage> {
         .collection("petsStream")
         //.document()
         //.collection("pets")
-        .orderBy('foundOn')
+        .orderBy('postDate', descending: true)
         .snapshots();
   }
 
@@ -79,7 +79,7 @@ class HomePageState extends State<HomePage> {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 18.0, vertical: 22.0),
+                            horizontal: 18.0, vertical: 15.0),
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -167,9 +167,9 @@ class HomePageState extends State<HomePage> {
   Widget buildPetIconList(int index) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(right: 50.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           InkWell(
             onTap: () {
@@ -186,7 +186,7 @@ class HomePageState extends State<HomePage> {
                 child: Center(
                   child: Icon(
                     petIcons[index],
-                    size: size.height * .04,
+                    size: size.height * .035,
                     color: selectedPetIndex == index
                         ? Colors.white
                         : Colors.grey.shade300,
@@ -221,7 +221,8 @@ class HomePageState extends State<HomePage> {
         Navigator.push(
             context,
             //!!!!!!!!!!!!!!!!!!!!!!!!!! trebe la detailed page
-            MaterialPageRoute(builder: (context) => DetailedPet(pet: pet)));
+            MaterialPageRoute(
+                builder: (context) => UpdatedDetailedPet(pet: pet)));
       },
       child: Padding(
         padding: EdgeInsets.only(

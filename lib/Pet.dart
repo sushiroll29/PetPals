@@ -7,23 +7,29 @@ import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 class Pet {
   String type;
   String name;
+  String breed;
   String gender;
+  String isVaccinated;
   PickResult location;
   String age;
   DateTime foundOn;
+  DateTime postDate;
   String description;
 
-  Pet(this.type, this.name, this.gender, this.location, this.age, this.foundOn,
-      this.description);
+  Pet(this.type, this.name, this.breed, this.gender, this.isVaccinated,
+      this.location, this.age, this.foundOn, this.postDate, this.description);
 
   //formatting for upload to Firebase
   Map<String, dynamic> toJson() => {
         'type': type,
         'name': name,
+        'breed': breed,
         'gender': gender,
+        'isVaccinated': isVaccinated,
         'location': location,
         'age': age,
         'foundOn': foundOn,
+        'postDate': postDate,
         'description': description,
       };
 
@@ -31,10 +37,13 @@ class Pet {
   Pet.fromSnapshot(DocumentSnapshot snapshot)
       : type = snapshot['type'],
         name = snapshot['name'],
+        breed = snapshot['breed'],
         gender = snapshot['gender'],
+        isVaccinated = snapshot['isVaccinated'],
         location = snapshot['location'],
         age = snapshot['age'],
         foundOn = snapshot['foundOn'].toDate(),
+        postDate = snapshot['postDate'].toDate(),
         description = snapshot['description'];
 
   Map<String, Icon> types() => {

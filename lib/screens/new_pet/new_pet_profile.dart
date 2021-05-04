@@ -24,11 +24,13 @@ class NewPetNamePage extends StatefulWidget {
 }
 
 class _NewPetNamePageState extends State<NewPetNamePage> {
-  String _currentSelectedGenderValue, _currentSelectedPetValue;
+  String _currentSelectedGenderValue, _currentSelectedVaccinatedValue;
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _ageController = TextEditingController();
+  final _breedController = TextEditingController();
   List genders = ["Male", "Female"];
+  List isVaccinated = ["Yes", "No", "Don't know"];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -77,7 +79,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     maxLines: 1,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade700,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w700)
                               .fontFamily,
@@ -97,7 +99,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     maxLines: 1,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade700,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -107,6 +109,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                 ),
               ],
             ),
+/*
             SizedBox(height: size.height * 0.005),
             Row(
               children: [
@@ -116,7 +119,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "If you don't know it, leave empty.",
                     maxLines: 1,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade700,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -126,7 +129,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                 ),
               ],
             ),
-
+*/
             SizedBox(height: size.height * 0.01), //1%
 
             Row(
@@ -155,11 +158,14 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         // icon: Icon(
                         //   FontAwesomeIcons.paw,
                         //   size: 16.0,
-                        //   color: Colors.black,
+                        //   color: Colors.grey.shade700,
                         // ),
                         border: InputBorder.none,
-                        hintText: "PET'S NAME",
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintText: "e.g. Bobby",
+                        hintStyle: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.grey.shade400),
                       ),
                     ),
                   ),
@@ -176,7 +182,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "Pet's gender",
                     maxLines: 1,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade700,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -189,8 +195,8 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
 
             Row(
               children: <Widget>[
-                addRadioButton(0, 'Male'),
-                addRadioButton(1, 'Female'),
+                addGenderRadioButton(0, 'Male'),
+                addGenderRadioButton(1, 'Female'),
               ],
             ),
 
@@ -199,10 +205,110 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: AutoSizeText(
+                    "Is the pet vaccinated?",
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: Colors.grey.shade700,
+                      fontFamily:
+                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                              .fontFamily,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: size.height * 0.005),
+            Row(
+              children: <Widget>[
+                addVaccinatedRadioButton(0, 'Yes'),
+                addVaccinatedRadioButton(1, 'No'),
+                addVaccinatedRadioButton(2, "Don't know"),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: AutoSizeText(
+                    "Pet's breed",
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: Colors.grey.shade700,
+                      fontFamily:
+                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                              .fontFamily,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: size.height * 0.005),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: AutoSizeText(
+                    "If you don't know it, write down 'Mix'.",
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: Colors.grey.shade700,
+                      fontFamily:
+                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                              .fontFamily,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: size.height * 0.005),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: TextFieldContainer(
+                    child: TextFormField(
+                      textAlign: TextAlign.left,
+                      controller: _breedController,
+                      style: TextStyle(
+                        fontFamily:
+                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                                .fontFamily,
+                        height: 1.3,
+                      ),
+                      decoration: InputDecoration(
+                        errorStyle: TextStyle(
+                          fontFamily: GoogleFonts.quicksand(
+                                  fontWeight: FontWeight.normal)
+                              .fontFamily,
+                        ),
+                        isDense: true,
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: InputBorder.none,
+                        hintText: "e.g. Pitbull",
+                        hintStyle: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.grey.shade400),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: AutoSizeText(
                     "Pet's age",
                     maxLines: 1,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade700,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -221,7 +327,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "Please mention months/years.",
                     maxLines: 1,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade700,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -232,6 +338,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
               ],
             ),
             SizedBox(height: size.height * 0.005),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -258,12 +365,14 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         // icon: Icon(
                         //   FontAwesomeIcons.solidDotCircle,
                         //   size: 16.0,
-                        //   color: Colors.black,
+                        //   color: Colors.grey.shade700,
                         // ),
                         border: InputBorder.none,
-                        hintText: "PET'S AGE",
+                        hintText: "e.g. 5 years",
                         hintStyle: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.grey.shade400),
                       ),
                     ),
                   ),
@@ -279,7 +388,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     "Pet's description",
                     maxLines: 1,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade700,
                       fontFamily:
                           GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                               .fontFamily,
@@ -316,12 +425,13 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         isDense: true,
                         contentPadding: EdgeInsets.all(10.0),
                         border: InputBorder.none,
-                        hintText: "BRIEFLY DESCRIBE THE PET",
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintText: "Brief description of the pet",
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: Colors.grey.shade400),
                         // icon: Icon(
                         //   FontAwesomeIcons.ellipsisH,
                         //   size: 16.0,
-                        //   color: Colors.black,
+                        //   color: Colors.grey.shade700,
                         // ),
                       ),
                     ),
@@ -334,8 +444,9 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
               text: 'CONTINUE',
               press: () {
                 widget.pet.name = _nameController.text;
-                //widget.pet.type = _currentSelectedPetValue;
+                widget.pet.breed = _breedController.text;
                 widget.pet.gender = _currentSelectedGenderValue;
+                widget.pet.isVaccinated = _currentSelectedVaccinatedValue;
                 widget.pet.description = _descriptionController.text;
                 widget.pet.age = _ageController.text;
                 Navigator.push(
@@ -351,12 +462,12 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
     );
   }
 
-  Row addRadioButton(int btnValue, String title) {
+  Row addGenderRadioButton(int btnValue, String title) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Radio(
-          activeColor: Colors.grey.shade800,
+          activeColor: aPrimaryColor,
           value: genders[btnValue],
           groupValue: _currentSelectedGenderValue,
           onChanged: (value) {
@@ -368,7 +479,34 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
         Text(
           title,
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.grey.shade700,
+            fontFamily:
+                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+            fontSize: 15,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row addVaccinatedRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: aPrimaryColor,
+          value: isVaccinated[btnValue],
+          groupValue: _currentSelectedVaccinatedValue,
+          onChanged: (value) {
+            setState(() {
+              _currentSelectedVaccinatedValue = value;
+            });
+          },
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.grey.shade700,
             fontFamily:
                 GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
             fontSize: 15,

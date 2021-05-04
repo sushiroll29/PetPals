@@ -20,6 +20,7 @@ class NewPetDatePage extends StatefulWidget {
 
 class _NewPetDatePageState extends State<NewPetDatePage> {
   DateTime _foundOn = DateTime.now();
+  DateTime _postDate = DateTime.now();
 
   Future displayDatePick(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -158,6 +159,7 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
                 text: 'CONTINUE',
                 press: () {
                   widget.pet.foundOn = _foundOn;
+                  widget.pet.postDate = _postDate;
                   Navigator.push(
                     context,
                     MaterialPageRoute(

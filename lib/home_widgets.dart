@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   Pet pet;
   final List<Widget> _children = [
-    HomePage(),
+    MenuPage(),
     FavoritesPage(),
     MapPage(),
     ProfilePage(),
@@ -31,7 +31,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final newPet = new Pet(null, null, null, null, null, null, null);
+    final newPet =
+        new Pet(null, null, null, null, null, null, null, null, null, null);
     return Scaffold(
       /*
       appBar: AppBar(
