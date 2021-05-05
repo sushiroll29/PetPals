@@ -1,6 +1,7 @@
 import 'package:fl/components/text_field_container.dart';
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
+import 'package:fl/screens/menu.dart';
 import 'package:fl/screens/updated_detailed_pet.dart';
 import 'package:fl/screens/profile.dart';
 import 'package:fl/services/auth.dart';
@@ -15,11 +16,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/widgets/provider.dart';
 
 class HomePage extends StatefulWidget {
+  final Function onMenuTap;
+
+  HomePage({this.onMenuTap});
+
   @override
-  HomePageState createState() => HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   int selectedPetIndex = 0;
   List<String> petTypes = [
     'Dogs',
@@ -46,6 +51,7 @@ class HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     //final pet = Pet.fromSnapshot(document);
     return Material(
+      borderRadius: BorderRadius.circular(40),
       child: Padding(
         padding: const EdgeInsets
             //symmetric(vertical: 50.0),
@@ -58,7 +64,17 @@ class HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.bars, color: Colors.grey.shade600),
+                  InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                        //widget.onMenuTap();
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => MenuPage()),
+                        // );
+                      },
+                      child: Icon(FontAwesomeIcons.bars,
+                          color: Colors.grey.shade400)),
                   CircleAvatar(
                     radius: 20.0,
                     backgroundColor: Colors.black,

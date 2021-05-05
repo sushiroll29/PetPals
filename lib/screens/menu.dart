@@ -19,6 +19,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/widgets/provider.dart';
 
 class MenuPage extends StatefulWidget {
+  final Function(int) menuCallback;
+
+  MenuPage({this.menuCallback});
   @override
   _MenuPageState createState() => _MenuPageState();
 }
@@ -26,6 +29,8 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   int selectedItemIndex = 0;
   int selectedBottomItemIndex = -1;
+
+  final bool isMenuOpen = false;
 
   List<String> bottomMenuItems = [
     'Settings',

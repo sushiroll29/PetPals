@@ -6,21 +6,49 @@ import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddNewPetPage extends StatelessWidget {
+class AddNewPetPage extends StatefulWidget {
+  final Function onMenuTap;
+
+  AddNewPetPage({this.onMenuTap});
+
+  @override
+  _AddNewPetPageState createState() => _AddNewPetPageState();
+}
+
+class _AddNewPetPageState extends State<AddNewPetPage> {
   final newPet =
       new Pet(null, null, null, null, null, null, null, null, null, null);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Padding(
+    return Material(
+      borderRadius: BorderRadius.circular(40),
+      //child: Scaffold(
+      child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      //widget.onMenuTap();
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => MenuPage()
+                      // ),
+                    },
+                    child: Icon(FontAwesomeIcons.bars,
+                        color: Colors.grey.shade600)),
+              ],
+            ),
             Container(
               child: Image(
                 image: AssetImage('assets/images/adoption_screen_doodle.png'),
@@ -86,6 +114,7 @@ class AddNewPetPage extends StatelessWidget {
           ],
         ),
       ),
+      // ),
     );
   }
 }

@@ -42,10 +42,7 @@ class UpdatedDetailedPet extends StatelessWidget {
                                 icon: Icon(FontAwesomeIcons.arrowLeft),
                                 color: Colors.grey.shade800,
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage()));
+                                  Navigator.pop(context);
                                 }),
                           ],
                         ),
