@@ -40,7 +40,7 @@ class UpdatedDetailedPet extends StatelessWidget {
                           children: <Widget>[
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.arrowLeft),
-                                color: Colors.grey.shade800,
+                                color: Colors.grey.shade400,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),

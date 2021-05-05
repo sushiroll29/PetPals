@@ -20,21 +20,21 @@ class AddNewPetPage extends StatefulWidget {
 
 class _AddNewPetPageState extends State<AddNewPetPage> {
   final newPet =
-      new Pet(null, null, null, null, null, null, null, null, null, null);
+      new Pet(null, null, null, null, null, null, null, null, null, null, null);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Material(
-      borderRadius: BorderRadius.circular(40),
       //child: Scaffold(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 InkWell(
                     onTap: () {
@@ -46,70 +46,82 @@ class _AddNewPetPageState extends State<AddNewPetPage> {
                       // ),
                     },
                     child: Icon(FontAwesomeIcons.bars,
-                        color: Colors.grey.shade600)),
+                        color: Colors.grey.shade400)),
               ],
             ),
-            Container(
-              child: Image(
-                image: AssetImage('assets/images/adoption_screen_doodle.png'),
-                height: size.width * 0.6,
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 100, horizontal: 10),
+                  child: Column(
+                    children: [
+                      Image(
+                        image: AssetImage(
+                            'assets/images/adoption_screen_doodle.png'),
+                        height: size.width * 0.6,
+                      ),
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Did you find a pet you wish to put up for adoption? Do you have a pet you can no longer care for?",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "We'll help you set up an adoption announcement!",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RoundedButton(
+                            text: 'CONTINUE',
+                            press: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        NewPetTypePage(pet: newPet)),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "Did you find a pet you wish to put up for adoption? Do you have a pet you can no longer care for?",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 17.5,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade600,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                              .fontFamily,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "We'll help you set up an adoption announcement!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 17.5,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade600,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                              .fontFamily,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RoundedButton(
-                  text: 'CONTINUE',
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NewPetTypePage(pet: newPet)),
-                    );
-                  },
-                ),
-              ],
             ),
           ],
         ),

@@ -24,19 +24,22 @@ class NewPetNamePage extends StatefulWidget {
 }
 
 class _NewPetNamePageState extends State<NewPetNamePage> {
-  String _currentSelectedGenderValue, _currentSelectedVaccinatedValue;
+  String _currentSelectedGenderValue,
+      _currentSelectedVaccinatedValue,
+      _currentSelectedSterilisedValue;
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _ageController = TextEditingController();
   final _breedController = TextEditingController();
   List genders = ["Male", "Female"];
   List isVaccinated = ["Yes", "No", "Don't know"];
+  List isSterilised = ["Yes", "No", "Don't know"];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    String _name;
+    //String _name;
 
-    var _petTypes = ["Dog", "Cat"];
+    //var _petTypes = ["Dog", "Cat"];
     //final _nameController = TextEditingController();
     //TextEditingController _genderController = new TextEditingController();
     _nameController.text = widget.pet.name;
@@ -44,419 +47,465 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
     _ageController.text = widget.pet.age;
     //_genderController.text = widget.pet.gender;
 
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: size.height * 0.08,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(1),
+    return Material(
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 50,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-        ),
-        backgroundColor: aPrimaryColor,
-        centerTitle: true,
-        title: Text(
-          "ADD A NEW PET",
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily:
-                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
-            fontSize: 19,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: size.height * 0.03), //1%
-            SizedBox(height: size.height * 0.01), //1%
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "New pet's details",
-                    maxLines: 1,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w700)
-                              .fontFamily,
-                      fontSize: 20,
+          child: SingleChildScrollView(
+            //reverse: true,
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: 20,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  // SizedBox(height: size.height * 0.03), //1%
+                  // SizedBox(height: size.height * 0.01), //1%
+                  Padding(
+                    padding: const EdgeInsets.only(left: 22),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                              //widget.onMenuTap();
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => MenuPage()
+                              // ),
+                            },
+                            child: Icon(FontAwesomeIcons.arrowLeft,
+                                color: Colors.grey.shade400)),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.03), //1%
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "Pet's name",
-                    maxLines: 1,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "New pet's details",
+                          maxLines: 1,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w700)
+                                .fontFamily,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
+                  SizedBox(height: size.height * 0.03), //1%
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Pet's name",
+                          maxLines: 1,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
 /*
-            SizedBox(height: size.height * 0.005),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "If you don't know it, leave empty.",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
+                  SizedBox(height: size.height * 0.005),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "If you don't know it, leave empty.",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily:
+                                GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                                    .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
 */
-            SizedBox(height: size.height * 0.01), //1%
+                  SizedBox(height: size.height * 0.01), //1%
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6),
-                  child: TextFieldContainer(
-                    child: TextFormField(
-                      textAlign: TextAlign.left,
-                      controller: _nameController,
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
-                      ),
-                      decoration: InputDecoration(
-                        errorStyle: TextStyle(
-                          fontFamily: GoogleFonts.quicksand(
-                                  fontWeight: FontWeight.normal)
-                              .fontFamily,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        child: TextFieldContainer(
+                          child: TextFormField(
+                            textAlign: TextAlign.left,
+                            controller: _nameController,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.normal)
+                                  .fontFamily,
+                              height: 1.3,
+                            ),
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
+                              isDense: true,
+                              contentPadding: EdgeInsets.all(10.0),
+                              // icon: Icon(
+                              //   FontAwesomeIcons.paw,
+                              //   size: 16.0,
+                              //   color: Colors.grey.shade700,
+                              // ),
+                              border: InputBorder.none,
+                              hintText: "e.g. Bobby",
+                              hintStyle: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.grey.shade400),
+                            ),
+                          ),
                         ),
-                        isDense: true,
-                        contentPadding: EdgeInsets.all(10.0),
-                        // icon: Icon(
-                        //   FontAwesomeIcons.paw,
-                        //   size: 16.0,
-                        //   color: Colors.grey.shade700,
-                        // ),
-                        border: InputBorder.none,
-                        hintText: "e.g. Bobby",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.grey.shade400),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.01), //1%
+                  SizedBox(height: size.height * 0.01), //1%
 
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "Pet's gender",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            Row(
-              children: <Widget>[
-                addGenderRadioButton(0, 'Male'),
-                addGenderRadioButton(1, 'Female'),
-              ],
-            ),
-
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "Is the pet vaccinated?",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.005),
-            Row(
-              children: <Widget>[
-                addVaccinatedRadioButton(0, 'Yes'),
-                addVaccinatedRadioButton(1, 'No'),
-                addVaccinatedRadioButton(2, "Don't know"),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "Pet's breed",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.005),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "If you don't know it, write down 'Mix'.",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.005),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: TextFieldContainer(
-                    child: TextFormField(
-                      textAlign: TextAlign.left,
-                      controller: _breedController,
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Pet's gender",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
                                 .fontFamily,
-                        height: 1.3,
-                      ),
-                      decoration: InputDecoration(
-                        errorStyle: TextStyle(
-                          fontFamily: GoogleFonts.quicksand(
-                                  fontWeight: FontWeight.normal)
-                              .fontFamily,
+                            fontSize: 16,
+                          ),
                         ),
-                        isDense: true,
-                        contentPadding: EdgeInsets.all(10.0),
-                        border: InputBorder.none,
-                        hintText: "e.g. Pitbull",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.grey.shade400),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "Pet's age",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.005),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: AutoSizeText(
-                    "Please mention months/years.",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.005),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: TextFieldContainer(
-                    child: TextFormField(
-                      textAlign: TextAlign.left,
-                      controller: _ageController,
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
-                      ),
-                      decoration: InputDecoration(
-                        errorStyle: TextStyle(
-                          fontFamily: GoogleFonts.quicksand(
-                                  fontWeight: FontWeight.normal)
-                              .fontFamily,
-                        ),
-                        isDense: true,
-                        contentPadding: EdgeInsets.all(10.0),
-                        // icon: Icon(
-                        //   FontAwesomeIcons.solidDotCircle,
-                        //   size: 16.0,
-                        //   color: Colors.grey.shade700,
-                        // ),
-                        border: InputBorder.none,
-                        hintText: "e.g. 5 years",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.grey.shade400),
-                      ),
-                    ),
+                  Row(
+                    children: <Widget>[
+                      addGenderRadioButton(0, 'Male'),
+                      addGenderRadioButton(1, 'Female'),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.01), //1%
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: AutoSizeText(
-                    "Pet's description",
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.005), //1%
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: DescriptionContainer(
-                    child: TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      textAlign: TextAlign.left,
-                      controller: _descriptionController,
-                      style: TextStyle(
-                        fontFamily:
-                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                                .fontFamily,
-                        height: 1.3,
-                      ),
-                      decoration: InputDecoration(
-                        errorStyle: TextStyle(
-                          fontFamily: GoogleFonts.quicksand(
-                                  fontWeight: FontWeight.normal)
-                              .fontFamily,
-                        ),
-                        isDense: true,
-                        contentPadding: EdgeInsets.all(10.0),
-                        border: InputBorder.none,
-                        hintText: "Brief description of the pet",
-                        hintStyle: TextStyle(
-                            fontSize: 14, color: Colors.grey.shade400),
-                        // icon: Icon(
-                        //   FontAwesomeIcons.ellipsisH,
-                        //   size: 16.0,
-                        //   color: Colors.grey.shade700,
-                        // ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
 
-            RoundedButton(
-              text: 'CONTINUE',
-              press: () {
-                widget.pet.name = _nameController.text;
-                widget.pet.breed = _breedController.text;
-                widget.pet.gender = _currentSelectedGenderValue;
-                widget.pet.isVaccinated = _currentSelectedVaccinatedValue;
-                widget.pet.description = _descriptionController.text;
-                widget.pet.age = _ageController.text;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MapScreen(pet: widget.pet)),
-                );
-              },
-            )
-          ],
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Is the pet vaccinated?",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: <Widget>[
+                      addVaccinatedRadioButton(0, 'Yes'),
+                      addVaccinatedRadioButton(1, 'No'),
+                      addVaccinatedRadioButton(2, "Don't know"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Is the pet sterilised?",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      addSterilisedRadioButton(0, 'Yes'),
+                      addSterilisedRadioButton(1, 'No'),
+                      addSterilisedRadioButton(2, "Don't know"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Pet's breed",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.005),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "If you don't know it, write down 'Mix'.",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.005),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: TextFieldContainer(
+                          child: TextFormField(
+                            textAlign: TextAlign.left,
+                            controller: _breedController,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.normal)
+                                  .fontFamily,
+                              height: 1.3,
+                            ),
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
+                              isDense: true,
+                              contentPadding: EdgeInsets.all(10.0),
+                              border: InputBorder.none,
+                              hintText: "e.g. Pitbull",
+                              hintStyle: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.grey.shade400),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Pet's age",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.005),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Please mention months/years.",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.005),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: TextFieldContainer(
+                          child: TextFormField(
+                            textAlign: TextAlign.left,
+                            controller: _ageController,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.normal)
+                                  .fontFamily,
+                              height: 1.3,
+                            ),
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
+                              isDense: true,
+                              contentPadding: EdgeInsets.all(10.0),
+                              // icon: Icon(
+                              //   FontAwesomeIcons.solidDotCircle,
+                              //   size: 16.0,
+                              //   color: Colors.grey.shade700,
+                              // ),
+                              border: InputBorder.none,
+                              hintText: "e.g. 5 years",
+                              hintStyle: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.grey.shade400),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.01), //1%
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: AutoSizeText(
+                          "Pet's description",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.height * 0.005), //1%
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: DescriptionContainer(
+                          child: TextFormField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            textAlign: TextAlign.left,
+                            controller: _descriptionController,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.normal)
+                                  .fontFamily,
+                              height: 1.3,
+                            ),
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
+                              isDense: true,
+
+                              contentPadding: EdgeInsets.all(10.0),
+                              border: InputBorder.none,
+                              hintText: "Brief description of the pet",
+                              hintStyle: TextStyle(
+                                  fontSize: 14, color: Colors.grey.shade400),
+                              // icon: Icon(
+                              //   FontAwesomeIcons.ellipsisH,
+                              //   size: 16.0,
+                              //   color: Colors.grey.shade700,
+                              // ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  RoundedButton(
+                    text: 'CONTINUE',
+                    press: () {
+                      widget.pet.name = _nameController.text;
+                      widget.pet.breed = _breedController.text;
+                      widget.pet.gender = _currentSelectedGenderValue;
+                      widget.pet.isVaccinated = _currentSelectedVaccinatedValue;
+                      widget.pet.isSterilised = _currentSelectedSterilisedValue;
+                      widget.pet.description = _descriptionController.text;
+                      widget.pet.age = _ageController.text;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MapScreen(pet: widget.pet)),
+                      );
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -500,6 +549,33 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
           onChanged: (value) {
             setState(() {
               _currentSelectedVaccinatedValue = value;
+            });
+          },
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.grey.shade700,
+            fontFamily:
+                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+            fontSize: 15,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row addSterilisedRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: aPrimaryColor,
+          value: isSterilised[btnValue],
+          groupValue: _currentSelectedSterilisedValue,
+          onChanged: (value) {
+            setState(() {
+              _currentSelectedSterilisedValue = value;
             });
           },
         ),

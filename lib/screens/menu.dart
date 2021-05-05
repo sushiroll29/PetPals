@@ -173,6 +173,7 @@ class _MenuPageState extends State<MenuPage> {
                         padding: const EdgeInsets.all(13.0),
                         child: Text(
                           "Ale Surdu",
+                          //"${user.displayName}",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

@@ -7,6 +7,7 @@ import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
 import 'package:fl/widgets/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:fl/screens/backgrounds/add_pet_bg.dart';
@@ -30,36 +31,36 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
     //TextEditingController _controller = new TextEditingController();
     //_controller.text = pet.location;
 
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: size.height * 0.08,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(1),
-          ),
-        ),
-        backgroundColor: aPrimaryColor,
-        centerTitle: true,
-        title: Text(
-          "ADD A NEW PET",
-          style: TextStyle(
-            fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,
-            fontSize: 19,
-          ),
-        ),
-      ),
-      body: Background(
+    return Material(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      //widget.onMenuTap();
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => MenuPage()
+                      // ),
+                    },
+                    child: Icon(FontAwesomeIcons.arrowLeft,
+                        color: Colors.grey.shade400)),
+              ],
+            ),
             SizedBox(height: size.height * 0.25),
             AutoSizeText(
-              "Pick the pet type",
+              "Please choose the pet type",
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.grey.shade600,
                 fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w700)
                     .fontFamily,
                 fontSize: 20,

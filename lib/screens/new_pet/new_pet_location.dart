@@ -31,24 +31,6 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: size.height * 0.08,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(1),
-          ),
-        ),
-        backgroundColor: aPrimaryColor,
-        centerTitle: true,
-        title: Text(
-          "ADD A NEW PET",
-          style: TextStyle(
-            fontFamily:
-                GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,
-            fontSize: 19,
-          ),
-        ),
-      ),
       body: PlacePicker(
           apiKey: "AIzaSyCID7zNDSX0ql3mqZ4fKWpLvk54G_Y-L8k",
           hintText: "Where is the pet located?",

@@ -69,15 +69,29 @@ class _MapPageState extends State<MapPage> {
     }
 */
     return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Find pets around you!',
+            style: TextStyle(
+              fontSize: 19,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                  .fontFamily,
+            ),
+          ),
+          backgroundColor: aPrimaryColor,
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
         body: GoogleMap(
-      markers: Set<Marker>.of(markers.values),
-      mapType: MapType.normal,
-      myLocationEnabled: true,
-      onMapCreated: (GoogleMapController controller) {
-        myController = controller;
-      },
-      initialCameraPosition:
-          CameraPosition(target: LatLng(45.7494, 21.2272), zoom: 15),
-    ));
+          markers: Set<Marker>.of(markers.values),
+          mapType: MapType.normal,
+          myLocationEnabled: true,
+          onMapCreated: (GoogleMapController controller) {
+            myController = controller;
+          },
+          initialCameraPosition:
+              CameraPosition(target: LatLng(45.7494, 21.2272), zoom: 15),
+        ));
   }
 }

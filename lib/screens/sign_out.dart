@@ -56,10 +56,7 @@ class SignOutPage extends StatelessWidget {
               RoundedButton(
                 text: 'No',
                 press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MenuPage()),
-                  );
+                  Navigator.pop(context);
                 },
               ),
             ],

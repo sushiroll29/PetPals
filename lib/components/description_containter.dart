@@ -18,7 +18,7 @@ class DescriptionContainer extends StatelessWidget {
       height: size.height * 0.2,
       width: size.width * 0.9,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: aPrimaryLightColor.withOpacity(0.1),
         border: Border.all(
           color: Colors.grey,
         ),

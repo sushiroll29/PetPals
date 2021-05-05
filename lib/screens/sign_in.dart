@@ -66,48 +66,54 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       body: Background(
         //child: SingleChildScrollView(),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              showError(),
-              SizedBox(height: size.height * 0.01), //1%
-              AutoSizeText(
-                'SIGN IN',
-                style: TextStyle(
-                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                      .fontFamily,
-                  fontSize: 19,
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                showError(),
+                SizedBox(height: size.height * 0.01), //1%
+                AutoSizeText(
+                  'SIGN IN',
+                  style: TextStyle(
+                    fontFamily:
+                        GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                            .fontFamily,
+                    fontSize: 19,
+                  ),
                 ),
-              ),
 
-              Image.asset(
-                "assets/images/login_doodle.png",
-                height: size.width * 0.6,
-              ),
-
-              Form(
-                key: formKey,
-                child: Column(
-                  children: inputsBuilder(),
+                Image.asset(
+                  "assets/images/login_doodle.png",
+                  height: size.width * 0.6,
                 ),
-              ),
 
-              RoundedButton(
-                  text: "SIGN IN",
-                  press: () async {
-                    submit();
-                    //Navigator.of(context).pushReplacementNamed('/home');
-                  }),
-              SizedBox(height: size.height * 0.01),
-              showForgotPassword(),
-              ExistingAccountCheck(
-                login: true,
-                press: () {
-                  Navigator.of(context).pushReplacementNamed('/signUp');
-                },
-              ),
-            ],
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: inputsBuilder(),
+                  ),
+                ),
+
+                RoundedButton(
+                    text: "SIGN IN",
+                    press: () async {
+                      submit();
+                      //Navigator.of(context).pushReplacementNamed('/home');
+                    }),
+                SizedBox(height: size.height * 0.01),
+                showForgotPassword(),
+                ExistingAccountCheck(
+                  login: true,
+                  press: () {
+                    Navigator.of(context).pushReplacementNamed('/signUp');
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

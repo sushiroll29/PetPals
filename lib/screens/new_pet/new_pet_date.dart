@@ -3,6 +3,7 @@ import 'package:fl/screens/new_pet/new_pet_summary.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:date_range_picker/date_range_picker.dart' as DateRangePicker;
 import 'dart:async';
 import 'package:intl/intl.dart';
@@ -50,124 +51,90 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: size.height * 0.08,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(1),
-          ),
-        ),
-        backgroundColor: aPrimaryColor,
-        centerTitle: true,
-        title: Text(
-          "ADD A NEW PET",
-          style: TextStyle(
-            fontFamily:
-                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
-            fontSize: 19,
-          ),
-        ),
-      ),
-      body: Background(
+    return Material(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: size.height * 0.03), //1%
-              //1%
-              AutoSizeText(
-                'WHEN DID YOU FIND THE PET?',
-                maxLines: 1,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w700)
-                      .fontFamily,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(height: size.height * 0.003), //1%
-              AutoSizeText(
-                'Provide the most accurate date you can remember.',
-                maxLines: 1,
-                style: TextStyle(
-                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                      .fontFamily,
-                  fontSize: 17,
-                ),
-              ),
-              SizedBox(height: size.height * 0.02), //1%
-              // AutoSizeText(
-              //   "Pet name: ${widget.pet.name}",
-              //   maxLines: 1,
-              //   style: TextStyle(
-              //     fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-              //         .fontFamily,
-              //     fontSize: 19,
-              //   ),
-              // ),
-              // SizedBox(height: size.height * 0.03), //1%
-              // AutoSizeText(
-              //   "Enter a date",
-              //   style: TextStyle(
-              //     fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-              //         .fontFamily,
-              //     fontSize: 19,
-              //   ),
-              // ),
-              SizedBox(height: size.height * 0.01), //1%
-              RoundedButton(
-                  text: 'SELECT DATE',
-                  press: () async {
-                    await displayDatePick(context);
-                  }),
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  AutoSizeText(
-                    "Found on: ${DateFormat('dd/MM/yyyy').format(_foundOn).toString()}",
-                    style: TextStyle(
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 17,
-                    ),
-                  ),
+                  InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(FontAwesomeIcons.arrowLeft,
+                          color: Colors.grey.shade400)),
                 ],
               ),
-              SizedBox(height: size.height * 0.004), //1%
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  AutoSizeText(
-                    "Is this correct?",
-                    style: TextStyle(
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                      fontSize: 17,
-                    ),
+              Container(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  child: Column(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage('assets/images/dog_doodle.png'),
+                        height: size.width * 0.75,
+                      ),
+                      SizedBox(height: 15),
+                      RoundedButton(
+                          text: 'SELECT DATE',
+                          press: () async {
+                            await displayDatePick(context);
+                          }),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          AutoSizeText(
+                            "Found on ${DateFormat('dd MMMM yyyy').format(_foundOn).toString()}.",
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.w600)
+                                  .fontFamily,
+                              fontSize: 17,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          AutoSizeText(
+                            "If this is correct, please continue.",
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.w600)
+                                  .fontFamily,
+                              fontSize: 17,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      RoundedButton(
+                        text: 'CONTINUE',
+                        press: () {
+                          widget.pet.foundOn = _foundOn;
+                          widget.pet.postDate = _postDate;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    NewPetLocationPage(pet: widget.pet)),
+                          );
+                        },
+                      )
+                    ],
                   ),
-                ],
+                ),
               ),
-
-              SizedBox(height: size.height * 0.1), //1%
-              RoundedButton(
-                text: 'CONTINUE',
-                press: () {
-                  widget.pet.foundOn = _foundOn;
-                  widget.pet.postDate = _postDate;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            NewPetLocationPage(pet: widget.pet)),
-                  );
-                },
-              )
             ],
           ),
         ),

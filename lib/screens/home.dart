@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     //final pet = Pet.fromSnapshot(document);
     return Material(
-      borderRadius: BorderRadius.circular(40),
       child: Padding(
         padding: const EdgeInsets
             //symmetric(vertical: 50.0),
@@ -66,12 +65,11 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   InkWell(
                       onTap: () {
-                        Navigator.pop(context);
                         //widget.onMenuTap();
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => MenuPage()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MenuPage()),
+                        );
                       },
                       child: Icon(FontAwesomeIcons.bars,
                           color: Colors.grey.shade400)),
@@ -86,11 +84,11 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: aLightGreyColor.withOpacity(0.5),
+                  color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 3.0),
                   child: Column(
                     children: <Widget>[
                       Padding(
@@ -133,6 +131,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
+                      /*  partea astea nu stiu daca o mai includ
                       Container(
                         //color: Colors.blue,
                         height: size.height * 0.12,
@@ -144,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                             return buildPetIconList(index);
                           },
                         ),
-                      ),
+                      ),*/
                       Expanded(
                           child: StreamBuilder(
                               stream: getUsersPets(context),
@@ -195,7 +194,7 @@ class _HomePageState extends State<HomePage> {
             },
             child: Material(
               color: selectedPetIndex == index ? aPrimaryColor : Colors.white,
-              elevation: 8.0,
+              elevation: 2.0,
               borderRadius: BorderRadius.circular(20.0),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 11.0),
@@ -236,7 +235,6 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         Navigator.push(
             context,
-            //!!!!!!!!!!!!!!!!!!!!!!!!!! trebe la detailed page
             MaterialPageRoute(
                 builder: (context) => UpdatedDetailedPet(pet: pet)));
       },
@@ -251,7 +249,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Material(
               borderRadius: BorderRadius.circular(20.0),
-              elevation: 4.0,
+              elevation: 2.0,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 17.0, vertical: 20.0),

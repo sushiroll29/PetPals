@@ -10,14 +10,25 @@ class Pet {
   String breed;
   String gender;
   String isVaccinated;
+  String isSterilised;
   PickResult location;
   String age;
   DateTime foundOn;
   DateTime postDate;
   String description;
 
-  Pet(this.type, this.name, this.breed, this.gender, this.isVaccinated,
-      this.location, this.age, this.foundOn, this.postDate, this.description);
+  Pet(
+      this.type,
+      this.name,
+      this.breed,
+      this.gender,
+      this.isVaccinated,
+      this.isSterilised,
+      this.location,
+      this.age,
+      this.foundOn,
+      this.postDate,
+      this.description);
 
   //formatting for upload to Firebase
   Map<String, dynamic> toJson() => {
@@ -26,6 +37,7 @@ class Pet {
         'breed': breed,
         'gender': gender,
         'isVaccinated': isVaccinated,
+        'isSterilised': isSterilised,
         'location': location,
         'age': age,
         'foundOn': foundOn,
@@ -40,6 +52,7 @@ class Pet {
         breed = snapshot['breed'],
         gender = snapshot['gender'],
         isVaccinated = snapshot['isVaccinated'],
+        isSterilised = snapshot['isSterilised'],
         location = snapshot['location'],
         age = snapshot['age'],
         foundOn = snapshot['foundOn'].toDate(),
@@ -47,12 +60,16 @@ class Pet {
         description = snapshot['description'];
 
   Map<String, Icon> types() => {
-        "dog": Icon(FontAwesomeIcons.dog, size: 25),
-        "cat": Icon(FontAwesomeIcons.cat, size: 25),
+        "dog":
+            Icon(FontAwesomeIcons.dog, size: 25, color: Colors.grey.shade500),
+        "cat":
+            Icon(FontAwesomeIcons.cat, size: 25, color: Colors.grey.shade500),
       };
 
   Map<String, Icon> bigTypes() => {
-        "dog": Icon(FontAwesomeIcons.dog, size: 60),
-        "cat": Icon(FontAwesomeIcons.cat, size: 60),
+        "dog":
+            Icon(FontAwesomeIcons.dog, size: 60, color: Colors.grey.shade800),
+        "cat":
+            Icon(FontAwesomeIcons.cat, size: 60, color: Colors.grey.shade800),
       };
 }

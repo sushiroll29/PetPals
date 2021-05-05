@@ -1,5 +1,6 @@
 import 'package:fl/home_widgets.dart';
 import 'package:fl/screens/menu.dart';
+
 import 'package:fl/screens/home.dart';
 import 'package:fl/screens/password_reset.dart';
 import 'package:fl/screens/sign_in.dart';
@@ -56,7 +57,7 @@ class HomeController extends StatelessWidget {
           //check if data is sending
           final bool signedIn = snapshot
               .hasData; //if not, it means that there's no user id => not signed in
-          return signedIn ? MenuPage() : Welcome();
+          return signedIn ? HomePage() : Welcome();
         }
         return Container();
       },

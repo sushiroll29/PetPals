@@ -66,50 +66,56 @@ class _SignUpState extends State<SignUp> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Background(
-        //child: SingleChildScrollView(),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              //SizedBox(height: size.height * 0.005),
-              showError(),
-              SizedBox(height: size.height * 0.03), //1%
-              AutoSizeText(
-                'SIGN UP',
-                style: TextStyle(
-                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                      .fontFamily,
-                  fontSize: 19,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+        child: Background(
+          //child: SingleChildScrollView(),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                //SizedBox(height: size.height * 0.005),
+                showError(),
+                SizedBox(height: size.height * 0.03), //1%
+                AutoSizeText(
+                  'SIGN UP',
+                  style: TextStyle(
+                    fontFamily:
+                        GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                            .fontFamily,
+                    fontSize: 19,
+                  ),
                 ),
-              ),
 
-              Image.asset(
-                "assets/images/signup_doodle.png",
-                height: size.width * 0.6,
-              ),
-
-              Form(
-                key: formKey,
-                child: Column(
-                  children: inputsBuilder(),
+                Image.asset(
+                  "assets/images/signup_doodle.png",
+                  height: size.width * 0.6,
                 ),
-              ),
 
-              RoundedButton(
-                  text: "CONTINUE",
-                  press: () async {
-                    submit();
-                    //Navigator.of(context).pushReplacementNamed('/welcome');
-                  }),
-              SizedBox(height: size.height * 0.01),
-              ExistingAccountCheck(
-                login: false,
-                press: () {
-                  Navigator.of(context).pushReplacementNamed('/signIn');
-                },
-              ),
-            ],
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: inputsBuilder(),
+                  ),
+                ),
+
+                RoundedButton(
+                    text: "CONTINUE",
+                    press: () async {
+                      submit();
+                      //Navigator.of(context).pushReplacementNamed('/welcome');
+                    }),
+                SizedBox(height: size.height * 0.01),
+                ExistingAccountCheck(
+                  login: false,
+                  press: () {
+                    Navigator.of(context).pushReplacementNamed('/signIn');
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
