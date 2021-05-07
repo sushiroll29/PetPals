@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/home_widgets.dart';
+import 'package:fl/screens/home_mock.dart';
 import 'package:fl/screens/menu.dart';
 
 import 'package:fl/screens/home.dart';
+import 'package:fl/screens/my_pets.dart';
 import 'package:fl/screens/password_reset.dart';
 import 'package:fl/screens/sign_in.dart';
 import 'package:fl/screens/sign_up.dart';
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider(
       auth: AuthService(),
+      db: Firestore.instance,
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: HomeController(),
@@ -40,6 +44,8 @@ class MyApp extends StatelessWidget {
             '/passwordReset': (BuildContext context) =>
                 PasswordReset(//authFormType: AuthFormType.signIn
                     ),
+            '/myPets': (BuildContext context) => MyPetsPage(),
+            '/menu': (BuildContext context) => MenuPage(),
           }),
     );
   }

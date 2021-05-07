@@ -206,6 +206,9 @@ class NewPetLocationPage extends StatelessWidget {
                                   .auth
                                   .getCurrentUID();
 
+                              pet.userId = uid;
+                              //print(pet.userId);
+
                               await db
                                   .collection("userData")
                                   .document(uid)
@@ -214,7 +217,9 @@ class NewPetLocationPage extends StatelessWidget {
 
                               await db
                                   .collection("petsStream")
+                                  //.document(widget.pet.documentId)
                                   .add(pet.toJson());
+
                               Navigator.of(context)
                                   .popUntil((route) => route.isFirst);
                             },

@@ -1,6 +1,6 @@
 import 'package:fl/constants.dart';
 import 'package:fl/pages.dart';
-import 'package:fl/screens/detailed_pet.dart';
+import 'package:fl/screens/detailed_pet_trash.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';

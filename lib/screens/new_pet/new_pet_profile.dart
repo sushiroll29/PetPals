@@ -27,6 +27,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
       _currentSelectedVaccinatedValue,
       _currentSelectedSterilisedValue;
   final _nameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _ageController = TextEditingController();
   final _breedController = TextEditingController();
@@ -157,6 +158,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 6),
                         child: TextFieldContainer(
                           child: TextFormField(
+                            autocorrect: false,
                             textAlign: TextAlign.left,
                             controller: _nameController,
                             style: TextStyle(
@@ -315,6 +317,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: TextFieldContainer(
                           child: TextFormField(
+                            autocorrect: false,
                             textAlign: TextAlign.left,
                             controller: _breedController,
                             style: TextStyle(
@@ -389,6 +392,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: TextFieldContainer(
                           child: TextFormField(
+                            autocorrect: false,
                             textAlign: TextAlign.left,
                             controller: _ageController,
                             style: TextStyle(
@@ -449,6 +453,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: DescriptionContainer(
                           child: TextFormField(
+                            autocorrect: false,
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
                             textAlign: TextAlign.left,

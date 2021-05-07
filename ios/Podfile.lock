@@ -369,6 +369,8 @@ PODS:
   - "permission_handler (5.1.0+2)":
     - Flutter
   - PromisesObjC (1.2.12)
+  - url_launcher (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -384,6 +386,7 @@ DEPENDENCIES:
   - location (from `.symlinks/plugins/location/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 SPEC REPOS:
   trunk:
@@ -433,6 +436,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider/ios"
   permission_handler:
     :path: ".symlinks/plugins/permission_handler/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -467,6 +472,7 @@ SPEC CHECKSUMS:
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
 
 PODFILE CHECKSUM: 71bd9237a9e7c67fb4636b10858355e2684fcc9e
 

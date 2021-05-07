@@ -1,28 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/Pet.dart';
+import 'package:fl/components/announcement_container.dart';
 import 'package:fl/constants.dart';
 import 'package:fl/main.dart';
 import 'package:fl/screens/home.dart';
+import 'package:fl/screens/my_pets.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class UpdatedDetailedPet extends StatefulWidget {
+class MyPetsDetailed extends StatefulWidget {
   final Pet pet;
 
-  UpdatedDetailedPet({Key key, @required this.pet}) : super(key: key);
+  MyPetsDetailed({Key key, @required this.pet}) : super(key: key);
 
   @override
-  _UpdatedDetailedPetState createState() => _UpdatedDetailedPetState();
+  _MyPetsDetailedState createState() => _MyPetsDetailedState();
 }
 
-class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
-  Future<void> _launched;
+class _MyPetsDetailedState extends State<MyPetsDetailed> {
+  var _description;
   final db = Firestore.instance;
+  TextEditingController _descriptionController = TextEditingController();
   bool isPressed = false;
+
+  void initState() {
+    super.initState();
+    _descriptionController.text = widget.pet.description.toString();
+    _description = widget.pet.description;
+  }
+
   List<String> petDetails = [
     'Vaccinated: ',
     'Sterilised: ',
@@ -48,18 +57,26 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 55),
+                    padding:
+                        const EdgeInsets.only(right: 8.0, left: 8.0, top: 55),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
-                          //mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.arrowLeft),
-                                color: Colors.grey.shade400,
+                                color: Colors.white,
                                 onPressed: () {
                                   Navigator.pop(context);
+                                }),
+                            IconButton(
+                                icon: Icon(FontAwesomeIcons.cog),
+                                color: Colors.white,
+                                onPressed: () {
+                                  _petEditModalBottomSheet(context);
+                                  //Navigator.pop(context);
                                 }),
                           ],
                         ),
@@ -134,7 +151,7 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                         ),
                         SizedBox(height: 20),
                         Text(
-                          '${widget.pet.description}',
+                          '$_description',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -171,7 +188,7 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                               FontAwesomeIcons.solidHeart,
                               color: (isPressed) ? Colors.red : Colors.white,
                             ),
-                            onPressed: () async {
+                            onPressed: () {
                               //saves to Favorites collection in Firebase
                               /*
                               final uid = await Provider.of(context)
@@ -182,24 +199,11 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                                   .collection("userData")
                                   .document(uid)
                                   .collection("favorites")
-                                  .add(widget.pet.toJson());
-*/
+                                  .add(widget.pet.toJson());*/
+
                               setState(() {
-                                //widget.pet.isFavorite = true;
+                                isPressed = !isPressed;
                               });
-
-                              await deletePet(context);
-                              /*
-                                final uid = await Provider.of(context)
-                                    .auth
-                                    .getCurrentUID();
-
-                                await db
-                                    .collection("userData")
-                                    .document(uid)
-                                    .collection("favorites")
-                                    .add(widget.pet.toJson());
-                                    */
                             },
                           ),
                         ),
@@ -223,13 +227,7 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                                   color: Colors.white,
                                 ),
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  _launched = _makePhoneCall(
-                                      'tel:${widget.pet.userPhoneNumber}');
-                                });
-                                //print("${widget.pet.userPhoneNumber}");
-                              },
+                              onPressed: () {},
                             ),
                           ),
                         ),
@@ -327,24 +325,105 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
     );
   }
 
+  void _petEditModalBottomSheet(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("animal"),
+                      Spacer(),
+                      IconButton(
+                        icon: Icon(Icons.cancel, color: Colors.black, size: 25),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        widget.pet.name,
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: TextField(
+                        autofocus: true,
+                        controller: _descriptionController,
+                        decoration: InputDecoration(
+                          helperText: "Description",
+                        ),
+                      ))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      RaisedButton(
+                          child: Text('Submit'),
+                          onPressed: () async {
+                            widget.pet.description =
+                                _descriptionController.text;
+                            setState(() {
+                              _description = widget.pet.description;
+                            });
+                            await updatePet(context);
+                            Navigator.of(context).pop();
+                          })
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      RaisedButton(
+                          child: Text('Delete'),
+                          onPressed: () async {
+                            await deletePet(context);
+                            //Navigator.of(context).pus
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyPetsPage()));
+                          })
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Future updatePet(context) async {
+    var uuid = await Provider.of(context).auth.getCurrentUID();
+    final doc = Firestore.instance
+        .collection('userData')
+        .document(uuid)
+        .collection('pets')
+        .document(widget.pet.documentId);
+
+    return await doc.setData(widget.pet.toJson());
+  }
+
   Future deletePet(context) async {
     var uuid = await Provider.of(context).auth.getCurrentUID();
 
     final doc = Firestore.instance
         .collection('userData')
         .document(uuid)
-        .collection('favorites')
-        .document('0ui8SQ9f3G3wM7SuTQwr');
-
+        .collection('pets')
+        .document(widget.pet.documentId);
+    print(widget.pet.documentId);
+    print(uuid);
     return await doc.delete();
-  }
-}
-
-Future<void> _makePhoneCall(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }
 /*

@@ -71,12 +71,10 @@ class _SignUpState extends State<SignUp> {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: Background(
-          //child: SingleChildScrollView(),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                //SizedBox(height: size.height * 0.005),
                 showError(),
                 SizedBox(height: size.height * 0.03), //1%
                 AutoSizeText(

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl/constants.dart';
-import 'package:fl/pages.dart';
 import 'package:fl/screens/add_new_pet.dart';
+import 'package:fl/screens/favorites.dart';
+import 'package:fl/screens/my_pets.dart';
 import 'package:fl/screens/updated_detailed_pet.dart';
 import 'package:fl/screens/home.dart';
 import 'package:fl/screens/map.dart';
@@ -27,6 +29,21 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  FirebaseUser user;
+  Future<void> getUserData() async {
+    FirebaseUser userData = await FirebaseAuth.instance.currentUser();
+    setState(() {
+      user = userData;
+      //print(userData.uid);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
   int selectedItemIndex = 0;
   int selectedBottomItemIndex = -1;
 
@@ -44,6 +61,7 @@ class _MenuPageState extends State<MenuPage> {
 
   List<String> menuItems = [
     'Adoption',
+    'My pets',
     'Add pet',
     'Map',
     'Favorites',
@@ -52,6 +70,7 @@ class _MenuPageState extends State<MenuPage> {
 
   List<IconData> menuIcons = [
     FontAwesomeIcons.paw,
+    FontAwesomeIcons.list,
     FontAwesomeIcons.plus,
     FontAwesomeIcons.solidMap,
     FontAwesomeIcons.solidHeart,
@@ -60,6 +79,7 @@ class _MenuPageState extends State<MenuPage> {
 
   List<Widget> menuPages = [
     HomePage(),
+    MyPetsPage(),
     AddNewPetPage(),
     MapPage(),
     FavoritesPage(),
@@ -172,8 +192,10 @@ class _MenuPageState extends State<MenuPage> {
                       Padding(
                         padding: const EdgeInsets.all(13.0),
                         child: Text(
-                          "Ale Surdu",
+                          "",
+                          //schimba in displayname!!!!!!!!!!!!!!!!!!!
                           //"${user.displayName}",
+
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

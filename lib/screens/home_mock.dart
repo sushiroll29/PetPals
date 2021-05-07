@@ -16,16 +16,16 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/widgets/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomeMockPage extends StatefulWidget {
   final Function onMenuTap;
 
-  HomePage({this.onMenuTap});
+  HomeMockPage({this.onMenuTap});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeMockPageState createState() => _HomeMockPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeMockPageState extends State<HomeMockPage> {
   FirebaseUser user;
   Future<void> getUserData() async {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
@@ -72,21 +72,11 @@ class _HomePageState extends State<HomePage> {
           child: AppBar(
             actions: [
               Padding(
-                padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
-                child: Text("", //schimba in displayname!!!!!!!!!!!!!!!!!!
-                    //"${user.displayName}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                    )),
-                /*
-                CircleAvatar(
+                padding: const EdgeInsets.symmetric(horizontal: 23),
+                child: CircleAvatar(
                   radius: 20.0,
                   backgroundColor: Colors.black,
-                ),*/
+                ),
               ),
             ],
             elevation: 0,

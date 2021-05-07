@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fl/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,6 +17,10 @@ class Pet {
   DateTime foundOn;
   DateTime postDate;
   String description;
+  String documentId;
+  String userId;
+  String userPhoneNumber;
+  //bool isFavorite;
 
   Pet(
       this.type,
@@ -28,7 +33,11 @@ class Pet {
       this.age,
       this.foundOn,
       this.postDate,
-      this.description);
+      this.userId,
+      this.description,
+      this.userPhoneNumber);
+  //this.documentId,
+  //this.isFavorite);
 
   //formatting for upload to Firebase
   Map<String, dynamic> toJson() => {
@@ -43,6 +52,10 @@ class Pet {
         'foundOn': foundOn,
         'postDate': postDate,
         'description': description,
+        'documentId': documentId,
+        'userId': userId,
+        'userPhoneNumber': userPhoneNumber,
+        //'isFavorite': isFavorite,
       };
 
   //create Pet object from Firebase snapshot
@@ -57,7 +70,13 @@ class Pet {
         age = snapshot['age'],
         foundOn = snapshot['foundOn'].toDate(),
         postDate = snapshot['postDate'].toDate(),
-        description = snapshot['description'];
+        description = snapshot['description'],
+        userId = snapshot['userId'],
+        documentId = snapshot.documentID,
+        userPhoneNumber = snapshot['userPhoneNumber'];
+  //userId = snapshot['userId'],
+  //isFavorite = snapshot['isFavorite'];
+  //userId = ;
 
   Map<String, Icon> types() => {
         "dog":
