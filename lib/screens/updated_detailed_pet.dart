@@ -107,7 +107,7 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                                 ),
                                 Text(
                                   /////////////////!!!!!!!!!!! de schimbat cu displayName
-                                  'Ale Surdu',
+                                  '${widget.pet.usersName}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,

@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
     setState(() {
       user = userData;
+
       //print(userData.uid);
     });
   }
@@ -73,20 +74,19 @@ class _HomePageState extends State<HomePage> {
             actions: [
               Padding(
                 padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
-                child: Text("", //schimba in displayname!!!!!!!!!!!!!!!!!!
-                    //"${user.displayName}",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey.shade700,
-                      fontFamily:
-                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                              .fontFamily,
-                    )),
-                /*
-                CircleAvatar(
-                  radius: 20.0,
-                  backgroundColor: Colors.black,
-                ),*/
+                child: FutureBuilder(
+                  future: Provider.of(context).auth.getCurrentUser(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return displayUserInformation(context, snapshot);
+                    } else {
+                      return CircleAvatar(
+                        radius: 20.0,
+                        backgroundColor: Colors.black,
+                      );
+                    }
+                  },
+                ),
               ),
             ],
             elevation: 0,
@@ -403,5 +403,24 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
+  }
+
+  Widget displayUserInformation(context, snapshot) {
+    final authData = snapshot.data;
+
+    return Column(children: <Widget>[
+      Padding(
+        padding: const EdgeInsets.all(0),
+        child: Text(
+            //schimba in displayname!!!!!!!!!!!!!!!!!!
+            "${authData.displayName}",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.grey.shade700,
+              fontFamily:
+                  GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+            )),
+      ),
+    ]);
   }
 }

@@ -7,6 +7,7 @@ import 'package:fl/screens/new_pet/new_pet_date.dart';
 import 'package:fl/screens/new_pet/new_pet_location.dart';
 import 'package:fl/screens/new_pet/new_pet_summary.dart';
 import 'package:fl/services/auth.dart';
+import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
@@ -25,7 +26,8 @@ class NewPetNamePage extends StatefulWidget {
 class _NewPetNamePageState extends State<NewPetNamePage> {
   String _currentSelectedGenderValue,
       _currentSelectedVaccinatedValue,
-      _currentSelectedSterilisedValue;
+      _currentSelectedSterilisedValue,
+      _usersName;
   final _nameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -488,10 +490,23 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       ),
                     ],
                   ),
+                  FutureBuilder(
+                    future: Provider.of(context).auth.getCurrentUser(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return getUserInformation(context, snapshot);
+                      } else {
+                        return Container(
+                          height: 0,
+                        );
+                      }
+                    },
+                  ),
 
                   RoundedButton(
                     text: 'CONTINUE',
                     press: () {
+                      widget.pet.usersName = _usersName;
                       widget.pet.name = _nameController.text;
                       widget.pet.breed = _breedController.text;
                       widget.pet.gender = _currentSelectedGenderValue;
@@ -594,5 +609,11 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
         ),
       ],
     );
+  }
+
+  Widget getUserInformation(context, snapshot) {
+    final authData = snapshot.data;
+    _usersName = authData.displayName;
+    return Container(height: 0);
   }
 }

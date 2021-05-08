@@ -185,24 +185,21 @@ class _MenuPageState extends State<MenuPage> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      CircleAvatar(
-                        radius: 24.0,
-                        backgroundColor: Colors.white,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.all(13.0),
-                        child: Text(
-                          "",
-                          //schimba in displayname!!!!!!!!!!!!!!!!!!!
-                          //"${user.displayName}",
-
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontFamily: GoogleFonts.quicksand(
-                                    fontWeight: FontWeight.bold)
-                                .fontFamily,
-                          ),
+                        padding: const EdgeInsets.only(top: 13),
+                        child: FutureBuilder(
+                          future: Provider.of(context).auth.getCurrentUser(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return displayUserInformation(context, snapshot);
+                            } else {
+                              return CircleAvatar(
+                                radius: 20.0,
+                                backgroundColor: Colors.white,
+                              );
+                            }
+                          },
                         ),
                       ),
                     ],
@@ -235,5 +232,24 @@ class _MenuPageState extends State<MenuPage> {
         ),
       ),
     );
+  }
+
+  Widget displayUserInformation(context, snapshot) {
+    final authData = snapshot.data;
+
+    return Column(children: <Widget>[
+      Padding(
+        padding: const EdgeInsets.all(0),
+        child: Text(
+            //schimba in displayname!!!!!!!!!!!!!!!!!!
+            "${authData.displayName}",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontFamily:
+                  GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+            )),
+      ),
+    ]);
   }
 }
