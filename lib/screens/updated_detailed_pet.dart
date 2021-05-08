@@ -69,45 +69,147 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                 ],
               ),
               Expanded(
-                child: Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 20, right: 20, bottom: 25, top: 90),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        /* !!!!!!!!!!!!!!! de adaugat metoda din notes pentru detalii sau direct din listview.builder
-                        Row(
-                          children: [
-                            ListView.builder(
-                              padding: EdgeInsets.only(left: 30),
+                child: SingleChildScrollView(
+                  child: Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 90),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          /* !!!!!!!!!!!!!!! de adaugat metoda din notes pentru detalii sau direct din listview.builder
+                          Row(
+                            children: [
+                              ListView.builder(
+                                padding: EdgeInsets.only(left: 30),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: petDetails.length,
+                                itemBuilder: (context, index) {
+                                  //return buildPetDetailsList(index);
+                                },
+                              ),
+                            ],
+                          ),
+                          */
+                          Container(
+                            height: 50,
+                            child: ListView(
                               scrollDirection: Axis.horizontal,
-                              itemCount: petDetails.length,
-                              itemBuilder: (context, index) {
-                                //return buildPetDetailsList(index);
-                              },
-                            ),
-                          ],
-                        ),
-                        */
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                CircleAvatar(
-                                  radius: 24.0,
-                                  backgroundColor: Colors.grey,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10.0),
+                                  child: Wrap(
+                                      spacing: 3,
+                                      runSpacing: 3,
+                                      children: [
+                                        Container(
+                                          height: 30,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10),
+                                          decoration: BoxDecoration(
+                                              color: aPrimaryLightColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Text(
+                                            'Vaccinated: ${widget.pet.isVaccinated}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey.shade600,
+                                              fontFamily: GoogleFonts.quicksand(
+                                                      fontWeight:
+                                                          FontWeight.normal)
+                                                  .fontFamily,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 30,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10),
+                                          decoration: BoxDecoration(
+                                              color: aPrimaryLightColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Text(
+                                            'Sterilised: ${widget.pet.isSterilised}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey.shade600,
+                                              fontFamily: GoogleFonts.quicksand(
+                                                      fontWeight:
+                                                          FontWeight.normal)
+                                                  .fontFamily,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 30,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10),
+                                          decoration: BoxDecoration(
+                                              color: aPrimaryLightColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Text(
+                                            'Requires special care: ${widget.pet.requiresSpecialCare}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey.shade600,
+                                              fontFamily: GoogleFonts.quicksand(
+                                                      fontWeight:
+                                                          FontWeight.normal)
+                                                  .fontFamily,
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
                                 ),
-                                SizedBox(
-                                  width: 10,
+                              ],
+                            ),
+                          ),
+                          // children: [
+                          //   Container(width: 50, color: Colors.red),
+                          //   Container(width: 50, color: Colors.green),
+                          //   Container(width: 50, color: Colors.blue),
+                          // ],
+
+                          Padding(
+                            padding: EdgeInsets.only(top: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    CircleAvatar(
+                                      radius: 24.0,
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '${widget.pet.usersName}',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey.shade600,
+                                        fontFamily: GoogleFonts.quicksand(
+                                                fontWeight: FontWeight.normal)
+                                            .fontFamily,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Text(
-                                  /////////////////!!!!!!!!!!! de schimbat cu displayName
-                                  '${widget.pet.usersName}',
+                                  '${DateFormat('dd MMMM yyyy').format(widget.pet.postDate).toString()}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
@@ -119,32 +221,21 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                                 ),
                               ],
                             ),
-                            Text(
-                              '${DateFormat('dd MMMM yyyy').format(widget.pet.postDate).toString()}',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey.shade600,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.normal)
-                                    .fontFamily,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        Text(
-                          '${widget.pet.description}',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey.shade600,
-                            fontFamily: GoogleFonts.quicksand(
-                                    fontWeight: FontWeight.normal)
-                                .fontFamily,
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 20),
+                          Text(
+                            '${widget.pet.description}',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey.shade600,
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.normal)
+                                  .fontFamily,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -347,37 +438,3 @@ Future<void> _makePhoneCall(String url) async {
     throw 'Could not launch $url';
   }
 }
-/*
-    return Scaffold(
-      body: Center(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              title: Text(''),
-              backgroundColor: Colors.grey[300],
-              expandedHeight: size.height * 0.35,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-                  "assets/images/bg.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            SliverFixedExtentList(
-              itemExtent: 200.0,
-              delegate: SliverChildListDelegate([
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.gender),
-              ]),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-*/

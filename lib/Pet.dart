@@ -21,6 +21,7 @@ class Pet {
   String userId;
   String userPhoneNumber;
   String usersName;
+  String requiresSpecialCare;
   //bool isFavorite;
 
   Pet(
@@ -37,7 +38,8 @@ class Pet {
       this.userId,
       this.description,
       this.userPhoneNumber,
-      this.usersName);
+      this.usersName,
+      this.requiresSpecialCare);
   //this.documentId,
   //this.isFavorite);
 
@@ -58,6 +60,7 @@ class Pet {
         'userId': userId,
         'userPhoneNumber': userPhoneNumber,
         'usersName': usersName,
+        'requiresSpecialCare': requiresSpecialCare,
         //'isFavorite': isFavorite,
       };
 
@@ -77,7 +80,8 @@ class Pet {
         userId = snapshot['userId'],
         documentId = snapshot.documentID,
         userPhoneNumber = snapshot['userPhoneNumber'],
-        usersName = snapshot['usersName'];
+        usersName = snapshot['usersName'],
+        requiresSpecialCare = snapshot['requiresSpecialCare'];
   //userId = snapshot['userId'],
   //isFavorite = snapshot['isFavorite'];
   //userId = ;

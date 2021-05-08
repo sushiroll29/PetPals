@@ -27,6 +27,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
   String _currentSelectedGenderValue,
       _currentSelectedVaccinatedValue,
       _currentSelectedSterilisedValue,
+      _currentSelectedSpecialCareValue,
       _usersName;
   final _nameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
@@ -34,6 +35,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
   final _ageController = TextEditingController();
   final _breedController = TextEditingController();
   List genders = ["Male", "Female"];
+  List requiresSpecialCare = ["Yes", "No"];
   List isVaccinated = ["Yes", "No", "Don't know"];
   List isSterilised = ["Yes", "No", "Don't know"];
   @override
@@ -428,14 +430,40 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       ),
                     ],
                   ),
+
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Does the pet require special care?",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      addSpecialCareRadioButton(0, 'Yes'),
+                      addSpecialCareRadioButton(1, 'No'),
+                    ],
+                  ),
+
                   SizedBox(height: size.height * 0.01), //1%
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         child: AutoSizeText(
-                          "Pet's description",
-                          maxLines: 1,
+                          "Pet's description\nPlease mention any special needs.",
+                          maxLines: 4,
                           style: TextStyle(
                             color: Colors.grey.shade700,
                             fontFamily: GoogleFonts.quicksand(
@@ -452,7 +480,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
                         child: DescriptionContainer(
                           child: TextFormField(
                             autocorrect: false,
@@ -474,7 +502,8 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                               ),
                               isDense: true,
 
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding:
+                                  EdgeInsets.only(top: 10, bottom: 10),
                               border: InputBorder.none,
                               hintText: "Brief description of the pet",
                               hintStyle: TextStyle(
@@ -512,6 +541,8 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       widget.pet.gender = _currentSelectedGenderValue;
                       widget.pet.isVaccinated = _currentSelectedVaccinatedValue;
                       widget.pet.isSterilised = _currentSelectedSterilisedValue;
+                      widget.pet.requiresSpecialCare =
+                          _currentSelectedSpecialCareValue;
                       widget.pet.description = _descriptionController.text;
                       widget.pet.age = _ageController.text;
                       Navigator.push(
@@ -568,6 +599,33 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
           onChanged: (value) {
             setState(() {
               _currentSelectedVaccinatedValue = value;
+            });
+          },
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.grey.shade700,
+            fontFamily:
+                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+            fontSize: 15,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row addSpecialCareRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: aPrimaryColor,
+          value: requiresSpecialCare[btnValue],
+          groupValue: _currentSelectedSpecialCareValue,
+          onChanged: (value) {
+            setState(() {
+              _currentSelectedSpecialCareValue = value;
             });
           },
         ),
