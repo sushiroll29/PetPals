@@ -23,6 +23,7 @@ class Pet {
   String usersName;
   String requiresSpecialCare;
   String imageURL;
+  String hasMicrochip;
   //bool isFavorite;
 
   Pet(
@@ -41,6 +42,7 @@ class Pet {
       this.userPhoneNumber,
       this.usersName,
       this.requiresSpecialCare,
+      this.hasMicrochip,
       this.imageURL);
   //this.documentId,
   //this.isFavorite);
@@ -64,6 +66,7 @@ class Pet {
         'usersName': usersName,
         'requiresSpecialCare': requiresSpecialCare,
         'imageURL': imageURL,
+        'hasMicrochip': hasMicrochip,
         //'isFavorite': isFavorite,
       };
 
@@ -85,7 +88,8 @@ class Pet {
         userPhoneNumber = snapshot['userPhoneNumber'],
         usersName = snapshot['usersName'],
         requiresSpecialCare = snapshot['requiresSpecialCare'],
-        imageURL = snapshot['imageURL'];
+        imageURL = snapshot['imageURL'],
+        hasMicrochip = snapshot['hasMicrochip'];
   //userId = snapshot['userId'],
   //isFavorite = snapshot['isFavorite'];
   //userId = ;

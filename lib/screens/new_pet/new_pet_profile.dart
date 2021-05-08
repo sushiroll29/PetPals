@@ -24,6 +24,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
       _currentSelectedVaccinatedValue,
       _currentSelectedSterilisedValue,
       _currentSelectedSpecialCareValue,
+      _currentSelectedMicrochipValue,
       _usersName;
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
@@ -33,6 +34,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
   List requiresSpecialCare = ["Yes", "No"];
   List isVaccinated = ["Yes", "No", "Don't know"];
   List isSterilised = ["Yes", "No", "Don't know"];
+  List hasMicrochip = ["Yes", "No", "Don't know"];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -228,6 +230,31 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       addSterilisedRadioButton(0, 'Yes'),
                       addSterilisedRadioButton(1, 'No'),
                       addSterilisedRadioButton(2, "Don't know"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: AutoSizeText(
+                          "Is the pet microchipped?",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      addMicrochipRadioButton(0, 'Yes'),
+                      addMicrochipRadioButton(1, 'No'),
+                      addMicrochipRadioButton(2, "Don't know"),
                     ],
                   ),
                   Row(
@@ -494,6 +521,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                           _currentSelectedSpecialCareValue;
                       widget.pet.description = _descriptionController.text;
                       widget.pet.age = _ageController.text;
+                      widget.pet.hasMicrochip = _currentSelectedMicrochipValue;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -604,6 +632,33 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
           onChanged: (value) {
             setState(() {
               _currentSelectedSterilisedValue = value;
+            });
+          },
+        ),
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.grey.shade700,
+            fontFamily:
+                GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+            fontSize: 15,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row addMicrochipRadioButton(int btnValue, String title) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Radio(
+          activeColor: aPrimaryColor,
+          value: hasMicrochip[btnValue],
+          groupValue: _currentSelectedMicrochipValue,
+          onChanged: (value) {
+            setState(() {
+              _currentSelectedMicrochipValue = value;
             });
           },
         ),

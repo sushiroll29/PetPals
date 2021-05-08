@@ -39,12 +39,12 @@ class _MenuPageState extends State<MenuPage> {
   final bool isMenuOpen = false;
 
   List<String> bottomMenuItems = [
-    'Settings',
+    'About',
     'Log out',
   ];
 
   List<IconData> bottomMenuIcons = [
-    FontAwesomeIcons.cog,
+    FontAwesomeIcons.infoCircle,
     FontAwesomeIcons.signOutAlt,
   ];
 
