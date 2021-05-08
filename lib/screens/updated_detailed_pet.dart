@@ -53,7 +53,7 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                           children: <Widget>[
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.arrowLeft),
-                                color: Colors.grey.shade400,
+                                color: Colors.white,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),
@@ -373,7 +373,7 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                       ),
                       SizedBox(height: 15),
                       Text(
-                        'Found on ${DateFormat('dd/MM/yyyy').format(widget.pet.foundOn).toString()}',
+                        'Found on ${DateFormat('dd MMMM yyyy').format(widget.pet.foundOn).toString()}',
                         style: TextStyle(
                           color: Colors.grey.shade600,
                           fontFamily:

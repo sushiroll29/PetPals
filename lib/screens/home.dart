@@ -332,7 +332,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'Found on ${DateFormat('dd/MM/yyyy').format(pet.foundOn).toString()}',
+                              'Found on ${DateFormat('dd MMMM yyyy').format(pet.foundOn).toString()}',
                               style: TextStyle(
                                 color: Colors.grey.shade600,
                                 fontFamily: GoogleFonts.quicksand(
