@@ -2,18 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl/components/announcement_container.dart';
 import 'package:fl/components/description_containter.dart';
 import 'package:fl/constants.dart';
-import 'package:fl/screens/backgrounds/add_pet_bg.dart';
-import 'package:fl/screens/new_pet/new_pet_date.dart';
 import 'package:fl/screens/new_pet/new_pet_location.dart';
-import 'package:fl/screens/new_pet/new_pet_summary.dart';
-import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 
 class NewPetNamePage extends StatefulWidget {
   final Pet pet;
@@ -30,7 +25,6 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
       _currentSelectedSpecialCareValue,
       _usersName;
   final _nameController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _ageController = TextEditingController();
   final _breedController = TextEditingController();
@@ -41,15 +35,9 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    //String _name;
-
-    //var _petTypes = ["Dog", "Cat"];
-    //final _nameController = TextEditingController();
-    //TextEditingController _genderController = new TextEditingController();
     _nameController.text = widget.pet.name;
     _descriptionController.text = widget.pet.description;
     _ageController.text = widget.pet.age;
-    //_genderController.text = widget.pet.gender;
 
     return Material(
       child: GestureDetector(
@@ -62,7 +50,6 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: SingleChildScrollView(
-            //reverse: true,
             child: Padding(
               padding: EdgeInsets.only(
                 bottom: 20,
@@ -70,8 +57,6 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  // SizedBox(height: size.height * 0.03), //1%
-                  // SizedBox(height: size.height * 0.01), //1%
                   Padding(
                     padding: const EdgeInsets.only(left: 22),
                     child: Row(
@@ -81,11 +66,6 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                         InkWell(
                             onTap: () {
                               Navigator.pop(context);
-                              //widget.onMenuTap();
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(builder: (context) => MenuPage()
-                              // ),
                             },
                             child: Icon(FontAwesomeIcons.arrowLeft,
                                 color: Colors.grey.shade400)),
@@ -132,28 +112,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       ),
                     ],
                   ),
-/*
-                  SizedBox(height: size.height * 0.005),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: AutoSizeText(
-                          "If you don't know it, leave empty.",
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Colors.grey.shade700,
-                            fontFamily:
-                                GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                                    .fontFamily,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-*/
-                  SizedBox(height: size.height * 0.01), //1%
+                  SizedBox(height: size.height * 0.01),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -179,11 +138,6 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                               ),
                               isDense: true,
                               contentPadding: EdgeInsets.all(10.0),
-                              // icon: Icon(
-                              //   FontAwesomeIcons.paw,
-                              //   size: 16.0,
-                              //   color: Colors.grey.shade700,
-                              // ),
                               border: InputBorder.none,
                               hintText: "e.g. Bobby",
                               hintStyle: TextStyle(
@@ -501,18 +455,12 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                                     .fontFamily,
                               ),
                               isDense: true,
-
                               contentPadding:
                                   EdgeInsets.only(top: 10, bottom: 10),
                               border: InputBorder.none,
                               hintText: "Brief description of the pet",
                               hintStyle: TextStyle(
                                   fontSize: 14, color: Colors.grey.shade400),
-                              // icon: Icon(
-                              //   FontAwesomeIcons.ellipsisH,
-                              //   size: 16.0,
-                              //   color: Colors.grey.shade700,
-                              // ),
                             ),
                           ),
                         ),

@@ -1,16 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fl/constants.dart';
-import 'package:fl/screens/new_pet/new_pet_image.dart';
 import 'package:fl/screens/new_pet/new_pet_profile.dart';
-import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
-import 'package:fl/widgets/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:fl/screens/backgrounds/add_pet_bg.dart';
 
 class NewPetTypePage extends StatefulWidget {
   final Pet pet;
@@ -28,8 +21,6 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
     var petKeys = petTypes.keys.toList();
 
     Size size = MediaQuery.of(context).size;
-    //TextEditingController _controller = new TextEditingController();
-    //_controller.text = pet.location;
 
     return Material(
       child: Padding(
@@ -44,11 +35,6 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
                 InkWell(
                     onTap: () {
                       Navigator.pop(context);
-                      //widget.onMenuTap();
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => MenuPage()
-                      // ),
                     },
                     child: Icon(FontAwesomeIcons.arrowLeft,
                         color: Colors.grey.shade400)),
@@ -77,7 +63,6 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       petTypes[petKeys[index]],
-                      //Text(petKeys[index]),
                     ],
                   ),
                   onPressed: () async {

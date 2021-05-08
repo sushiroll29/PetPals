@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/Pet.dart';
 import 'package:fl/constants.dart';
-import 'package:fl/main.dart';
-import 'package:fl/screens/home.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,7 +36,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
           Column(
             children: <Widget>[
               Stack(
-                // alignment: Alignment.center,
                 children: <Widget>[
                   Container(
                     height: size.height * 0.4,
@@ -53,7 +50,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
-                          //mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.arrowLeft),
@@ -78,20 +74,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          /* !!!!!!!!!!!!!!! de adaugat metoda din notes pentru detalii sau direct din listview.builder
-                          Row(
-                            children: [
-                              ListView.builder(
-                                padding: EdgeInsets.only(left: 30),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: petDetails.length,
-                                itemBuilder: (context, index) {
-                                  //return buildPetDetailsList(index);
-                                },
-                              ),
-                            ],
-                          ),
-                          */
                           Container(
                             height: 50,
                             child: ListView(
@@ -174,12 +156,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                               ],
                             ),
                           ),
-                          // children: [
-                          //   Container(width: 50, color: Colors.red),
-                          //   Container(width: 50, color: Colors.green),
-                          //   Container(width: 50, color: Colors.blue),
-                          // ],
-
                           Padding(
                             padding: EdgeInsets.only(top: 30),
                             child: Row(
@@ -319,7 +295,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                                   _launched = _makePhoneCall(
                                       'tel:${widget.pet.userPhoneNumber}');
                                 });
-                                //print("${widget.pet.userPhoneNumber}");
                               },
                             ),
                           ),
@@ -373,7 +348,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                         ],
                       ),
                       SizedBox(height: 10),
-                      //Text(pet.type,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

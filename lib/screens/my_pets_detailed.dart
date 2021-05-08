@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/Pet.dart';
-import 'package:fl/components/announcement_container.dart';
 import 'package:fl/components/description_containter.dart';
 import 'package:fl/constants.dart';
-import 'package:fl/main.dart';
-import 'package:fl/screens/home.dart';
 import 'package:fl/screens/my_pets.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
@@ -50,7 +47,6 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
           Column(
             children: <Widget>[
               Stack(
-                // alignment: Alignment.center,
                 children: <Widget>[
                   Container(
                     height: size.height * 0.4,
@@ -79,7 +75,6 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                 color: Colors.white,
                                 onPressed: () {
                                   _petEditModalBottomSheet(context);
-                                  //Navigator.pop(context);
                                 }),
                           ],
                         ),
@@ -98,20 +93,6 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          /* !!!!!!!!!!!!!!! de adaugat metoda din notes pentru detalii sau direct din listview.builder
-                          Row(
-                            children: [
-                              ListView.builder(
-                                padding: EdgeInsets.only(left: 30),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: petDetails.length,
-                                itemBuilder: (context, index) {
-                                  //return buildPetDetailsList(index);
-                                },
-                              ),
-                            ],
-                          ),
-                          */
                           Container(
                             height: 50,
                             child: ListView(
@@ -194,12 +175,6 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                               ],
                             ),
                           ),
-                          // children: [
-                          //   Container(width: 50, color: Colors.red),
-                          //   Container(width: 50, color: Colors.green),
-                          //   Container(width: 50, color: Colors.blue),
-                          // ],
-
                           Padding(
                             padding: EdgeInsets.only(top: 30),
                             child: Row(
@@ -287,7 +262,6 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                         ],
                       ),
                       SizedBox(height: 10),
-                      //Text(pet.type,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -470,37 +444,3 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
     return await doc.delete();
   }
 }
-/*
-    return Scaffold(
-      body: Center(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              title: Text(''),
-              backgroundColor: Colors.grey[300],
-              expandedHeight: size.height * 0.35,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-                  "assets/images/bg.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            SliverFixedExtentList(
-              itemExtent: 200.0,
-              delegate: SliverChildListDelegate([
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.name),
-                Text(pet.gender),
-              ]),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-*/

@@ -44,17 +44,6 @@ class Welcome extends StatelessWidget {
               text: "SIGN UP",
               press: () {
                 Navigator.of(context).pushReplacementNamed('/signUp');
-
-                /*
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUp(authFormType: AuthFormType.signUp);
-                      
-                    },
-                  ),
-                );*/
               },
             ),
           ],

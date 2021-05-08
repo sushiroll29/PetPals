@@ -1,10 +1,5 @@
-import 'package:fl/components/text_field_container.dart';
 import 'package:fl/constants.dart';
-import 'package:fl/pages.dart';
-import 'package:fl/screens/menu.dart';
 import 'package:fl/screens/my_pets_detailed.dart';
-import 'package:fl/screens/profile.dart';
-import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:fl/Pet.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fl/widgets/provider.dart';
 
 class MyPetsPage extends StatefulWidget {
-  final Function onMenuTap;
-
-  MyPetsPage({this.onMenuTap});
-
   @override
   _MyPetsPageState createState() => _MyPetsPageState();
 }
@@ -37,8 +27,6 @@ class _MyPetsPageState extends State<MyPetsPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    //final pet = Pet.fromSnapshot(document);
     return Material(
       child: Scaffold(
         appBar: PreferredSize(
@@ -68,36 +56,9 @@ class _MyPetsPageState extends State<MyPetsPage> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets
-              //symmetric(vertical: 50.0),
-              .only(top: 20.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: Column(
             children: <Widget>[
-              /*
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 22.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    InkWell(
-                        onTap: () {
-                          //widget.onMenuTap();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MenuPage()),
-                          );
-                        },
-                        child: Icon(FontAwesomeIcons.bars,
-                            color: Colors.grey.shade400)),
-                    CircleAvatar(
-                      radius: 20.0,
-                      backgroundColor: Colors.black,
-                    ),
-                  ],
-                ),
-              ),*/
-              //SizedBox(height: size.height * 0.04),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
@@ -221,7 +182,6 @@ class _MyPetsPageState extends State<MyPetsPage> {
                             ],
                           ),
                           SizedBox(height: 10),
-                          //Text(pet.type,),
                           Text(
                             '${pet.age} years old',
                             style: TextStyle(

@@ -1,18 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl/components/announcement_container.dart';
-import 'package:fl/components/description_containter.dart';
-import 'package:fl/constants.dart';
-import 'package:fl/screens/backgrounds/add_pet_bg.dart';
-import 'package:fl/screens/new_pet/new_pet_date.dart';
-import 'package:fl/screens/new_pet/new_pet_location.dart';
 import 'package:fl/screens/new_pet/new_pet_summary.dart';
-import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 
 class NewPetPhonePage extends StatefulWidget {
   final Pet pet;
@@ -26,7 +18,6 @@ class _NewPetPhonePageState extends State<NewPetPhonePage> {
   final _phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     _phoneNumberController.text = widget.pet.userPhoneNumber;
 
     return Material(
@@ -53,7 +44,6 @@ class _NewPetPhonePageState extends State<NewPetPhonePage> {
           body: Padding(
             padding: EdgeInsets.only(right: 22.0, left: 22.0),
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Expanded(
                   child: Container(
@@ -132,7 +122,7 @@ class _NewPetPhonePageState extends State<NewPetPhonePage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  NewPetLocationPage(
+                                                  NewPetSummaryPage(
                                                       pet: widget.pet)));
                                     }),
                               ],

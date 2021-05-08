@@ -3,27 +3,17 @@ import 'package:fl/constants.dart';
 import 'package:fl/screens/add_new_pet.dart';
 import 'package:fl/screens/favorites.dart';
 import 'package:fl/screens/my_pets.dart';
-import 'package:fl/screens/updated_detailed_pet.dart';
 import 'package:fl/screens/home.dart';
 import 'package:fl/screens/map.dart';
-import 'package:fl/screens/new_pet/new_pet_type.dart';
 import 'package:fl/screens/profile.dart';
 import 'package:fl/screens/sign_out.dart';
-import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:fl/Pet.dart';
-import 'package:intl/intl.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fl/widgets/provider.dart';
 
 class MenuPage extends StatefulWidget {
-  final Function(int) menuCallback;
-
-  MenuPage({this.menuCallback});
   @override
   _MenuPageState createState() => _MenuPageState();
 }
@@ -34,7 +24,6 @@ class _MenuPageState extends State<MenuPage> {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
     setState(() {
       user = userData;
-      //print(userData.uid);
     });
   }
 
@@ -240,9 +229,7 @@ class _MenuPageState extends State<MenuPage> {
     return Column(children: <Widget>[
       Padding(
         padding: const EdgeInsets.all(0),
-        child: Text(
-            //schimba in displayname!!!!!!!!!!!!!!!!!!
-            "${authData.displayName}",
+        child: Text("${authData.displayName}",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,

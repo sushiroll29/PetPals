@@ -1,9 +1,5 @@
 import 'package:fl/Pet.dart';
-import 'package:fl/screens/menu.dart';
 import 'package:fl/screens/new_pet/new_pet_type.dart';
-import 'package:fl/screens/sign_in.dart';
-import 'package:fl/services/auth.dart';
-import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -45,7 +41,6 @@ class _AddNewPetPageState extends State<AddNewPetPage> {
         body: Padding(
           padding: EdgeInsets.only(right: 22.0, left: 22.0),
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 child: Container(
