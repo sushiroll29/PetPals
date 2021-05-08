@@ -183,7 +183,7 @@ class _MyPetsPageState extends State<MyPetsPage> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            '${pet.age} years old',
+                            '${pet.age} old',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontFamily: GoogleFonts.quicksand(
@@ -217,11 +217,14 @@ class _MyPetsPageState extends State<MyPetsPage> {
                   ),
                   height: 190,
                   width: size.width * 0.4,
-                ),
-                Image(
-                  image: AssetImage('assets/images/bg.jpg'),
-                  height: 190,
-                  width: size.width * 0.4,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      "${pet.imageURL}",
+                      //height: 190, width: size.width * 0.4,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -356,12 +356,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                     height: 190,
                     width: size.width * 0.4,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        "${pet.imageURL}",
+                        //height: 190, width: size.width * 0.4,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                  Image(
-                    image: AssetImage('assets/images/bg.jpg'),
-                    height: 190,
-                    width: size.width * 0.4,
-                  ),
+                  // Image.network("${pet.imageURL}",
+                  //     height: 190, width: size.width * 0.4),
                 ],
               ),
             ],

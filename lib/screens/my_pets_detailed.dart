@@ -48,11 +48,13 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  Container(
-                    height: size.height * 0.4,
-                    child: Image(
-                      image: AssetImage('assets/images/bg.jpg'),
-                      fit: BoxFit.cover,
+                  Center(
+                    child: Container(
+                      height: size.height * 0.4,
+                      child: Image.network(
+                        "${widget.pet.imageURL}",
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Padding(
@@ -66,13 +68,13 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                           children: <Widget>[
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.arrowLeft),
-                                color: Colors.white,
+                                color: aPrimaryLightColor,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.ellipsisH),
-                                color: Colors.white,
+                                color: aPrimaryLightColor,
                                 onPressed: () {
                                   _petEditModalBottomSheet(context);
                                 }),

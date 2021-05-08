@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fl/components/announcement_container.dart';
 import 'package:fl/components/description_containter.dart';
 import 'package:fl/constants.dart';
+import 'package:fl/screens/new_pet/new_pet_image.dart';
 import 'package:fl/screens/new_pet/new_pet_location.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
@@ -496,7 +497,9 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MapScreen(pet: widget.pet)),
+                            builder: (context) =>
+                                PetImagePage(pet: widget.pet)),
+                        //PetImage o sa se duca la MapScreen
                       );
                     },
                   )

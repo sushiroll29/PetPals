@@ -56,23 +56,23 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget displayUserInformation(context, snapshot) {
-    //final authData = snapshot.data;
+    final authData = snapshot.data;
 
     return Column(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "",
-            //"Name: ${authData.displayName ?? 'Anonymous'}",
+            //"",
+            "Name: ${authData.displayName ?? 'null'}",
             style: TextStyle(fontSize: 20),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "",
-            //"Email: ${authData.email ?? 'Anonymous'}",
+            //"",
+            "Email: ${authData.email ?? 'Anonymous'}",
             style: TextStyle(fontSize: 20),
           ),
         ),

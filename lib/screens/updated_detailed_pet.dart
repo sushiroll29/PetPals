@@ -39,9 +39,12 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                 children: <Widget>[
                   Container(
                     height: size.height * 0.4,
-                    child: Image(
-                      image: AssetImage('assets/images/bg.jpg'),
-                      fit: BoxFit.cover,
+                    child: Center(
+                      child: Image.network(
+                        "${widget.pet.imageURL}",
+                        //height: 190, width: size.width * 0.4,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Padding(
@@ -53,7 +56,7 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                           children: <Widget>[
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.arrowLeft),
-                                color: Colors.white,
+                                color: aPrimaryLightColor,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),
