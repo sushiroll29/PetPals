@@ -443,14 +443,19 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(8),
-      child: Container(
-        width: _width,
-        height: _height,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: NetworkImage("${widget.pet.imageURL}"),
-          fit: BoxFit.fitWidth,
-        )),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: Container(
+          width: _width,
+          height: _height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: NetworkImage("${widget.pet.imageURL}"),
+            fit: BoxFit.fitWidth,
+          )),
+        ),
       ),
     );
   }
