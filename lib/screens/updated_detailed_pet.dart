@@ -38,11 +38,17 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
               Stack(
                 children: <Widget>[
                   Container(
+                    alignment: Alignment.topCenter,
                     height: size.height * 0.4,
-                    child: Center(
+                    child: GestureDetector(
+                      onTap: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (_) =>
+                                showImageDialog(size.width, size.height * 0.6));
+                      },
                       child: Image.network(
                         "${widget.pet.imageURL}",
-                        //height: 190, width: size.width * 0.4,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -431,5 +437,21 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  Widget showImageDialog(_width, _height) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(8),
+      child: Container(
+        width: _width,
+        height: _height,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: NetworkImage("${widget.pet.imageURL}"),
+          fit: BoxFit.fitWidth,
+        )),
+      ),
+    );
   }
 }

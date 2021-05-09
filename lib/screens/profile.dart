@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Home Country: ${_userPhoneNumberController.text}",
+                        "Phone number: ${_userPhoneNumberController.text}",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -105,7 +105,7 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             }),
         RaisedButton(
-          child: Text("Edit User"),
+          child: Text("Edit phone number"),
           onPressed: () {
             _userEditBottomSheet(context);
           },
@@ -184,6 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             .collection('userData')
                             .document(uid)
                             .setData(user.toJson());
+                        //print(user.phoneNumber);
                         Navigator.of(context).pop();
                       },
                     )

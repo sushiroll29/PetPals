@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class User {
   String phoneNumber;
 
@@ -7,4 +9,7 @@ class User {
   Map<String, dynamic> toJson() => {
         'phoneNumber': phoneNumber,
       };
+
+  User.fromSnapshot(DocumentSnapshot snapshot)
+      : phoneNumber = snapshot['phoneNumber'];
 }

@@ -57,9 +57,16 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  Center(
-                    child: Container(
-                      height: size.height * 0.4,
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: size.height * 0.4,
+                    child: GestureDetector(
+                      onTap: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (_) =>
+                                showImageDialog(size.width, size.height * 0.6));
+                      },
                       child: Image.network(
                         "${widget.pet.imageURL}",
                         fit: BoxFit.cover,
@@ -714,6 +721,22 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget showImageDialog(_width, _height) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(8),
+      child: Container(
+        width: _width,
+        height: _height,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: NetworkImage("${widget.pet.imageURL}"),
+          fit: BoxFit.fitWidth,
+        )),
+      ),
     );
   }
 

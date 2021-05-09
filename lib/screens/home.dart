@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:fl/Pet.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:photo_view/photo_view.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fl/User.dart';
 import 'package:fl/components/announcement_container.dart';
 import 'package:fl/screens/new_pet/new_pet_summary.dart';
+import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/Pet.dart';
@@ -17,6 +19,8 @@ class NewPetPhonePage extends StatefulWidget {
 
 class _NewPetPhonePageState extends State<NewPetPhonePage> {
   FirebaseUser user;
+  bool isUserLoading = true;
+  User _user = User("");
   Future<void> getUserData() async {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
     setState(() {
@@ -25,14 +29,27 @@ class _NewPetPhonePageState extends State<NewPetPhonePage> {
     //print(user.phoneNumber);
   }
 
+  _getProfileData() async {
+    final uid = await Provider.of(context).auth.getCurrentUID();
+    await Provider.of(context)
+        .db
+        .collection('userData')
+        .document(uid)
+        .get()
+        .then((result) {
+      //print(result.data['phoneNumber']);
+      _user.phoneNumber = result.data['phoneNumber'];
+      _phoneNumberController.text = _user.phoneNumber;
+      //print(_phoneNumberController.text);
+    });
+  }
+
   @override
   void initState() {
+    Future.delayed(Duration.zero).then((value) {
+      _getProfileData();
+    });
     super.initState();
-    getUserData()
-        // .then((value) {
-        //   _phoneNumberController.text = user.phoneNumber;
-        // })
-        ;
   }
 
   TextEditingController _phoneNumberController = TextEditingController();
@@ -135,9 +152,22 @@ class _NewPetPhonePageState extends State<NewPetPhonePage> {
                               children: <Widget>[
                                 RoundedButton(
                                     text: 'CONTINUE',
-                                    press: () {
+                                    press: () async {
                                       widget.pet.userPhoneNumber =
                                           _phoneNumberController.text;
+                                      _user.phoneNumber =
+                                          _phoneNumberController.text;
+
+                                      final uid = await Provider.of(context)
+                                          .auth
+                                          .getCurrentUID();
+                                      await Provider.of(context)
+                                          .db
+                                          .collection('userData')
+                                          .document(uid)
+                                          .setData(_user.toJson());
+                                      //print(user.phoneNumber);
+
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
