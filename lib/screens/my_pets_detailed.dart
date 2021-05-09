@@ -575,6 +575,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                   _microchipped = widget.pet.hasMicrochip;
                                 });
                                 await updatePet(context);
+                                await updateMyPet(context);
                                 Navigator.of(context).pop();
                               })
                         ],
