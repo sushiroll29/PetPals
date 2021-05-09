@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl/components/announcement_container.dart';
 import 'package:fl/screens/new_pet/new_pet_summary.dart';
 import 'package:fl/widgets/rounded_button.dart';
@@ -15,7 +16,26 @@ class NewPetPhonePage extends StatefulWidget {
 }
 
 class _NewPetPhonePageState extends State<NewPetPhonePage> {
-  final _phoneNumberController = TextEditingController();
+  FirebaseUser user;
+  Future<void> getUserData() async {
+    FirebaseUser userData = await FirebaseAuth.instance.currentUser();
+    setState(() {
+      user = userData;
+    });
+    //print(user.phoneNumber);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData()
+        // .then((value) {
+        //   _phoneNumberController.text = user.phoneNumber;
+        // })
+        ;
+  }
+
+  TextEditingController _phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     _phoneNumberController.text = widget.pet.userPhoneNumber;

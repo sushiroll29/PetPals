@@ -142,6 +142,28 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                                               borderRadius:
                                                   BorderRadius.circular(20)),
                                           child: Text(
+                                            'Has microchip: ${widget.pet.hasMicrochip}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey.shade600,
+                                              fontFamily: GoogleFonts.quicksand(
+                                                      fontWeight:
+                                                          FontWeight.normal)
+                                                  .fontFamily,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 30,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10),
+                                          decoration: BoxDecoration(
+                                              color: aPrimaryLightColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Text(
                                             'Requires special care: ${widget.pet.requiresSpecialCare}',
                                             style: TextStyle(
                                               fontSize: 16,
