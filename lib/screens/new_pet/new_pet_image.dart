@@ -61,31 +61,62 @@ class _PetImagePageState extends State<PetImagePage> {
         ),
         body: Padding(
           padding: EdgeInsets.only(right: 22.0, left: 22.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RoundedButton(
-                    text: 'UPLOAD AN IMAGE',
-                    press: () {
-                      uploadImage();
-                    }),
-                SizedBox(height: 20),
-                RoundedButton(
-                  text: 'CONTINUE',
-                  press: () {
-                    widget.pet.imageURL = _imageUrl;
-                    print(_imageUrl);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MapScreen(pet: widget.pet)),
-                      //PetImage o sa se duca la MapScreen
-                    );
-                  },
-                )
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 50, horizontal: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage(
+                              'assets/images/uploadImage_doodle.png'),
+                          height: size.width * 0.6,
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              child: Text(
+                                "Please select an image of your pet.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 17.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey.shade600,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.normal)
+                                      .fontFamily,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedButton(
+                                text: 'UPLOAD AN IMAGE',
+                                press: () async {
+                                  await uploadImage();
+                                  print("uploaded");
+                                  showAlertDialog(context);
+                                }),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -134,6 +165,48 @@ class _PetImagePageState extends State<PetImagePage> {
     } else {
       print('grant permissions and try again');
     }
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = RoundedButton(
+      text: 'CONTINUE',
+      press: () {
+        widget.pet.imageURL = _imageUrl;
+        print(_imageUrl);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MapScreen(pet: widget.pet)),
+        );
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30.0))),
+      content: Text(
+        "Your image has been uploaded.",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.grey.shade700,
+          fontFamily:
+              GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+          fontSize: 16,
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
 

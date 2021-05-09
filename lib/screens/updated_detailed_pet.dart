@@ -167,13 +167,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    CircleAvatar(
-                                      radius: 24.0,
-                                      backgroundColor: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
                                     Text(
                                       '${widget.pet.usersName}',
                                       style: TextStyle(
