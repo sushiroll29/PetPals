@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/home_widgets.dart';
-import 'package:fl/screens/home_mock.dart';
 import 'package:fl/screens/menu.dart';
 
 import 'package:fl/screens/home.dart';

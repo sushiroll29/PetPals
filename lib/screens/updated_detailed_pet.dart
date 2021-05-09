@@ -250,13 +250,6 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                                 setState(() {
                                   isPressed = true;
                                 });
-                              } else {
-                                await deletePet(context);
-                                print("removed from favorites");
-
-                                setState(() {
-                                  isPressed = false;
-                                });
                               }
 
                               // if (isPressed == true) {
@@ -398,29 +391,23 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
     );
   }
 
-  Future deletePet(context) async {
-    final doc = Firestore.instance.collection('petsStream').document();
+//   Future deleteFromFav(context) async {
+//     var uuid = await Provider.of(context).auth.getCurrentUID();
+//     final doc = Firestore.instance
+//         .collection('userData')
+//         .document(uuid)
+//         .collection('favorites')
+//         .document();
 
-    return await doc.delete();
-  }
+//     return await doc.delete();
+//   }
+// }
 
-  Future deleteMyPet(context) async {
-    var uuid = await Provider.of(context).auth.getCurrentUID();
-
-    final doc = Firestore.instance
-        .collection('userData')
-        .document(uuid)
-        .collection('favorites')
-        .document(widget.pet.documentId);
-
-    return await doc.delete();
-  }
-}
-
-Future<void> _makePhoneCall(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
