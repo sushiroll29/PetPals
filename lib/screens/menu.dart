@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl/Pet.dart';
 import 'package:fl/constants.dart';
+import 'package:fl/screens/credits.dart';
 import 'package:fl/screens/add_new_pet.dart';
 import 'package:fl/screens/favorites.dart';
-import 'package:fl/trash/my_pets_trash.dart';
 import 'package:fl/screens/home.dart';
 import 'package:fl/screens/map.dart';
 import 'package:fl/screens/my_pets_updated.dart';
@@ -41,7 +40,7 @@ class _MenuPageState extends State<MenuPage> {
   final bool isMenuOpen = false;
 
   List<String> bottomMenuItems = [
-    'About',
+    'Credits',
     'Log out',
   ];
 
@@ -78,8 +77,7 @@ class _MenuPageState extends State<MenuPage> {
   ];
 
   List<Widget> bottomMenuPages = [
-    //SettingsPage(),
-    HomePage(),
+    CreditsPage(),
     SignOutPage(),
   ];
 

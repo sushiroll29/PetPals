@@ -1,4 +1,3 @@
-import 'package:fl/screens/menu.dart';
 import 'package:fl/screens/sign_in.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/widgets/provider.dart';
@@ -11,13 +10,14 @@ class SignOutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Are you sure you want to sign out?",
+                "Are you sure you want to log out?",
                 style: TextStyle(
                   fontSize: 17.5,
                   fontWeight: FontWeight.w600,
