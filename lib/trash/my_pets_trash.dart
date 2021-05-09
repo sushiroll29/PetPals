@@ -130,6 +130,7 @@ class _MyPetsPageState extends State<MyPetsPage> {
 
   Widget buildPetsList(BuildContext context, DocumentSnapshot document) {
     final pet = Pet.fromSnapshot(document);
+    // print(pet.documentId);
     //final petType = pet.types();
     Size size = MediaQuery.of(context).size;
 

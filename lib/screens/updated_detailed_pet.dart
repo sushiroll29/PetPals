@@ -236,22 +236,32 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
                             ),
                             onPressed: () async {
                               //saves to Favorites collection in Firebase
-                              /*
-                              final uid = await Provider.of(context)
-                                  .auth
-                                  .getCurrentUID();
+                              if (isPressed == false) {
+                                final uid = await Provider.of(context)
+                                    .auth
+                                    .getCurrentUID();
 
-                              await db
-                                  .collection("userData")
-                                  .document(uid)
-                                  .collection("favorites")
-                                  .add(widget.pet.toJson());
-*/
-                              setState(() {
-                                //widget.pet.isFavorite = true;
-                              });
+                                await db
+                                    .collection("userData")
+                                    .document(uid)
+                                    .collection("favorites")
+                                    .add(widget.pet.toJson());
 
-                              await deletePet(context);
+                                setState(() {
+                                  isPressed = true;
+                                });
+                              } else {
+                                await deletePet(context);
+                                print("removed from favorites");
+
+                                setState(() {
+                                  isPressed = false;
+                                });
+                              }
+
+                              // if (isPressed == true) {
+                              //   await deletePet(context);
+                              // }
                               /*
                                 final uid = await Provider.of(context)
                                     .auth
@@ -389,13 +399,19 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
   }
 
   Future deletePet(context) async {
+    final doc = Firestore.instance.collection('petsStream').document();
+
+    return await doc.delete();
+  }
+
+  Future deleteMyPet(context) async {
     var uuid = await Provider.of(context).auth.getCurrentUID();
 
     final doc = Firestore.instance
         .collection('userData')
         .document(uuid)
         .collection('favorites')
-        .document('0ui8SQ9f3G3wM7SuTQwr');
+        .document(widget.pet.documentId);
 
     return await doc.delete();
   }

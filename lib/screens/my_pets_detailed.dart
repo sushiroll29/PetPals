@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/Pet.dart';
 import 'package:fl/components/description_containter.dart';
 import 'package:fl/constants.dart';
-import 'package:fl/screens/my_pets.dart';
+import 'package:fl/trash/my_pets_trash.dart';
+import 'package:fl/screens/my_pets_updated.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                 icon: Icon(FontAwesomeIcons.ellipsisH),
                                 color: aPrimaryLightColor,
                                 onPressed: () {
+                                  print(widget.pet.documentId);
                                   _petEditModalBottomSheet(context);
                                 }),
                           ],
@@ -564,9 +566,11 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                 widget.pet.isVaccinated = _vaccinated;
                                 widget.pet.description =
                                     _descriptionController.text;
+                                widget.pet.isSterilised = _sterilised;
                                 setState(() {
                                   _vaccinated = widget.pet.isVaccinated;
                                   _description = widget.pet.description;
+                                  _sterilised = widget.pet.isSterilised;
                                 });
                                 await updatePet(context);
                                 Navigator.of(context).pop();
@@ -580,12 +584,16 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                               color: Colors.red.shade400,
                               text: 'Delete pet',
                               press: () async {
+                                await deleteMyPet(context);
+                                print("sters my pet");
                                 await deletePet(context);
+                                print("sters pet");
                                 //Navigator.of(context).pus
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => MyPetsPage()));
+                                        builder: (context) =>
+                                            MyPetsUpdatedPage()));
                               })
                         ],
                       )
@@ -718,6 +726,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
   }
 
   Future deletePet(context) async {
+    final doc = Firestore.instance
+        .collection('petsStream')
+        .document(widget.pet.documentId);
+
+    return await doc.delete();
+  }
+
+  Future deleteMyPet(context) async {
     var uuid = await Provider.of(context).auth.getCurrentUID();
 
     final doc = Firestore.instance

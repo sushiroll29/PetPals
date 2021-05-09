@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fl/Pet.dart';
 import 'package:fl/constants.dart';
 import 'package:fl/screens/add_new_pet.dart';
 import 'package:fl/screens/favorites.dart';
-import 'package:fl/screens/my_pets.dart';
+import 'package:fl/trash/my_pets_trash.dart';
 import 'package:fl/screens/home.dart';
 import 'package:fl/screens/map.dart';
+import 'package:fl/screens/my_pets_updated.dart';
 import 'package:fl/screens/profile.dart';
 import 'package:fl/screens/sign_out.dart';
 import 'package:fl/widgets/provider.dart';
@@ -68,7 +70,7 @@ class _MenuPageState extends State<MenuPage> {
 
   List<Widget> menuPages = [
     HomePage(),
-    MyPetsPage(),
+    MyPetsUpdatedPage(),
     AddNewPetPage(),
     MapPage(),
     FavoritesPage(),

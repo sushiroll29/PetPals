@@ -4,7 +4,7 @@ import 'package:fl/screens/home_mock.dart';
 import 'package:fl/screens/menu.dart';
 
 import 'package:fl/screens/home.dart';
-import 'package:fl/screens/my_pets.dart';
+import 'package:fl/trash/my_pets_trash.dart';
 import 'package:fl/screens/password_reset.dart';
 import 'package:fl/screens/sign_in.dart';
 import 'package:fl/screens/sign_up.dart';
