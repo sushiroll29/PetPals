@@ -85,7 +85,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                 icon: Icon(FontAwesomeIcons.ellipsisH),
                                 color: aPrimaryLightColor,
                                 onPressed: () {
-                                  print(widget.pet.documentId);
+                                  //print(widget.pet.documentId);
                                   _petEditModalBottomSheet(context);
                                 }),
                           ],
@@ -567,10 +567,12 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                 widget.pet.description =
                                     _descriptionController.text;
                                 widget.pet.isSterilised = _sterilised;
+                                widget.pet.hasMicrochip = _microchipped;
                                 setState(() {
                                   _vaccinated = widget.pet.isVaccinated;
                                   _description = widget.pet.description;
                                   _sterilised = widget.pet.isSterilised;
+                                  _microchipped = widget.pet.hasMicrochip;
                                 });
                                 await updatePet(context);
                                 Navigator.of(context).pop();
@@ -714,12 +716,21 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
     );
   }
 
-  Future updatePet(context) async {
+  Future updateMyPet(context) async {
     var uuid = await Provider.of(context).auth.getCurrentUID();
     final doc = Firestore.instance
         .collection('userData')
         .document(uuid)
         .collection('pets')
+        .document(widget.pet.documentId);
+
+    return await doc.setData(widget.pet.toJson());
+  }
+
+  Future updatePet(context) async {
+    var uuid = await Provider.of(context).auth.getCurrentUID();
+    final doc = Firestore.instance
+        .collection('petsStream')
         .document(widget.pet.documentId);
 
     return await doc.setData(widget.pet.toJson());
