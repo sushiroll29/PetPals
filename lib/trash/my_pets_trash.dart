@@ -1,5 +1,5 @@
 import 'package:fl/constants.dart';
-import 'package:fl/screens/my_pets_detailed.dart';
+import 'package:fl/trash/my_pets_detailed_trash.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

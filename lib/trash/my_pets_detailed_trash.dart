@@ -6,6 +6,7 @@ import 'package:fl/components/description_containter.dart';
 import 'package:fl/constants.dart';
 import 'package:fl/trash/my_pets_trash.dart';
 import 'package:fl/screens/my_pets_updated.dart';
+import 'package:fl/trash/old_home_trash.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -610,8 +611,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MyPetsUpdatedPage()));
+                                        builder: (context) => HomePage()));
                               })
                         ],
                       )

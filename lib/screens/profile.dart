@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl/User.dart';
 import 'package:fl/components/announcement_container.dart';
 import 'package:fl/screens/menu.dart';
@@ -17,6 +18,15 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   User user = User("");
   TextEditingController _userPhoneNumberController = TextEditingController();
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero).then((value) {
+      _getUserData();
+      _getProfileData();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,9 +131,6 @@ class _ProfilePageState extends State<ProfilePage> {
         FutureBuilder(
             future: _getProfileData(),
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                //_userPhoneNumberController.text = user.phoneNumber;
-              }
               return Container(
                 child: Column(
                   children: <Widget>[
@@ -155,6 +162,39 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  _getPetData() async {
+    //DocumentSnapshot document =
+    Firestore.instance.collection('petsStream').getDocuments().then((data) {
+      if (data.documents.isNotEmpty) {
+        for (int i = 0; i < data.documents.length; i++) {
+          if (data.documents[i].data['userId'] == _user.uid) {
+            print("a");
+            setState(() {});
+          }
+        }
+      }
+    });
+  }
+
+  // Future updatePet(context) async {
+  //   var uuid = await Provider.of(context).auth.getCurrentUID();
+  //   final doc = Firestore.instance
+  //       .collection('petsStream')
+  //       .document(widget.pet.documentId);
+
+  //   return await doc.setData(widget.pet.toJson());
+  // }
+
+  FirebaseUser _user;
+  Future<void> _getUserData() async {
+    FirebaseUser userData = await FirebaseAuth.instance.currentUser();
+    setState(() {
+      _user = userData;
+
+      // print(_user.uid);
+    });
+  }
+
   _getProfileData() async {
     final uid = await Provider.of(context).auth.getCurrentUID();
     await Provider.of(context)
@@ -164,6 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
         .get()
         .then((result) {
       user.phoneNumber = result.data['phoneNumber'];
+      _userPhoneNumberController.text = user.phoneNumber;
     });
   }
 
@@ -270,7 +311,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 .collection('userData')
                                 .document(uid)
                                 .setData(user.toJson());
+
+                            _getPetData();
+
                             //print(user.phoneNumber);
+
                             Navigator.of(context).pop();
                           },
                         )

@@ -69,7 +69,7 @@ class _MenuPageState extends State<MenuPage> {
 
   List<Widget> menuPages = [
     HomePage(),
-    MyPetsUpdatedPage(),
+    MyPetsPage(),
     AddNewPetPage(),
     MapPage(),
     FavoritesPage(),
