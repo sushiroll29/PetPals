@@ -1,13 +1,13 @@
 import 'package:fl/screens/new_pet/new_pet_phone.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:fl/Pet.dart';
+import 'package:fl/models/Pet.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fl/constants.dart';
+import 'package:fl/widgets/constants.dart';
 
 class NewPetDatePage extends StatefulWidget {
   final Pet pet;

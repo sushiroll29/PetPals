@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fl/home_widgets.dart';
 import 'package:fl/screens/menu.dart';
-
-import 'package:fl/screens/home.dart';
-import 'package:fl/trash/my_pets_trash.dart';
-import 'package:fl/screens/password_reset.dart';
-import 'package:fl/screens/sign_in.dart';
-import 'package:fl/screens/sign_up.dart';
+import 'package:fl/screens/menu_items/home.dart';
+import 'package:fl/screens/authentication/password_reset.dart';
+import 'package:fl/screens/authentication/sign_in.dart';
+import 'package:fl/screens/authentication/sign_up.dart';
+import 'package:fl/screens/menu_items/my_pets.dart';
 import 'package:fl/screens/welcome.dart';
 import 'package:fl/services/auth.dart';
-import 'package:fl/widgets/provider.dart';
+import 'package:fl/services/provider.dart';
 import 'package:flutter/material.dart';
 
 void main() {

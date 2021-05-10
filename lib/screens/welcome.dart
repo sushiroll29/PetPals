@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fl/constants.dart';
+import 'package:fl/widgets/constants.dart';
 import 'package:fl/widgets/rounded_button_light.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/screens/backgrounds/welcome_bg.dart';

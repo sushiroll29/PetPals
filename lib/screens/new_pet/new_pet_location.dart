@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/screens/new_pet/new_pet_date.dart';
 import 'package:flutter/material.dart';
-import 'package:fl/Pet.dart';
+import 'package:fl/models/Pet.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:location/location.dart';

@@ -2,7 +2,7 @@ import 'package:fl/screens/new_pet/new_pet_location.dart';
 import 'package:fl/services/firebase_storage_service.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:fl/Pet.dart';
+import 'package:fl/models/Pet.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';

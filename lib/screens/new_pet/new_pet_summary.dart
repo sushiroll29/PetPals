@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:fl/Pet.dart';
-import 'package:fl/widgets/provider.dart';
+import 'package:fl/models/Pet.dart';
+import 'package:fl/services/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
