@@ -1,10 +1,14 @@
 import 'package:fl/constants.dart';
+import 'package:fl/home_widgets.dart';
 import 'package:fl/pages.dart';
+import 'package:fl/screens/updated_detailed_pet.dart';
 import 'package:fl/services/auth.dart';
+import 'package:fl/trash/old_home_trash.dart';
 import 'package:fl/widgets/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fl/Pet.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,6 +17,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/widgets/provider.dart';
 
 class MapPage extends StatefulWidget {
+  final Pet pet;
+  MapPage({Key key, this.pet}) : super(key: key);
   @override
   _MapPageState createState() => _MapPageState();
 }
@@ -20,30 +26,44 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   GoogleMapController myController;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
-
+//Pet pet = new Pet();
   void initMarker(specify, specifyId) async {
     var markerIdVal = specifyId;
     final MarkerId markerId = MarkerId(markerIdVal);
     final Marker marker = Marker(
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
       markerId: markerId,
       position:
           LatLng(specify['location'].latitude, specify['location'].longitude),
-      infoWindow: InfoWindow(title: 'Locatie', snippet: specify['address']),
+      infoWindow: InfoWindow(
+          title: specify['name'],
+          snippet: specify['type'],
+          onTap: () {
+            // Navigator.push(
+            //     context, MaterialPageRoute(builder: (context) => UpdatedDetailedPet(pet: Pet('type', 'name', 'breed', 'gender', 'isVaccinated', 'isSterilised', 'location', 'age', )))));
+          }),
     );
     setState(() {
       markers[markerId] = marker;
     });
   }
 
+  LatLng currentPostion;
+
+  void getUserLocation() async {
+    var position = await GeolocatorPlatform.instance
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    setState(() {
+      currentPostion = LatLng(position.latitude, position.longitude);
+    });
+  }
+
   getMarkerData() async {
-    Firestore.instance
-        .collection('locations')
-        .getDocuments()
-        .then((myMockLocations) {
-      if (myMockLocations.documents.isNotEmpty) {
-        for (int i = 0; i < myMockLocations.documents.length; i++) {
-          initMarker(myMockLocations.documents[i].data,
-              myMockLocations.documents[i].documentID);
+    Firestore.instance.collection('petsStream').getDocuments().then((data) {
+      if (data.documents.isNotEmpty) {
+        for (int i = 0; i < data.documents.length; i++) {
+          initMarker(data.documents[i].data, data.documents[i].documentID);
         }
       }
     });
@@ -51,23 +71,12 @@ class _MapPageState extends State<MapPage> {
 
   void initState() {
     getMarkerData();
+    getUserLocation();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    /*
-    Set<Marker> getMarker() {
-      return <Marker>[
-        Marker(
-          markerId: MarkerId('Locatie'),
-          position: LatLng(45.751110, 21.266010),
-          icon: BitmapDescriptor.defaultMarker,
-          infoWindow: InfoWindow(title: 'O locatie'),
-        )
-      ].toSet();
-    }
-*/
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -90,8 +99,10 @@ class _MapPageState extends State<MapPage> {
           onMapCreated: (GoogleMapController controller) {
             myController = controller;
           },
-          initialCameraPosition:
-              CameraPosition(target: LatLng(45.7494, 21.2272), zoom: 15),
+          initialCameraPosition: CameraPosition(
+              target: currentPostion,
+              //target: LatLng(45.7494, 21.2272),
+              zoom: 15),
         ));
   }
 }

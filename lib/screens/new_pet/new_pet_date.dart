@@ -20,6 +20,7 @@ class NewPetDatePage extends StatefulWidget {
 }
 
 class _NewPetDatePageState extends State<NewPetDatePage> {
+  bool _isDateValid = false;
   DateTime _foundOn = DateTime.now();
   DateTime _postDate = DateTime.now();
 
@@ -28,8 +29,9 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
         helpText: 'SELECT THE DATE WHEN YOU FOUND THE PET',
         context: context,
         initialDate: _foundOn,
-        firstDate: new DateTime(DateTime.now().year - 5),
-        lastDate: new DateTime(DateTime.now().year + 5),
+        firstDate: new DateTime(DateTime.now().year - 15),
+        //lastDate: DateTime.now().subtract(Duration(days: 1)),
+        lastDate: new DateTime(DateTime.now().year + 15),
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.light().copyWith(
@@ -40,6 +42,15 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
             child: child,
           );
         });
+    if (picked.isAfter(_foundOn)) {
+      setState(() {
+        _isDateValid = false;
+      });
+    } else {
+      setState(() {
+        _isDateValid = true;
+      });
+    }
 
     if (picked != null && picked != _foundOn)
       setState(() {
@@ -85,6 +96,9 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
                           text: 'SELECT DATE',
                           press: () async {
                             await displayDatePick(context);
+                            if (_isDateValid == false) {
+                              return AlertDialog();
+                            }
                           }),
                       SizedBox(height: 20),
                       Row(

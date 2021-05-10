@@ -12,7 +12,7 @@ class Pet {
   String gender;
   String isVaccinated;
   String isSterilised;
-  PickResult location;
+  GeoPoint location;
   String age;
   DateTime foundOn;
   DateTime postDate;
