@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/Pet.dart';
 import 'package:fl/constants.dart';
@@ -440,21 +442,24 @@ class _UpdatedDetailedPetState extends State<UpdatedDetailedPet> {
   }
 
   Widget showImageDialog(_width, _height) {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.all(8),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).pop();
-        },
-        child: Container(
-          width: _width,
-          height: _height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: NetworkImage("${widget.pet.imageURL}"),
-            fit: BoxFit.fitWidth,
-          )),
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: EdgeInsets.all(8),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            width: _width,
+            height: _height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: NetworkImage("${widget.pet.imageURL}"),
+              fit: BoxFit.fitWidth,
+            )),
+          ),
         ),
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/Pet.dart';
 import 'package:fl/components/description_containter.dart';
@@ -350,7 +352,10 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
   _petEditModalBottomSheet(context) {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(30.0))),
+            borderRadius: BorderRadius.only(
+          topLeft: const Radius.circular(25.0),
+          topRight: const Radius.circular(25.0),
+        )),
         isDismissible: false,
         context: context,
         isScrollControlled: true,
@@ -361,11 +366,12 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                 FocusScope.of(context).requestFocus(new FocusNode());
               },
               child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(25.0),
-                  topRight: const Radius.circular(25.0),
-                )),
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.only(
+                //     topLeft: const Radius.circular(25.0),
+                //     topRight: const Radius.circular(25.0),
+                //   ),
+                // ),
                 height: MediaQuery.of(context).size.height * 0.9,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -419,6 +425,45 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                       //     ],
                       //   ),
                       // ),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: DescriptionContainer(
+                            child: GestureDetector(
+                              onTap: () {
+                                FocusScope.of(context)
+                                    .requestFocus(new FocusNode());
+                              },
+                              child: TextField(
+                                style: TextStyle(
+                                    fontFamily: GoogleFonts.quicksand(
+                                            fontWeight: FontWeight.w600)
+                                        .fontFamily,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.grey.shade600),
+                                autocorrect: false,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                textAlign: TextAlign.left,
+                                controller: _descriptionController,
+                                decoration: InputDecoration(
+                                  hintText: 'Description',
+                                  hintStyle: TextStyle(
+                                      fontFamily: GoogleFonts.quicksand(
+                                              fontWeight: FontWeight.w600)
+                                          .fontFamily,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.grey.shade400),
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ))
+                        ],
+                      ),
+                      SizedBox(height: 5),
                       Row(
                         children: [
                           Padding(
@@ -526,44 +571,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                           addSpecialCareRadioButton(2, "Don't know"),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: DescriptionContainer(
-                            child: GestureDetector(
-                              onTap: () {
-                                FocusScope.of(context)
-                                    .requestFocus(new FocusNode());
-                              },
-                              child: TextField(
-                                style: TextStyle(
-                                    fontFamily: GoogleFonts.quicksand(
-                                            fontWeight: FontWeight.w600)
-                                        .fontFamily,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.grey.shade600),
-                                autocorrect: false,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                textAlign: TextAlign.left,
-                                controller: _descriptionController,
-                                decoration: InputDecoration(
-                                  hintText: 'Description',
-                                  hintStyle: TextStyle(
-                                      fontFamily: GoogleFonts.quicksand(
-                                              fontWeight: FontWeight.w600)
-                                          .fontFamily,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.grey.shade400),
-                                  border: InputBorder.none,
-                                ),
-                              ),
-                            ),
-                          ))
-                        ],
-                      ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -725,21 +733,25 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
   }
 
   Widget showImageDialog(_width, _height) {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.all(8),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).pop();
-        },
-        child: Container(
-          width: _width,
-          height: _height,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: NetworkImage("${widget.pet.imageURL}"),
-            fit: BoxFit.fitWidth,
-          )),
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+      child: Dialog(
+        elevation: 20,
+        backgroundColor: Colors.transparent,
+        insetPadding: EdgeInsets.all(8),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            width: _width,
+            height: _height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: NetworkImage("${widget.pet.imageURL}"),
+              fit: BoxFit.fitWidth,
+            )),
+          ),
         ),
       ),
     );
