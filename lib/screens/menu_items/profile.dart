@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl/models/User.dart';
 import 'package:fl/components/announcement_container.dart';
-import 'package:fl/screens/menu.dart';
 import 'package:fl/services/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,36 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   User user = User("");
   TextEditingController _userPhoneNumberController = TextEditingController();
+
+  FirebaseUser _user;
+  Future<void> _getUserData() async {
+    FirebaseUser userData = await FirebaseAuth.instance.currentUser();
+    setState(() {
+      _user = userData;
+    });
+  }
+
+  _updatePetData() async {
+    CollectionReference ref = Firestore.instance.collection('petsStream');
+    QuerySnapshot eventsQuery =
+        await ref.where('userId', isEqualTo: _user.uid).getDocuments();
+    eventsQuery.documents.forEach((doc) {
+      doc.reference.updateData({'userPhoneNumber': '${user.phoneNumber}'});
+    });
+  }
+
+  _getProfileData() async {
+    final uid = await Provider.of(context).auth.getCurrentUID();
+    await Provider.of(context)
+        .db
+        .collection('userData')
+        .document(uid)
+        .get()
+        .then((result) {
+      user.phoneNumber = result.data['phoneNumber'];
+      _userPhoneNumberController.text = user.phoneNumber;
+    });
+  }
 
   @override
   void initState() {
@@ -162,50 +191,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  _getPetData() async {
-    //DocumentSnapshot document =
-    Firestore.instance.collection('petsStream').getDocuments().then((data) {
-      if (data.documents.isNotEmpty) {
-        for (int i = 0; i < data.documents.length; i++) {
-          if (data.documents[i].data['userId'] == _user.uid) {
-            print("a");
-            setState(() {});
-          }
-        }
-      }
-    });
-  }
-
-  // Future updatePet(context) async {
-  //   var uuid = await Provider.of(context).auth.getCurrentUID();
-  //   final doc = Firestore.instance
-  //       .collection('petsStream')
-  //       .document(widget.pet.documentId);
-
-  //   return await doc.setData(widget.pet.toJson());
-  // }
-
-  FirebaseUser _user;
-  Future<void> _getUserData() async {
-    FirebaseUser userData = await FirebaseAuth.instance.currentUser();
-    setState(() {
-      _user = userData;
-    });
-  }
-
-  _getProfileData() async {
-    final uid = await Provider.of(context).auth.getCurrentUID();
-    await Provider.of(context)
-        .db
-        .collection('userData')
-        .document(uid)
-        .get()
-        .then((result) {
-      user.phoneNumber = result.data['phoneNumber'];
-      _userPhoneNumberController.text = user.phoneNumber;
-    });
-  }
-
   void _userEditBottomSheet(BuildContext context) {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
@@ -310,7 +295,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 .document(uid)
                                 .setData(user.toJson());
 
-                            _getPetData();
+                            await _updatePetData();
 
                             //print(user.phoneNumber);
 

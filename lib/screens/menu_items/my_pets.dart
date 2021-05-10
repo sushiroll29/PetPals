@@ -67,7 +67,8 @@ class _MyPetsPageState extends State<MyPetsPage> {
               icon: Icon(FontAwesomeIcons.bars),
               onPressed: () {
                 //popmaybe?????
-                Navigator.pop(context);
+                //Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/menu');
               },
             ),
           ),

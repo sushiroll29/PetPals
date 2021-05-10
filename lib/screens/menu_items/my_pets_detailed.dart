@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/models/Pet.dart';
 import 'package:fl/components/description_containter.dart';
+import 'package:fl/screens/menu_items/my_pets.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/screens/menu_items/home.dart';
 import 'package:fl/services/provider.dart';
@@ -609,7 +610,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => HomePage()));
+                                        builder: (context) => MyPetsPage()));
                               })
                         ],
                       )
