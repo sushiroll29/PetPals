@@ -185,7 +185,7 @@ class _MenuPageState extends State<MenuPage> {
                             } else {
                               return CircleAvatar(
                                 radius: 20.0,
-                                backgroundColor: Colors.white,
+                                backgroundColor: aPrimaryColor,
                               );
                             }
                           },

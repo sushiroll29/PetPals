@@ -63,8 +63,8 @@ class _DetailedPetState extends State<DetailedPet> {
                         Row(
                           children: <Widget>[
                             IconButton(
-                                icon: Icon(FontAwesomeIcons.arrowLeft),
-                                color: aPrimaryLightColor,
+                                icon: Icon(FontAwesomeIcons.chevronCircleLeft),
+                                color: aPrimaryColor,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),
@@ -211,7 +211,7 @@ class _DetailedPetState extends State<DetailedPet> {
                                   ],
                                 ),
                                 Text(
-                                  '${DateFormat('dd MMMM yyyy').format(widget.pet.postDate).toString()}',
+                                  '${DateFormat('dd MMMM yyyy   hh:mm a').format(widget.pet.postDate).toString()}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,

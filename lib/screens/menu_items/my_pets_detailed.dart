@@ -85,14 +85,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             IconButton(
-                                icon: Icon(FontAwesomeIcons.arrowLeft),
-                                color: aPrimaryLightColor,
+                                icon: Icon(FontAwesomeIcons.chevronCircleLeft),
+                                color: aPrimaryColor,
                                 onPressed: () {
                                   Navigator.pop(context);
                                 }),
                             IconButton(
                                 icon: Icon(FontAwesomeIcons.ellipsisH),
-                                color: aPrimaryLightColor,
+                                color: aPrimaryColor,
                                 onPressed: () {
                                   //print(widget.pet.documentId);
                                   _petEditModalBottomSheet(context);

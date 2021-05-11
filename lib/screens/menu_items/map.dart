@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fl/screens/menu_items/detailed_pet.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,50 +19,11 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   GoogleMapController myController;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
-//Pet pet = new Pet();
-  void initMarker(specify, specifyId) async {
-    var markerIdVal = specifyId;
-    final MarkerId markerId = MarkerId(markerIdVal);
-    final Marker marker = Marker(
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
-      markerId: markerId,
-      position:
-          LatLng(specify['location'].latitude, specify['location'].longitude),
-      infoWindow: InfoWindow(
-          title: specify['name'],
-          snippet: specify['type'],
-          onTap: () {
-            // Navigator.push(
-            //     context, MaterialPageRoute(builder: (context) => UpdatedDetailedPet(pet: Pet('type', 'name', 'breed', 'gender', 'isVaccinated', 'isSterilised', 'location', 'age', )))));
-          }),
-    );
-    setState(() {
-      markers[markerId] = marker;
-    });
-  }
-
   LatLng currentPostion;
-
-  void getUserLocation() async {
-    var position = await GeolocatorPlatform.instance
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-
-    setState(() {
-      currentPostion = LatLng(position.latitude, position.longitude);
-    });
-  }
-
-  getMarkerData() async {
-    Firestore.instance.collection('petsStream').getDocuments().then((data) {
-      if (data.documents.isNotEmpty) {
-        for (int i = 0; i < data.documents.length; i++) {
-          initMarker(data.documents[i].data, data.documents[i].documentID);
-        }
-      }
-    });
-  }
+  FirebaseUser user;
 
   void initState() {
+    getUserData();
     getMarkerData();
     getUserLocation();
     super.initState();
@@ -90,10 +53,78 @@ class _MapPageState extends State<MapPage> {
           onMapCreated: (GoogleMapController controller) {
             myController = controller;
           },
-          initialCameraPosition: CameraPosition(
-              target: currentPostion,
-              //target: LatLng(45.7494, 21.2272),
-              zoom: 15),
+          initialCameraPosition:
+              CameraPosition(target: currentPostion, zoom: 15),
         ));
+  }
+
+  Future<void> getUserData() async {
+    FirebaseUser userData = await FirebaseAuth.instance.currentUser();
+    setState(() {
+      user = userData;
+    });
+  }
+
+  void getUserLocation() async {
+    var position = await GeolocatorPlatform.instance
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    setState(() {
+      currentPostion = LatLng(position.latitude, position.longitude);
+    });
+  }
+
+  getMarkerData() async {
+    Firestore.instance.collection('petsStream').getDocuments().then((data) {
+      if (data.documents.isNotEmpty) {
+        for (int i = 0; i < data.documents.length; i++) {
+          if (data.documents[i]['userId'] != "${user.uid}") {
+            initMarker(data.documents[i].data, data.documents[i].documentID);
+          }
+        }
+      }
+    });
+  }
+
+  void initMarker(specify, specifyId) async {
+    var markerIdVal = specifyId;
+    final MarkerId markerId = MarkerId(markerIdVal);
+    final Marker marker = Marker(
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      markerId: markerId,
+      position:
+          LatLng(specify['location'].latitude, specify['location'].longitude),
+      infoWindow: InfoWindow(
+          title: specify['name'],
+          snippet: specify['type'],
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DetailedPet(
+                            pet: Pet(
+                          specify['type'],
+                          specify['name'],
+                          specify['breed'],
+                          specify['gender'],
+                          specify['isVaccinated'],
+                          specify['isStreilised'],
+                          specify['location'],
+                          specify['age'],
+                          specify['foundOn'].toDate(),
+                          specify['postDate'].toDate(),
+                          specify['userId'],
+                          specify['description'],
+                          specify['userPhoneNumber'],
+                          specify['usersName'],
+                          specify['requiresSpecialCare'],
+                          specify['hasMicrochip'],
+                          specify['imageURL'],
+                        ))));
+          }),
+    );
+    setState(() {
+      markers[markerId] = marker;
+    });
   }
 }
