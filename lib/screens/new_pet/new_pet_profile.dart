@@ -3,7 +3,6 @@ import 'package:fl/components/announcement_container.dart';
 import 'package:fl/components/description_containter.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/screens/new_pet/new_pet_image.dart';
-import 'package:fl/screens/new_pet/new_pet_location.dart';
 import 'package:fl/services/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';

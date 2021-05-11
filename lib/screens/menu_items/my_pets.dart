@@ -128,7 +128,6 @@ class _MyPetsPageState extends State<MyPetsPage> {
 
   Widget buildMyPetsList(BuildContext context, DocumentSnapshot document) {
     final pet = Pet.fromSnapshot(document);
-    final FirebaseAuth auth = FirebaseAuth.instance;
     //final petType = pet.types();
     Size size = MediaQuery.of(context).size;
     if (pet.userId != user.uid) {

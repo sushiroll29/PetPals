@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fl/models/Pet.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
-import 'package:location/location.dart';
 
 class MapScreen extends StatefulWidget {
   final Pet pet;
@@ -24,7 +23,6 @@ class _MapScreenState extends State<MapScreen> {
   );*/
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: PlacePicker(
           apiKey: "AIzaSyCID7zNDSX0ql3mqZ4fKWpLvk54G_Y-L8k",
