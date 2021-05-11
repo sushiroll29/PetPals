@@ -23,10 +23,6 @@ class _DetailedPetState extends State<DetailedPet> {
   Future<void> _launched;
   final db = Firestore.instance;
   bool isPressed = false;
-  List<String> petDetails = [
-    'Vaccinated: ',
-    'Sterilised: ',
-  ];
 
   @override
   Widget build(BuildContext context) {
