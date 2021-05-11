@@ -15,267 +15,250 @@ class NewPetSummaryPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Material(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            brightness: Brightness.light,
-            leading: IconButton(
-              color: Colors.grey.shade400,
-              icon: Icon(FontAwesomeIcons.arrowLeft),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(FontAwesomeIcons.arrowLeft,
-                            color: Colors.grey.shade400)),
-                  ],
-                ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 30, horizontal: 10),
-                    child: Column(
-                      children: <Widget>[
-                        Image(
-                          image: AssetImage('assets/images/cat_doodle.png'),
-                          height: size.width * 0.6,
-                        ),
-                        SizedBox(height: 15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "These are your pet's details!\nPlease check if the information is correct.",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+      child: Padding(
+        padding: EdgeInsets.only(left: 22.0, right: 22, top: 50, bottom: 20),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(FontAwesomeIcons.arrowLeft,
+                          color: Colors.grey.shade400)),
+                ],
+              ),
+              Container(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Column(
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage('assets/images/cat_doodle.png'),
+                        height: size.width * 0.6,
+                      ),
+                      SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "These are your pet's details.\nPlease check if the information is correct.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 60),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Name: ${pet.name}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 60),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Name: ${pet.name}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Age: ${pet.age}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Age: ${pet.age}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Gender: ${pet.gender}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Gender: ${pet.gender}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Breed: ${pet.breed}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Breed: ${pet.breed}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Size category: ${pet.petSize}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Size category: ${pet.petSize}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Vaccinated: ${pet.isVaccinated}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Vaccinated: ${pet.isVaccinated}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Sterilised: ${pet.isSterilised}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Sterilised: ${pet.isSterilised}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Microchipped: ${pet.hasMicrochip}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 17.5,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade600,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.normal)
-                                      .fontFamily,
-                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Microchipped: ${pet.hasMicrochip}",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 17.5,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 60),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            RoundedButton(
-                              text: 'FINISH',
-                              press: () async {
-                                //save data to firebase
-                                final uid = await Provider.of(context)
-                                    .auth
-                                    .getCurrentUID();
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 60),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RoundedButton(
+                            text: 'FINISH',
+                            press: () async {
+                              //save data to firebase
+                              final uid = await Provider.of(context)
+                                  .auth
+                                  .getCurrentUID();
 
-                                pet.userId = uid;
+                              pet.userId = uid;
 
-                                await db
-                                    .collection("userData")
-                                    .document(uid)
-                                    .collection("pets")
-                                    .add(pet.toJson());
+                              await db
+                                  .collection("userData")
+                                  .document(uid)
+                                  .collection("pets")
+                                  .add(pet.toJson());
 
-                                await db
-                                    .collection("petsStream")
-                                    //.document(widget.pet.documentId)
-                                    .add(pet.toJson());
+                              await db
+                                  .collection("petsStream")
+                                  //.document(widget.pet.documentId)
+                                  .add(pet.toJson());
 
-                                Navigator.of(context)
-                                    .popUntil((route) => route.isFirst);
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                              Navigator.of(context)
+                                  .popUntil((route) => route.isFirst);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
