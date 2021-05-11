@@ -80,24 +80,31 @@ class _MapPageState extends State<MapPage> {
         for (int i = 0; i < data.documents.length; i++) {
           //data.documents[i]['favoritesID'] == data.documents[i].documentID;
           if (data.documents[i]['userId'] != "${user.uid}") {
-            initMarker(data.documents[i].data, data.documents[i].documentID);
+            if (data.documents[i]['type'] == "dog") {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 180.0);
+            } else {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 340.0);
+            }
           }
         }
       }
     });
   }
 
-  void initMarker(specify, specifyId) async {
+  void initMarker(specify, specifyId, markerHue) async {
     var markerIdVal = specifyId;
     final MarkerId markerId = MarkerId(markerIdVal);
     final Marker marker = Marker(
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      icon: BitmapDescriptor.defaultMarkerWithHue(markerHue),
       markerId: markerId,
       position:
           LatLng(specify['location'].latitude, specify['location'].longitude),
       infoWindow: InfoWindow(
           title: specify['name'],
-          snippet: specify['type'],
+          snippet:
+              "${specify['type']}, ${specify['gender'].toString().toLowerCase()}",
           onTap: () {
             Navigator.push(
                 context,

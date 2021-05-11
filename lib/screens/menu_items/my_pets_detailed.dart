@@ -257,8 +257,8 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                       style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.grey.shade600,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey.shade800,
                                         fontFamily: GoogleFonts.quicksand(
                                                 fontWeight: FontWeight.normal)
                                             .fontFamily,

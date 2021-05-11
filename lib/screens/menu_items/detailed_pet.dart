@@ -221,8 +221,8 @@ class _DetailedPetState extends State<DetailedPet> {
                                       '${widget.pet.usersName}',
                                       style: TextStyle(
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.grey.shade600,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey.shade800,
                                         fontFamily: GoogleFonts.quicksand(
                                                 fontWeight: FontWeight.normal)
                                             .fontFamily,
@@ -234,8 +234,8 @@ class _DetailedPetState extends State<DetailedPet> {
                                   '${DateFormat('dd MMMM yyyy   hh:mm a').format(widget.pet.postDate).toString()}',
                                   style: TextStyle(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey.shade600,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey.shade800,
                                     fontFamily: GoogleFonts.quicksand(
                                             fontWeight: FontWeight.normal)
                                         .fontFamily,
