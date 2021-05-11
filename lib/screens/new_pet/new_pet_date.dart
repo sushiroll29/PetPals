@@ -61,93 +61,98 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
     Size size = MediaQuery.of(context).size;
 
     return Material(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(FontAwesomeIcons.arrowLeft,
-                          color: Colors.grey.shade400)),
-                ],
-              ),
-              Container(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  child: Column(
-                    children: <Widget>[
-                      Image(
-                        image: AssetImage('assets/images/dog_doodle.png'),
-                        height: size.width * 0.75,
-                      ),
-                      SizedBox(height: 15),
-                      RoundedButton(
-                          text: 'SELECT DATE',
-                          press: () async {
-                            await displayDatePick(context);
-                            if (_isDateValid == false) {
-                              return AlertDialog();
-                            }
-                          }),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          AutoSizeText(
-                            "Found on ${DateFormat('dd MMMM yyyy').format(_foundOn).toString()}.",
-                            style: TextStyle(
-                              fontFamily: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.w600)
-                                  .fontFamily,
-                              fontSize: 17,
-                              color: Colors.grey.shade600,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            brightness: Brightness.light,
+            leading: IconButton(
+              color: Colors.grey.shade400,
+              icon: Icon(FontAwesomeIcons.bars),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage('assets/images/dog_doodle.png'),
+                          height: size.width * 0.75,
+                        ),
+                        SizedBox(height: 15),
+                        RoundedButton(
+                            text: 'SELECT DATE',
+                            press: () async {
+                              await displayDatePick(context);
+                              if (_isDateValid == false) {
+                                return AlertDialog();
+                              }
+                            }),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            AutoSizeText(
+                              "Found on ${DateFormat('dd MMMM yyyy').format(_foundOn).toString()}.",
+                              style: TextStyle(
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.w600)
+                                    .fontFamily,
+                                fontSize: 17,
+                                color: Colors.grey.shade600,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          AutoSizeText(
-                            "If this is correct, please continue.",
-                            style: TextStyle(
-                              fontFamily: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.w600)
-                                  .fontFamily,
-                              fontSize: 17,
-                              color: Colors.grey.shade600,
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            AutoSizeText(
+                              "If this is correct, please continue.",
+                              style: TextStyle(
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.w600)
+                                    .fontFamily,
+                                fontSize: 17,
+                                color: Colors.grey.shade600,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      RoundedButton(
-                        text: 'CONTINUE',
-                        press: () {
-                          widget.pet.foundOn = _foundOn;
-                          widget.pet.postDate = _postDate;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    NewPetPhonePage(pet: widget.pet)),
-                          );
-                        },
-                      )
-                    ],
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        RoundedButton(
+                          text: 'CONTINUE',
+                          press: () {
+                            widget.pet.foundOn = _foundOn;
+                            widget.pet.postDate = _postDate;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      NewPetPhonePage(pet: widget.pet)),
+                            );
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

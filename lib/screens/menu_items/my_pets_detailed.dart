@@ -21,7 +21,12 @@ class MyPetsDetailed extends StatefulWidget {
 }
 
 class _MyPetsDetailedState extends State<MyPetsDetailed> {
-  var _description, _vaccinated, _sterilised, _specialCare, _microchipped;
+  var _description,
+      _vaccinated,
+      _sterilised,
+      _specialCare,
+      _microchipped,
+      _size;
   List isVaccinated = ["Yes", "No", "Don't know"];
   final db = Firestore.instance;
 
@@ -31,6 +36,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
   void initState() {
     super.initState();
     _descriptionController.text = widget.pet.description.toString();
+    _size = widget.pet.petSize;
     _description = widget.pet.description;
     _vaccinated = widget.pet.isVaccinated;
     _sterilised = widget.pet.isSterilised;
@@ -106,7 +112,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                   child: Container(
                     color: Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 90),
+                      padding: EdgeInsets.only(left: 2, right: 2, top: 90),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -122,6 +128,28 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                       spacing: 3,
                                       runSpacing: 3,
                                       children: [
+                                        Container(
+                                          height: 30,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10),
+                                          decoration: BoxDecoration(
+                                              color: aPrimaryLightColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Text(
+                                            'Size category: ${widget.pet.petSize}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey.shade600,
+                                              fontFamily: GoogleFonts.quicksand(
+                                                      fontWeight:
+                                                          FontWeight.normal)
+                                                  .fontFamily,
+                                            ),
+                                          ),
+                                        ),
                                         Container(
                                           height: 30,
                                           alignment: Alignment.center,
@@ -216,7 +244,8 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 30),
+                            padding:
+                                EdgeInsets.only(top: 20, left: 10, right: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
@@ -241,15 +270,18 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                             ),
                           ),
                           SizedBox(height: 20),
-                          Text(
-                            '${widget.pet.description}',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey.shade600,
-                              fontFamily: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.normal)
-                                  .fontFamily,
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            child: Text(
+                              '${widget.pet.description}',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
                             ),
                           ),
                         ],
@@ -362,256 +394,259 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
               onTap: () {
                 FocusScope.of(context).requestFocus(new FocusNode());
               },
-              child: Container(
-                // decoration: BoxDecoration(
-                //   borderRadius: BorderRadius.only(
-                //     topLeft: const Radius.circular(25.0),
-                //     topRight: const Radius.circular(25.0),
-                //   ),
-                // ),
-                height: MediaQuery.of(context).size.height * 0.9,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            //Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Text(
-                                widget.pet.name,
-                                style: TextStyle(
-                                  color: Colors.grey.shade800,
-                                  fontSize: 18.5,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.bold)
-                                      .fontFamily,
+              child: Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: Container(
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.only(
+                  //     topLeft: const Radius.circular(25.0),
+                  //     topRight: const Radius.circular(25.0),
+                  //   ),
+                  // ),
+                  height: MediaQuery.of(context).size.height * 9,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              //Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  widget.pet.name,
+                                  style: TextStyle(
+                                    color: Colors.grey.shade800,
+                                    fontSize: 18.5,
+                                    fontFamily: GoogleFonts.quicksand(
+                                            fontWeight: FontWeight.bold)
+                                        .fontFamily,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Spacer(),
-                            IconButton(
-                              icon: Icon(FontAwesomeIcons.timesCircle,
-                                  color: Colors.grey.shade800, size: 20),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
+                              Spacer(),
+                              IconButton(
+                                icon: Icon(FontAwesomeIcons.timesCircle,
+                                    color: Colors.grey.shade800, size: 20),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      // Padding(
-                      //   padding: EdgeInsets.only(bottom: 10.0),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     crossAxisAlignment: CrossAxisAlignment.center,
-                      //     children: [
-                      //       Text(
-                      //         widget.pet.name,
-                      //         style: TextStyle(
-                      //           color: Colors.grey.shade800,
-                      //           fontSize: 18.5,
-                      //           fontFamily: GoogleFonts.quicksand(
-                      //                   fontWeight: FontWeight.bold)
-                      //               .fontFamily,
-                      //         ),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: DescriptionContainer(
-                            child: GestureDetector(
-                              onTap: () {
-                                FocusScope.of(context)
-                                    .requestFocus(new FocusNode());
-                              },
-                              child: TextField(
-                                style: TextStyle(
-                                    fontFamily: GoogleFonts.quicksand(
-                                            fontWeight: FontWeight.w600)
-                                        .fontFamily,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.grey.shade600),
-                                autocorrect: false,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: null,
-                                textAlign: TextAlign.left,
-                                controller: _descriptionController,
-                                decoration: InputDecoration(
-                                  hintText: 'Description',
-                                  hintStyle: TextStyle(
+                        // Padding(
+                        //   padding: EdgeInsets.only(bottom: 10.0),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     crossAxisAlignment: CrossAxisAlignment.center,
+                        //     children: [
+                        //       Text(
+                        //         widget.pet.name,
+                        //         style: TextStyle(
+                        //           color: Colors.grey.shade800,
+                        //           fontSize: 18.5,
+                        //           fontFamily: GoogleFonts.quicksand(
+                        //                   fontWeight: FontWeight.bold)
+                        //               .fontFamily,
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: DescriptionContainer(
+                              child: GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
+                                },
+                                child: TextField(
+                                  style: TextStyle(
                                       fontFamily: GoogleFonts.quicksand(
                                               fontWeight: FontWeight.w600)
                                           .fontFamily,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.normal,
-                                      color: Colors.grey.shade400),
-                                  border: InputBorder.none,
+                                      color: Colors.grey.shade600),
+                                  autocorrect: false,
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  textAlign: TextAlign.left,
+                                  controller: _descriptionController,
+                                  decoration: InputDecoration(
+                                    hintText: 'Description',
+                                    hintStyle: TextStyle(
+                                        fontFamily: GoogleFonts.quicksand(
+                                                fontWeight: FontWeight.w600)
+                                            .fontFamily,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                  ),
+                                ),
+                              ),
+                            ))
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                "Is the pet vaccinated?",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w600)
+                                      .fontFamily,
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
-                          ))
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              "Is the pet vaccinated?",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w600)
-                                    .fontFamily,
-                                fontSize: 16,
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: <Widget>[
+                            addVaccinatedRadioButton(0, 'Yes'),
+                            addVaccinatedRadioButton(1, 'No'),
+                            addVaccinatedRadioButton(2, "Don't know"),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                "Is the pet sterilised?",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w600)
+                                      .fontFamily,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: <Widget>[
-                          addVaccinatedRadioButton(0, 'Yes'),
-                          addVaccinatedRadioButton(1, 'No'),
-                          addVaccinatedRadioButton(2, "Don't know"),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              "Is the pet sterilised?",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w600)
-                                    .fontFamily,
-                                fontSize: 16,
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: <Widget>[
+                            addSterilisedRadioButton(0, 'Yes'),
+                            addSterilisedRadioButton(1, 'No'),
+                            addSterilisedRadioButton(2, "Don't know"),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                "Is the pet microchipped?",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w600)
+                                      .fontFamily,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: <Widget>[
-                          addSterilisedRadioButton(0, 'Yes'),
-                          addSterilisedRadioButton(1, 'No'),
-                          addSterilisedRadioButton(2, "Don't know"),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              "Is the pet microchipped?",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w600)
-                                    .fontFamily,
-                                fontSize: 16,
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: <Widget>[
+                            addMicrochipRadioButton(0, 'Yes'),
+                            addMicrochipRadioButton(1, 'No'),
+                            addMicrochipRadioButton(2, "Don't know"),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                "Does the pet require special care?",
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w600)
+                                      .fontFamily,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: <Widget>[
-                          addMicrochipRadioButton(0, 'Yes'),
-                          addMicrochipRadioButton(1, 'No'),
-                          addMicrochipRadioButton(2, "Don't know"),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
-                            child: Text(
-                              "Does the pet require special care?",
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w600)
-                                    .fontFamily,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: <Widget>[
-                          addSpecialCareRadioButton(0, 'Yes'),
-                          addSpecialCareRadioButton(1, 'No'),
-                          addSpecialCareRadioButton(2, "Don't know"),
-                        ],
-                      ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: <Widget>[
+                            addSpecialCareRadioButton(0, 'Yes'),
+                            addSpecialCareRadioButton(1, 'No'),
+                            addSpecialCareRadioButton(2, "Don't know"),
+                          ],
+                        ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundedButton(
-                              text: 'Save',
-                              press: () async {
-                                widget.pet.isVaccinated = _vaccinated;
-                                widget.pet.description =
-                                    _descriptionController.text;
-                                widget.pet.isSterilised = _sterilised;
-                                widget.pet.hasMicrochip = _microchipped;
-                                setState(() {
-                                  _vaccinated = widget.pet.isVaccinated;
-                                  _description = widget.pet.description;
-                                  _sterilised = widget.pet.isSterilised;
-                                  _microchipped = widget.pet.hasMicrochip;
-                                });
-                                await updatePet(context);
-                                await updateMyPet(context);
-                                Navigator.of(context).pop();
-                              })
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundedButton(
-                              color: Colors.red.shade400,
-                              text: 'Delete pet',
-                              press: () async {
-                                await deleteMyPet(context);
-                                print("sters my pet");
-                                await deletePet(context);
-                                print("sters pet");
-                                //Navigator.of(context).pus
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyPetsPage()));
-                              })
-                        ],
-                      )
-                    ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedButton(
+                                text: 'Save',
+                                press: () async {
+                                  widget.pet.isVaccinated = _vaccinated;
+                                  widget.pet.description =
+                                      _descriptionController.text;
+                                  widget.pet.isSterilised = _sterilised;
+                                  widget.pet.hasMicrochip = _microchipped;
+                                  setState(() {
+                                    _vaccinated = widget.pet.isVaccinated;
+                                    _description = widget.pet.description;
+                                    _sterilised = widget.pet.isSterilised;
+                                    _microchipped = widget.pet.hasMicrochip;
+                                  });
+                                  await updatePet(context);
+                                  await updateMyPet(context);
+                                  Navigator.of(context).pop();
+                                })
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedButton(
+                                color: Colors.red.shade400,
+                                text: 'Delete pet',
+                                press: () async {
+                                  await deleteMyPet(context);
+                                  print("sters my pet");
+                                  await deletePet(context);
+                                  print("sters pet");
+                                  //Navigator.of(context).pus
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MyPetsPage()));
+                                })
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

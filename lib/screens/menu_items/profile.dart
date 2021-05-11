@@ -208,7 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
               FocusScope.of(context).requestFocus(new FocusNode());
             },
             child: Container(
-              height: MediaQuery.of(context).size.height * .7,
+              height: MediaQuery.of(context).size.height * .3,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15.0, top: 15.0),
                 child: Column(

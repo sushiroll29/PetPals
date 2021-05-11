@@ -23,61 +23,66 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
     Size size = MediaQuery.of(context).size;
 
     return Material(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(FontAwesomeIcons.arrowLeft,
-                        color: Colors.grey.shade400)),
-              ],
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            brightness: Brightness.light,
+            leading: IconButton(
+              color: Colors.grey.shade400,
+              icon: Icon(FontAwesomeIcons.arrowLeft),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            SizedBox(height: size.height * 0.25),
-            AutoSizeText(
-              "Please choose the pet type",
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey.shade600,
-                fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w700)
-                    .fontFamily,
-                fontSize: 20,
+          ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: size.height * 0.25),
+              AutoSizeText(
+                "Please choose the pet type",
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w700)
+                      .fontFamily,
+                  fontSize: 20,
+                ),
               ),
-            ),
-            Expanded(
-                child: GridView.count(
-              crossAxisCount: 2,
-              scrollDirection: Axis.vertical,
-              primary: false,
-              children: List.generate(petTypes.length, (index) {
-                return TextButton(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      petTypes[petKeys[index]],
-                    ],
-                  ),
-                  onPressed: () async {
-                    widget.pet.type = petKeys[index];
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              NewPetNamePage(pet: widget.pet)),
-                    );
-                  },
-                );
-              }),
-            )),
-          ],
+              Expanded(
+                  child: GridView.count(
+                crossAxisCount: 2,
+                scrollDirection: Axis.vertical,
+                primary: false,
+                children: List.generate(petTypes.length, (index) {
+                  return TextButton(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        petTypes[petKeys[index]],
+                      ],
+                    ),
+                    onPressed: () async {
+                      widget.pet.type = petKeys[index];
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                NewPetNamePage(pet: widget.pet)),
+                      );
+                    },
+                  );
+                }),
+              )),
+            ],
+          ),
         ),
       ),
     );

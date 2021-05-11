@@ -78,6 +78,7 @@ class _MapPageState extends State<MapPage> {
     Firestore.instance.collection('petsStream').getDocuments().then((data) {
       if (data.documents.isNotEmpty) {
         for (int i = 0; i < data.documents.length; i++) {
+          //data.documents[i]['favoritesID'] == data.documents[i].documentID;
           if (data.documents[i]['userId'] != "${user.uid}") {
             initMarker(data.documents[i].data, data.documents[i].documentID);
           }
@@ -119,6 +120,8 @@ class _MapPageState extends State<MapPage> {
                           specify['usersName'],
                           specify['requiresSpecialCare'],
                           specify['hasMicrochip'],
+                          specify['favoritesId'],
+                          specify['petSize'],
                           specify['imageURL'],
                         ))));
           }),

@@ -9,19 +9,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailedPet extends StatefulWidget {
+class FavoritesDetailed extends StatefulWidget {
   final Pet pet;
 
-  DetailedPet({Key key, @required this.pet}) : super(key: key);
+  FavoritesDetailed({Key key, @required this.pet}) : super(key: key);
 
   @override
-  _DetailedPetState createState() => _DetailedPetState();
+  _FavoritesDetailedState createState() => _FavoritesDetailedState();
 }
 
-class _DetailedPetState extends State<DetailedPet> {
+class _FavoritesDetailedState extends State<FavoritesDetailed> {
   Future<void> _launched;
   final db = Firestore.instance;
-  bool isPressed = false;
+  bool isPressed = true;
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +75,7 @@ class _DetailedPetState extends State<DetailedPet> {
                   child: Container(
                     color: Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 2, right: 2, top: 90),
-                      //padding: EdgeInsets.only(left: 20, right: 20, top: 90),
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 90),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,28 +91,6 @@ class _DetailedPetState extends State<DetailedPet> {
                                       spacing: 3,
                                       runSpacing: 3,
                                       children: [
-                                        Container(
-                                          height: 30,
-                                          alignment: Alignment.center,
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 5, horizontal: 10),
-                                          decoration: BoxDecoration(
-                                              color: aPrimaryLightColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Text(
-                                            'Size category: ${widget.pet.petSize}',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.grey.shade600,
-                                              fontFamily: GoogleFonts.quicksand(
-                                                      fontWeight:
-                                                          FontWeight.normal)
-                                                  .fontFamily,
-                                            ),
-                                          ),
-                                        ),
                                         Container(
                                           height: 30,
                                           alignment: Alignment.center,
@@ -208,9 +185,7 @@ class _DetailedPetState extends State<DetailedPet> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsets.only(left: 10, right: 10, top: 30),
-                            //padding: EdgeInsets.only(top: 30),
+                            padding: EdgeInsets.only(top: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
@@ -245,18 +220,15 @@ class _DetailedPetState extends State<DetailedPet> {
                             ),
                           ),
                           SizedBox(height: 20),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              '${widget.pet.description}',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey.shade600,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.normal)
-                                    .fontFamily,
-                              ),
+                          Text(
+                            '${widget.pet.description}',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey.shade600,
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.normal)
+                                  .fontFamily,
                             ),
                           ),
                         ],
@@ -289,42 +261,13 @@ class _DetailedPetState extends State<DetailedPet> {
                             ),
                             onPressed: () async {
                               //saves to Favorites collection in Firebase
-                              if (isPressed == false) {
-                                final uid = await Provider.of(context)
-                                    .auth
-                                    .getCurrentUID();
 
-                                DocumentReference ref = Firestore.instance
-                                    .collection("userData")
-                                    .document(uid)
-                                    .collection("favorites")
-                                    .document();
-                                ref.setData({
-                                  "age": widget.pet.age,
-                                  "breed": widget.pet.breed,
-                                  "description": widget.pet.description,
-                                  "documentId": widget.pet.documentId,
-                                  "favoritesId": ref.documentID,
-                                  "foundOn": widget.pet.foundOn,
-                                  "gender": widget.pet.gender,
-                                  "hasMicrochip": widget.pet.hasMicrochip,
-                                  "imageURL": widget.pet.imageURL,
-                                  "isSterilised": widget.pet.isSterilised,
-                                  "isVaccinated": widget.pet.isVaccinated,
-                                  "location": widget.pet.location,
-                                  "name": widget.pet.name,
-                                  "postDate": widget.pet.postDate,
-                                  "requiresSpecialCare":
-                                      widget.pet.requiresSpecialCare,
-                                  "type": widget.pet.type,
-                                  "userId": widget.pet.userId,
-                                  "userPhoneNumber": widget.pet.userPhoneNumber,
-                                  "usersName": widget.pet.usersName,
-                                  "isFavorite": isPressed,
-                                });
+                              if (isPressed == true) {
+                                await deleteFromFavorites(context);
+                                print("deleted from favorites");
 
                                 setState(() {
-                                  isPressed = true;
+                                  isPressed = false;
                                 });
                               }
                             },
@@ -450,6 +393,17 @@ class _DetailedPetState extends State<DetailedPet> {
         ],
       ),
     );
+  }
+
+  Future deleteFromFavorites(context) async {
+    var uuid = await Provider.of(context).auth.getCurrentUID();
+
+    final doc = Firestore.instance
+        .collection('userData')
+        .document(uuid)
+        .collection('favorites')
+        .document(widget.pet.favoritesId);
+    return await doc.delete();
   }
 
   Future<void> _makePhoneCall(String url) async {

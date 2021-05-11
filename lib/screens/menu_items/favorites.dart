@@ -1,3 +1,4 @@
+import 'package:fl/screens/menu_items/favorites_detailed.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/screens/menu_items/detailed_pet.dart';
 import 'package:fl/services/provider.dart';
@@ -10,10 +11,6 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FavoritesPage extends StatefulWidget {
-  final Function onMenuTap;
-
-  FavoritesPage({this.onMenuTap});
-
   @override
   _FavoritesPageState createState() => _FavoritesPageState();
 }
@@ -176,8 +173,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DetailedPet(pet: pet)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => FavoritesDetailed(pet: pet)));
       },
       child: Padding(
         padding: EdgeInsets.only(

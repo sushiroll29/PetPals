@@ -52,27 +52,27 @@ class _MenuPageState extends State<MenuPage> {
   List<String> menuItems = [
     'Adoption',
     'My pets',
+    'Favorites',
     'Add pet',
     'Map',
-    'Favorites',
     'Profile',
   ];
 
   List<IconData> menuIcons = [
     FontAwesomeIcons.paw,
     FontAwesomeIcons.list,
+    FontAwesomeIcons.solidHeart,
     FontAwesomeIcons.plus,
     FontAwesomeIcons.solidMap,
-    FontAwesomeIcons.solidHeart,
     FontAwesomeIcons.userAlt,
   ];
 
   List<Widget> menuPages = [
     HomePage(),
     MyPetsPage(),
+    FavoritesPage(),
     AddNewPetPage(),
     MapPage(),
-    FavoritesPage(),
     ProfilePage(),
   ];
 
