@@ -304,7 +304,7 @@ class _DetailedPetState extends State<DetailedPet> {
                           color: aPrimaryColor,
                           child: Padding(
                             padding: EdgeInsets.all(8),
-                            child: FlatButton(
+                            child: TextButton(
                               child: Text(
                                 'Adopt me',
                                 style: TextStyle(

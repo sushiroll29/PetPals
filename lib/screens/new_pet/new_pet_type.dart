@@ -58,7 +58,7 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
               scrollDirection: Axis.vertical,
               primary: false,
               children: List.generate(petTypes.length, (index) {
-                return FlatButton(
+                return TextButton(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
