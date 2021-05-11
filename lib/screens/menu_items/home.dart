@@ -18,6 +18,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController _searchController = TextEditingController();
+
   FirebaseUser user;
   Future<void> getUserData() async {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
@@ -28,10 +30,59 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future resultsLoaded;
+  List _allResults = [];
+  List _searchResults = [];
+
   @override
   void initState() {
     super.initState();
     getUserData();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getUsersPets();
+  }
+
+  _onSearchChanged() {
+    searchResultsList();
+  }
+
+  searchResultsList() {
+    var showResults = [];
+
+    if (_searchController.text != "") {
+      //if we have a search parameter
+      for (var petSnapshot in _allResults) {
+        var name = Pet.fromSnapshot(petSnapshot).name.toLowerCase();
+        var type = Pet.fromSnapshot(petSnapshot).type.toLowerCase();
+        var gender = Pet.fromSnapshot(petSnapshot).gender.toLowerCase();
+        //search by name/pet type/gender
+        if (type.contains(_searchController.text.toLowerCase()) ||
+                name.contains(_searchController.text.toLowerCase()) ||
+                gender == _searchController.text.toLowerCase()
+            //gender.contains(_searchController.text.toLowerCase())
+            ) {
+          showResults.add(petSnapshot);
+        }
+      }
+    } else {
+      showResults = List.from(_allResults);
+    }
+
+    setState(() {
+      _searchResults = showResults;
+    });
   }
 
   int selectedPetIndex = 0;
@@ -44,13 +95,16 @@ class _HomePageState extends State<HomePage> {
     FontAwesomeIcons.dog,
     FontAwesomeIcons.cat,
   ];
-  Stream<QuerySnapshot> getUsersPets(BuildContext context) async* {
-    yield* Firestore.instance
+  getUsersPets() async {
+    var data = await Firestore.instance
         .collection("petsStream")
-        //.document()
-        //.collection("pets")
         .orderBy('postDate', descending: true)
-        .snapshots();
+        .getDocuments();
+    setState(() {
+      _allResults = data.documents;
+    });
+    searchResultsList();
+    return "complete";
   }
 
   @override
@@ -128,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Expanded(
                                     child: TextField(
-                                  //controller: _searchController,
+                                  controller: _searchController,
                                   autocorrect: false,
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(
@@ -154,15 +208,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
 
-                        //asta e pentru search
-                        // Expanded(
-                        //   child: ListView.builder(
-                        //       itemCount: _allResults.length,
-                        //       itemBuilder: (BuildContext context, int index) {
-                        //         buildPetsList(context, _allResults[index]);
-                        //       }),
-                        // ),
-
                         /*  partea astea nu stiu daca o mai includ
                         Container(
                           //color: Colors.blue,
@@ -177,29 +222,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),*/
                         Expanded(
-                            child: StreamBuilder(
-                                stream: getUsersPets(context),
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData)
-                                    return Text(
-                                      "Loading...",
-                                      style: TextStyle(
-                                        color: Colors.grey.shade500,
-                                        fontFamily: GoogleFonts.quicksand(
-                                                fontWeight: FontWeight.w600)
-                                            .fontFamily,
-                                      ),
-                                    );
-
-                                  return new ListView.builder(
-                                    padding: EdgeInsets.only(top: 10),
-                                    itemCount: snapshot.data.documents.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) =>
-                                            buildPetsList(context,
-                                                snapshot.data.documents[index]),
-                                  );
-                                }))
+                          child: ListView.builder(
+                            itemCount: _searchResults.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                buildPetsList(context, _searchResults[index]),
+                          ),
+                        ),
                       ],
                     ),
                   ),
