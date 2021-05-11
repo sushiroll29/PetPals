@@ -463,21 +463,24 @@ class _DetailedPetState extends State<DetailedPet> {
   Widget showImageDialog(_width, _height) {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-      child: Dialog(
-        backgroundColor: Colors.transparent,
-        insetPadding: EdgeInsets.all(8),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Container(
-            width: _width,
-            height: _height,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: NetworkImage("${widget.pet.imageURL}"),
-              fit: BoxFit.fitWidth,
-            )),
+      child: InteractiveViewer(
+        constrained: true,
+        child: Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.all(8),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              width: _width,
+              height: _height,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: NetworkImage("${widget.pet.imageURL}"),
+                fit: BoxFit.fitWidth,
+              )),
+            ),
           ),
         ),
       ),
