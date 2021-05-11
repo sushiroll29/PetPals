@@ -1,4 +1,3 @@
-import 'package:fl/components/existing_account_check.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:fl/services/provider.dart';

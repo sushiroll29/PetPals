@@ -11,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:fl/models/Pet.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:photo_view/photo_view.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -46,7 +45,6 @@ class _HomePageState extends State<HomePage> {
     FontAwesomeIcons.cat,
   ];
   Stream<QuerySnapshot> getUsersPets(BuildContext context) async* {
-    final _uid = await Provider.of(context).auth.getCurrentUID();
     yield* Firestore.instance
         .collection("petsStream")
         //.document()
@@ -263,7 +261,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildPetsList(BuildContext context, DocumentSnapshot document) {
     final pet = Pet.fromSnapshot(document);
-    final FirebaseAuth auth = FirebaseAuth.instance;
     //final petType = pet.types();
     Size size = MediaQuery.of(context).size;
     if (pet.userId == user.uid) {

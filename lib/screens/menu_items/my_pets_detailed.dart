@@ -1,11 +1,9 @@
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/models/Pet.dart';
 import 'package:fl/components/description_containter.dart';
 import 'package:fl/screens/menu_items/my_pets.dart';
 import 'package:fl/widgets/constants.dart';
-import 'package:fl/screens/menu_items/home.dart';
 import 'package:fl/services/provider.dart';
 import 'package:fl/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +22,6 @@ class MyPetsDetailed extends StatefulWidget {
 
 class _MyPetsDetailedState extends State<MyPetsDetailed> {
   var _description, _vaccinated, _sterilised, _specialCare, _microchipped;
-  String _isV;
   List isVaccinated = ["Yes", "No", "Don't know"];
   final db = Firestore.instance;
 
@@ -768,7 +765,6 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
   }
 
   Future updatePet(context) async {
-    var uuid = await Provider.of(context).auth.getCurrentUID();
     final doc = Firestore.instance
         .collection('petsStream')
         .document(widget.pet.documentId);

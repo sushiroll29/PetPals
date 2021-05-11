@@ -42,8 +42,6 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    //final pet = Pet.fromSnapshot(document);
     return Material(
       child: Scaffold(
         appBar: PreferredSize(
