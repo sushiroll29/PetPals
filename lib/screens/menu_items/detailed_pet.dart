@@ -57,12 +57,20 @@ class _DetailedPetState extends State<DetailedPet> {
                       children: [
                         Row(
                           children: <Widget>[
-                            IconButton(
-                                icon: Icon(FontAwesomeIcons.chevronCircleLeft),
-                                color: aPrimaryColor,
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                }),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: IconButton(
+                                  icon: Icon(FontAwesomeIcons.chevronLeft),
+                                  color: aPrimaryColor,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  }),
+                            ),
                           ],
                         ),
                       ],
@@ -93,14 +101,14 @@ class _DetailedPetState extends State<DetailedPet> {
                                       runSpacing: 3,
                                       children: [
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Size category: ${widget.pet.petSize}',
                                             style: TextStyle(
@@ -115,14 +123,14 @@ class _DetailedPetState extends State<DetailedPet> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Vaccinated: ${widget.pet.isVaccinated}',
                                             style: TextStyle(
@@ -137,14 +145,14 @@ class _DetailedPetState extends State<DetailedPet> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Sterilised: ${widget.pet.isSterilised}',
                                             style: TextStyle(
@@ -159,14 +167,14 @@ class _DetailedPetState extends State<DetailedPet> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Has microchip: ${widget.pet.hasMicrochip}',
                                             style: TextStyle(
@@ -181,14 +189,14 @@ class _DetailedPetState extends State<DetailedPet> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Requires special care: ${widget.pet.requiresSpecialCare}',
                                             style: TextStyle(

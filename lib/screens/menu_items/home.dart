@@ -110,135 +110,142 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //final pet = Pet.fromSnapshot(document);
     return Material(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
-                  },
-                  child: Column(children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Text("$loggedUserName",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey.shade700,
-                            fontFamily: GoogleFonts.quicksand(
-                                    fontWeight: FontWeight.w600)
-                                .fontFamily,
-                          )),
-                    ),
-                  ]),
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(50.0),
+            child: AppBar(
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()));
+                    },
+                    child: Column(children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Text("$loggedUserName",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey.shade700,
+                              fontFamily: GoogleFonts.quicksand(
+                                      fontWeight: FontWeight.w600)
+                                  .fontFamily,
+                            )),
+                      ),
+                    ]),
+                  ),
                 ),
+              ],
+              elevation: 0,
+              backgroundColor: Colors.white,
+              brightness: Brightness.light,
+              leading: IconButton(
+                color: Colors.grey.shade400,
+                icon: Icon(FontAwesomeIcons.bars),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MenuPage()),
+                  );
+                },
               ),
-            ],
-            elevation: 0,
-            backgroundColor: Colors.white,
-            brightness: Brightness.light,
-            leading: IconButton(
-              color: Colors.grey.shade400,
-              icon: Icon(FontAwesomeIcons.bars),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MenuPage()),
-                );
-              },
             ),
           ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(30),
-                      topRight: const Radius.circular(30),
+          body: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(30),
+                        topRight: const Radius.circular(30),
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 3.0),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 18.0, vertical: 15.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20.0)),
-                            padding: EdgeInsets.symmetric(horizontal: 14.0),
-                            child: Row(
-                              children: <Widget>[
-                                Icon(
-                                  FontAwesomeIcons.search,
-                                  color: Colors.grey.shade300,
-                                  size: 20,
-                                ),
-                                Expanded(
-                                    child: TextField(
-                                  controller: _searchController,
-                                  autocorrect: false,
-                                  decoration: InputDecoration(
-                                    hintStyle: TextStyle(
-                                      color: Colors.grey.shade400,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 3.0),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 18.0, vertical: 15.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20.0)),
+                              padding: EdgeInsets.symmetric(horizontal: 14.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    FontAwesomeIcons.search,
+                                    color: Colors.grey.shade300,
+                                    size: 20,
+                                  ),
+                                  Expanded(
+                                      child: TextField(
+                                    controller: _searchController,
+                                    autocorrect: false,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey.shade400,
+                                        fontFamily: GoogleFonts.quicksand(
+                                                fontWeight: FontWeight.w600)
+                                            .fontFamily,
+                                      ),
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide.none),
+                                      hintText: 'Search for a pet to adopt',
+                                    ),
+                                    style: TextStyle(
+                                      color: Colors.grey.shade700,
                                       fontFamily: GoogleFonts.quicksand(
                                               fontWeight: FontWeight.w600)
                                           .fontFamily,
+                                      //height: 1.3,
                                     ),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none),
-                                    hintText: 'Search for a pet to adopt',
-                                  ),
-                                  style: TextStyle(
-                                    color: Colors.grey.shade700,
-                                    fontFamily: GoogleFonts.quicksand(
-                                            fontWeight: FontWeight.w600)
-                                        .fontFamily,
-                                    //height: 1.3,
-                                  ),
-                                )),
-                              ],
+                                  )),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
 
-                        /*  partea astea nu stiu daca o mai includ
-                        Container(
-                          //color: Colors.blue,
-                          height: size.height * 0.12,
-                          child: ListView.builder(
-                            padding: EdgeInsets.only(left: 30),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: petTypes.length,
-                            itemBuilder: (context, index) {
-                              return buildPetIconList(index);
-                            },
+                          /*  partea astea nu stiu daca o mai includ
+                          Container(
+                            //color: Colors.blue,
+                            height: size.height * 0.12,
+                            child: ListView.builder(
+                              padding: EdgeInsets.only(left: 30),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: petTypes.length,
+                              itemBuilder: (context, index) {
+                                return buildPetIconList(index);
+                              },
+                            ),
+                          ),*/
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: _searchResults.length,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  buildPetsList(context, _searchResults[index]),
+                            ),
                           ),
-                        ),*/
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: _searchResults.length,
-                            itemBuilder: (BuildContext context, int index) =>
-                                buildPetsList(context, _searchResults[index]),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

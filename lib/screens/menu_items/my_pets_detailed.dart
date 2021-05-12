@@ -87,19 +87,35 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            IconButton(
-                                icon: Icon(FontAwesomeIcons.chevronCircleLeft),
-                                color: aPrimaryColor,
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                }),
-                            IconButton(
-                                icon: Icon(FontAwesomeIcons.ellipsisH),
-                                color: aPrimaryColor,
-                                onPressed: () {
-                                  //print(widget.pet.documentId);
-                                  _petEditModalBottomSheet(context);
-                                }),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: IconButton(
+                                  icon: Icon(FontAwesomeIcons.chevronLeft),
+                                  color: aPrimaryColor,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  }),
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: IconButton(
+                                  icon: Icon(FontAwesomeIcons.ellipsisH),
+                                  color: aPrimaryColor,
+                                  onPressed: () {
+                                    //print(widget.pet.documentId);
+                                    _petEditModalBottomSheet(context);
+                                  }),
+                            ),
                           ],
                         ),
                       ],
@@ -129,14 +145,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                       runSpacing: 3,
                                       children: [
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Size category: ${widget.pet.petSize}',
                                             style: TextStyle(
@@ -151,14 +167,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Vaccinated: ${widget.pet.isVaccinated}',
                                             style: TextStyle(
@@ -173,14 +189,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Sterilised: ${widget.pet.isSterilised}',
                                             style: TextStyle(
@@ -195,14 +211,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Has microchip: ${widget.pet.hasMicrochip}',
                                             style: TextStyle(
@@ -217,14 +233,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                           ),
                                         ),
                                         Container(
-                                          height: 30,
+                                          height: 35,
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
                                           decoration: BoxDecoration(
                                               color: aPrimaryLightColor,
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(15)),
                                           child: Text(
                                             'Requires special care: ${widget.pet.requiresSpecialCare}',
                                             style: TextStyle(
@@ -385,15 +401,16 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
           topLeft: const Radius.circular(25.0),
           topRight: const Radius.circular(25.0),
         )),
-        isDismissible: false,
+        isDismissible: true,
         context: context,
         isScrollControlled: true,
         builder: (BuildContext bc) {
-          return SingleChildScrollView(
-            child: GestureDetector(
-              onTap: () {
-                FocusScope.of(context).requestFocus(new FocusNode());
-              },
+          return GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.only(top: 30.0),
                 child: Container(
@@ -614,11 +631,14 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                                       _descriptionController.text;
                                   widget.pet.isSterilised = _sterilised;
                                   widget.pet.hasMicrochip = _microchipped;
+                                  widget.pet.requiresSpecialCare = _specialCare;
                                   setState(() {
                                     _vaccinated = widget.pet.isVaccinated;
                                     _description = widget.pet.description;
                                     _sterilised = widget.pet.isSterilised;
                                     _microchipped = widget.pet.hasMicrochip;
+                                    _specialCare =
+                                        widget.pet.requiresSpecialCare;
                                   });
                                   await updatePet(context);
                                   await updateMyPet(context);
@@ -830,5 +850,17 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
     print(widget.pet.documentId);
     print(uuid);
     return await doc.delete();
+  }
+}
+
+class BottomSheetEdit extends StatefulWidget {
+  @override
+  _BottomSheetEditState createState() => _BottomSheetEditState();
+}
+
+class _BottomSheetEditState extends State<BottomSheetEdit> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
