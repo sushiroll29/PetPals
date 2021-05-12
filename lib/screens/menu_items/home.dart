@@ -3,7 +3,6 @@ import 'package:fl/screens/menu_items/profile.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/screens/menu.dart';
 import 'package:fl/screens/menu_items/detailed_pet.dart';
-import 'package:fl/services/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,12 +20,12 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _searchController = TextEditingController();
 
   FirebaseUser user;
+  String loggedUserName;
   Future<void> getUserData() async {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
     setState(() {
       user = userData;
-
-      //print(userData.uid);
+      loggedUserName = user.displayName.toString();
     });
   }
 
@@ -118,18 +117,24 @@ class _HomePageState extends State<HomePage> {
             actions: [
               Padding(
                 padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
-                child: FutureBuilder(
-                  future: Provider.of(context).auth.getCurrentUser(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return displayUserInformation(context, snapshot);
-                    } else {
-                      return CircleAvatar(
-                        radius: 20.0,
-                        backgroundColor: Colors.white,
-                      );
-                    } /////////////////////
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ProfilePage()));
                   },
+                  child: Column(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Text("$loggedUserName",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey.shade700,
+                            fontFamily: GoogleFonts.quicksand(
+                                    fontWeight: FontWeight.w600)
+                                .fontFamily,
+                          )),
+                    ),
+                  ]),
                 ),
               ),
             ],
@@ -399,28 +404,5 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
-  }
-
-  Widget displayUserInformation(context, snapshot) {
-    final authData = snapshot.data;
-
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProfilePage()));
-      },
-      child: Column(children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(0),
-          child: Text("${authData.displayName}",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.grey.shade700,
-                fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                    .fontFamily,
-              )),
-        ),
-      ]),
-    );
   }
 }

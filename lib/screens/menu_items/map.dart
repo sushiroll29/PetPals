@@ -19,10 +19,12 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   GoogleMapController myController;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
-  LatLng currentPostion;
   FirebaseUser user;
+  bool loading;
+  var _currentPosition;
 
   void initState() {
+    loading = false;
     getUserData();
     getMarkerData();
     getUserLocation();
@@ -46,16 +48,18 @@ class _MapPageState extends State<MapPage> {
           backgroundColor: aPrimaryColor,
           iconTheme: IconThemeData(color: Colors.white),
         ),
-        body: GoogleMap(
-          markers: Set<Marker>.of(markers.values),
-          mapType: MapType.normal,
-          myLocationEnabled: true,
-          onMapCreated: (GoogleMapController controller) {
-            myController = controller;
-          },
-          initialCameraPosition:
-              CameraPosition(target: currentPostion, zoom: 15),
-        ));
+        body: loading
+            ? GoogleMap(
+                markers: Set<Marker>.of(markers.values),
+                mapType: MapType.normal,
+                myLocationEnabled: true,
+                onMapCreated: (GoogleMapController controller) {
+                  myController = controller;
+                },
+                initialCameraPosition:
+                    CameraPosition(target: _currentPosition, zoom: 15),
+              )
+            : Container());
   }
 
   Future<void> getUserData() async {
@@ -70,7 +74,10 @@ class _MapPageState extends State<MapPage> {
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
     setState(() {
-      currentPostion = LatLng(position.latitude, position.longitude);
+      double latitude = position.latitude;
+      double longitude = position.longitude;
+      _currentPosition = LatLng(latitude, longitude);
+      loading = true;
     });
   }
 

@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fl/screens/menu_items/map.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/screens/menu_items/credits.dart';
 import 'package:fl/screens/menu_items/add_new_pet.dart';
 import 'package:fl/screens/menu_items/favorites.dart';
 import 'package:fl/screens/menu_items/home.dart';
-import 'package:fl/screens/menu_items/map.dart';
 import 'package:fl/screens/menu_items/my_pets.dart';
 import 'package:fl/screens/menu_items/profile.dart';
 import 'package:fl/screens/authentication/sign_out.dart';

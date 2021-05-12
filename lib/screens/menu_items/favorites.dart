@@ -224,7 +224,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                           SizedBox(height: 10),
                           //Text(pet.type,),
                           Text(
-                            '${pet.age} years old',
+                            '${pet.age} old',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontFamily: GoogleFonts.quicksand(

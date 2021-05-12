@@ -5,6 +5,7 @@ import 'package:fl/screens/authentication/password_reset.dart';
 import 'package:fl/screens/authentication/sign_in.dart';
 import 'package:fl/screens/authentication/sign_up.dart';
 import 'package:fl/screens/menu_items/my_pets.dart';
+import 'package:fl/screens/menu_items/profile.dart';
 import 'package:fl/screens/welcome.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/services/provider.dart';
