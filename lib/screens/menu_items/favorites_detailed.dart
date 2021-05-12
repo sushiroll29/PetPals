@@ -75,7 +75,7 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                   child: Container(
                     color: Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 90),
+                      padding: EdgeInsets.only(left: 2, right: 2, top: 90),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -185,7 +185,8 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 30),
+                            padding:
+                                EdgeInsets.only(left: 10, right: 10, top: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
@@ -220,15 +221,18 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                             ),
                           ),
                           SizedBox(height: 20),
-                          Text(
-                            '${widget.pet.description}',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey.shade600,
-                              fontFamily: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.normal)
-                                  .fontFamily,
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            child: Text(
+                              '${widget.pet.description}',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
                             ),
                           ),
                         ],
