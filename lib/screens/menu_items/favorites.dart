@@ -1,6 +1,5 @@
 import 'package:fl/screens/menu_items/favorites_detailed.dart';
 import 'package:fl/widgets/constants.dart';
-import 'package:fl/screens/menu_items/detailed_pet.dart';
 import 'package:fl/services/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

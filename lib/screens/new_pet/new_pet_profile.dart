@@ -187,7 +187,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: AutoSizeText(
-                          "Size category",
+                          "Size category (depending on type)",
                           maxLines: 1,
                           style: TextStyle(
                             color: Colors.grey.shade700,

@@ -147,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Account created on ${DateFormat('MM/dd/yyyy').format(authData.metadata.creationTime)}",
+            "Account created on ${DateFormat('dd/MM/yyyy').format(authData.metadata.creationTime)}",
             style: TextStyle(
               fontSize: 17.5,
               fontWeight: FontWeight.w600,

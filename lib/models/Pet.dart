@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fl/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -107,9 +108,9 @@ class Pet {
       };
 
   Map<String, Icon> bigTypes() => {
-        "dog":
-            Icon(FontAwesomeIcons.dog, size: 60, color: Colors.grey.shade800),
-        "cat":
-            Icon(FontAwesomeIcons.cat, size: 60, color: Colors.grey.shade800),
+        "dog": Icon(FontAwesomeIcons.dog, size: 60, color: aDarkGreyColor),
+        "cat": Icon(FontAwesomeIcons.cat, size: 60, color: aDarkGreyColor),
+        "parrot":
+            Icon(FontAwesomeIcons.feather, size: 60, color: aDarkGreyColor)
       };
 }

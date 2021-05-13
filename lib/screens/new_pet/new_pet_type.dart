@@ -40,7 +40,7 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 22.0, vertical: 50),
+          padding: EdgeInsets.symmetric(horizontal: 22.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -56,9 +56,10 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
                   fontSize: 20,
                 ),
               ),
+              SizedBox(height: 20),
               Expanded(
                   child: GridView.count(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 scrollDirection: Axis.vertical,
                 primary: false,
                 children: List.generate(petTypes.length, (index) {

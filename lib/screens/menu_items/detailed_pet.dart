@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/models/Pet.dart';
+import 'package:fl/screens/menu_items/home.dart';
+import 'package:fl/screens/menu_items/specific_user_pets.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/services/provider.dart';
 import 'package:flutter/material.dart';
@@ -223,20 +225,31 @@ class _DetailedPetState extends State<DetailedPet> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      '${widget.pet.usersName}',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey.shade800,
-                                        fontFamily: GoogleFonts.quicksand(
-                                                fontWeight: FontWeight.normal)
-                                            .fontFamily,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SpecificUserPetsPage(
+                                                  pet: widget.pet)),
+                                    );
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(
+                                        '${widget.pet.usersName}',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey.shade800,
+                                          fontFamily: GoogleFonts.quicksand(
+                                                  fontWeight: FontWeight.normal)
+                                              .fontFamily,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 Text(
                                   '${DateFormat('dd MMMM yyyy   hh:mm a').format(widget.pet.postDate).toString()}',

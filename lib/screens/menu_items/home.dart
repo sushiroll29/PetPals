@@ -32,6 +32,9 @@ class _HomePageState extends State<HomePage> {
   Future resultsLoaded;
   List _allResults = [];
   List _searchResults = [];
+  List _dogResults = [];
+  List _catResults = [];
+  List _parrotResults = [];
 
   @override
   void initState() {
@@ -84,16 +87,38 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  int selectedPetIndex = 0;
-  List<String> petTypes = [
-    'Dogs',
-    'Cats',
-  ];
+  petResultList() {
+    var showDogResults = [];
+    var showCatResults = [];
+    var showParrotRestults = [];
+
+    for (var petSnapshot in _allResults) {
+      var type = Pet.fromSnapshot(petSnapshot).type.toLowerCase();
+      if (type == "dog") {
+        showDogResults.add(petSnapshot);
+      } else if (type == "cat") {
+        showCatResults.add(petSnapshot);
+      } else if (type == "parrot") {
+        showParrotRestults.add(petSnapshot);
+      }
+
+      setState(() {
+        _dogResults = showDogResults;
+        _catResults = showCatResults;
+        _parrotResults = showParrotRestults;
+      });
+    }
+  }
+
+  int selectedPetIndex = -1;
+  List<String> petTypes = ['Dogs', 'Cats', 'Parrots'];
 
   List<IconData> petIcons = [
     FontAwesomeIcons.dog,
     FontAwesomeIcons.cat,
+    FontAwesomeIcons.feather,
   ];
+
   getUsersPets() async {
     var data = await Firestore.instance
         .collection("petsStream")
@@ -103,11 +128,13 @@ class _HomePageState extends State<HomePage> {
       _allResults = data.documents;
     });
     searchResultsList();
+    petResultList();
     return "complete";
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     //final pet = Pet.fromSnapshot(document);
     return Material(
       child: GestureDetector(
@@ -120,7 +147,7 @@ class _HomePageState extends State<HomePage> {
             child: AppBar(
               actions: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
+                  padding: const EdgeInsets.only(left: 23, right: 23, top: 15),
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -128,19 +155,38 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (context) => ProfilePage()));
                     },
-                    child: Column(children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Text("$loggedUserName",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey.shade700,
-                              fontFamily: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.w600)
-                                  .fontFamily,
-                            )),
-                      ),
-                    ]),
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Row(
+                            children: [
+                              Text(
+                                "$loggedUserName",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.grey.shade700,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w600)
+                                      .fontFamily,
+                                ),
+                              ),
+                              // SizedBox(width: 10),
+                              // RawMaterialButton(
+                              //   onPressed: () {},
+                              //   elevation: 2.0,
+                              //   fillColor: Colors.white,
+                              //   //padding: EdgeInsets.all(15.0),
+                              //   shape: CircleBorder(),
+                              //   //backgroundColor: Colors.blue,
+                              //   child: ImageIcon(
+                              //       AssetImage("assets/images/bg.jpg")),
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -219,25 +265,25 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
 
-                          /*  partea astea nu stiu daca o mai includ
                           Container(
-                            //color: Colors.blue,
                             height: size.height * 0.12,
                             child: ListView.builder(
-                              padding: EdgeInsets.only(left: 30),
+                              //padding: EdgeInsets.only(left: 30),
                               scrollDirection: Axis.horizontal,
                               itemCount: petTypes.length,
                               itemBuilder: (context, index) {
                                 return buildPetIconList(index);
                               },
                             ),
-                          ),*/
+                          ),
+                          //*/
                           Expanded(
-                            child: ListView.builder(
-                              itemCount: _searchResults.length,
-                              itemBuilder: (BuildContext context, int index) =>
-                                  buildPetsList(context, _searchResults[index]),
-                            ),
+                            child: isSearchUsed(),
+                            // ListView.builder(
+                            //   itemCount: _searchResults.length,
+                            //   itemBuilder: (BuildContext context, int index) =>
+                            //       buildPetsList(context, _searchResults[index]),
+                            // ),
                           ),
                         ],
                       ),
@@ -261,16 +307,24 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           InkWell(
             onTap: () {
-              setState(() {
-                selectedPetIndex = index;
-              });
+              if (selectedPetIndex == -1)
+                setState(() {
+                  selectedPetIndex = index;
+                });
+              else if (selectedPetIndex == 0 ||
+                  selectedPetIndex == 1 ||
+                  selectedPetIndex == 2) {
+                setState(() {
+                  selectedPetIndex = -1;
+                });
+              }
             },
             child: Material(
               color: selectedPetIndex == index ? aPrimaryColor : Colors.white,
               elevation: 2.0,
               borderRadius: BorderRadius.circular(20.0),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 11.0),
+                padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 11.0),
                 child: Center(
                   child: Icon(
                     petIcons[index],
@@ -284,15 +338,21 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(height: 12.0),
-          Text(
-            petTypes[index],
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey.shade400,
-              fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
-                  .fontFamily,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                petTypes[index],
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade400,
+                  fontFamily:
+                      GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                          .fontFamily,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -411,5 +471,32 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
+  }
+
+  Widget isSearchUsed() {
+    if (selectedPetIndex == 0)
+      return ListView.builder(
+        itemCount: _dogResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _dogResults[index]),
+      );
+    else if (selectedPetIndex == 1)
+      return ListView.builder(
+        itemCount: _catResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _catResults[index]),
+      );
+    else if (selectedPetIndex == 2)
+      return ListView.builder(
+        itemCount: _parrotResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _parrotResults[index]),
+      );
+    else
+      return ListView.builder(
+        itemCount: _searchResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _searchResults[index]),
+      );
   }
 }
