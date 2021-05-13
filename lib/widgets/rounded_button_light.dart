@@ -33,7 +33,7 @@ class RoundedButtonLight extends StatelessWidget {
             style: TextStyle(
               fontFamily:
                   GoogleFonts.raleway(fontWeight: FontWeight.w600).fontFamily,
-              color: Colors.black,
+              color: aDarkGreyColor,
             ),
           ),
         ),

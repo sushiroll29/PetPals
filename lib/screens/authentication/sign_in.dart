@@ -79,17 +79,18 @@ class _SignInState extends State<SignIn> {
                 AutoSizeText(
                   'SIGN IN',
                   style: TextStyle(
+                    color: aDarkGreyColor,
                     fontFamily:
                         GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                             .fontFamily,
                     fontSize: 19,
                   ),
                 ),
-
-                Image.asset(
-                  "assets/images/login_doodle.png",
-                  height: size.width * 0.6,
-                ),
+                SizedBox(height: 50),
+                // Image.asset(
+                //   "assets/images/doodle_1.png",
+                //   height: size.width * 0.6,
+                // ),
 
                 Form(
                   key: formKey,
@@ -222,11 +223,11 @@ class _SignInState extends State<SignIn> {
   }
 
   Widget showForgotPassword() {
-    return FlatButton(
+    return TextButton(
         child: Text(
           "Forgot your password?",
           style: TextStyle(
-            color: aPrimaryColor,
+            color: aDarkGreyColor,
             fontFamily:
                 GoogleFonts.quicksand(fontWeight: FontWeight.bold).fontFamily,
           ),

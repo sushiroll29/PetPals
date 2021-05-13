@@ -5,8 +5,7 @@ import 'package:fl/screens/authentication/password_reset.dart';
 import 'package:fl/screens/authentication/sign_in.dart';
 import 'package:fl/screens/authentication/sign_up.dart';
 import 'package:fl/screens/menu_items/my_pets.dart';
-import 'package:fl/screens/menu_items/profile.dart';
-import 'package:fl/screens/welcome.dart';
+import 'package:fl/screens/onboarding/onboarding.dart';
 import 'package:fl/services/auth.dart';
 import 'package:fl/services/provider.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +35,6 @@ class MyApp extends StatelessWidget {
                 SignIn(//authFormType: AuthFormType.signIn
                     ),
             '/home': (BuildContext context) => HomeController(),
-            '/welcome': (BuildContext context) =>
-                Welcome(//authFormType: AuthFormType.signUp
-                    ),
             '/passwordReset': (BuildContext context) =>
                 PasswordReset(//authFormType: AuthFormType.signIn
                     ),
@@ -61,7 +57,7 @@ class HomeController extends StatelessWidget {
           //check if data is sending
           final bool signedIn = snapshot
               .hasData; //if not, it means that there's no user id => not signed in
-          return signedIn ? HomePage() : Welcome();
+          return signedIn ? HomePage() : Onboarding();
         }
         return Container();
       },

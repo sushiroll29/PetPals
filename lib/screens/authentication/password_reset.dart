@@ -74,16 +74,19 @@ class _PasswordResetState extends State<PasswordReset> {
               AutoSizeText(
                 'RESET YOUR PASSWORD',
                 style: TextStyle(
+                  color: aDarkGreyColor,
                   fontFamily: GoogleFonts.manjari(fontWeight: FontWeight.bold)
                       .fontFamily,
                   fontSize: 19,
                 ),
               ),
 
-              Image.asset(
-                "assets/images/login_doodle.png",
-                height: size.width * 0.6,
-              ),
+              SizedBox(height: 35),
+
+              // Image.asset(
+              //   "assets/images/doodle_1.png",
+              //   height: size.width * 0.6,
+              // ),
 
               Form(
                 key: formKey,
@@ -179,11 +182,11 @@ class _PasswordResetState extends State<PasswordReset> {
   }
 
   Widget returnToSignIn() {
-    return FlatButton(
+    return TextButton(
         child: Text(
           "Return to sign in",
           style: TextStyle(
-            color: aPrimaryColor,
+            color: aDarkGreyColor,
             fontFamily:
                 GoogleFonts.manjari(fontWeight: FontWeight.bold).fontFamily,
           ),

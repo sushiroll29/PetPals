@@ -22,7 +22,7 @@ class Background extends StatelessWidget {
               top: 0,
               right: 0,
               child: Image.asset(
-                "assets/images/top_bubble1.png",
+                "assets/images/top_bubble_1.png",
                 width: size.width * 0.35,
               ),
             ),
@@ -30,7 +30,7 @@ class Background extends StatelessWidget {
               bottom: -20,
               left: 0,
               child: Image.asset(
-                "assets/images/bottom_bubble2.png",
+                "assets/images/bottom_bubble_1.png",
                 width: size.width * 0.25,
               ),
             ),

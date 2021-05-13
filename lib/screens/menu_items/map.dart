@@ -36,7 +36,7 @@ class _MapPageState extends State<MapPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Find pets around you!',
+            'Find pets around you',
             style: TextStyle(
               fontSize: 19,
               fontWeight: FontWeight.bold,

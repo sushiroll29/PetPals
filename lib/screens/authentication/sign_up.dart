@@ -87,11 +87,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
 
-                Image.asset(
-                  "assets/images/signup_doodle.png",
-                  height: size.width * 0.6,
-                ),
-
+                SizedBox(height: 50),
                 Form(
                   key: formKey,
                   child: Column(
