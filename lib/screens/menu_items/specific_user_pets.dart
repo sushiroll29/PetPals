@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl/screens/menu_items/detailed_pet.dart';
 import 'package:fl/widgets/constants.dart';
-import 'package:fl/screens/menu_items/my_pets_detailed.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

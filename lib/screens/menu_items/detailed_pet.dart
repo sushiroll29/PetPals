@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/models/Pet.dart';
-import 'package:fl/screens/menu_items/home.dart';
 import 'package:fl/screens/menu_items/specific_user_pets.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/services/provider.dart';
