@@ -113,10 +113,16 @@ class _HomePageState extends State<HomePage> {
   int selectedPetIndex = -1;
   List<String> petTypes = ['Dogs', 'Cats', 'Parrots'];
 
-  List<IconData> petIcons = [
-    FontAwesomeIcons.dog,
-    FontAwesomeIcons.cat,
-    FontAwesomeIcons.feather,
+  // List<IconData> petIcons = [
+  //   FontAwesomeIcons.dog,
+  //   FontAwesomeIcons.cat,
+  //   FontAwesomeIcons.feather,
+  // ];
+
+  List<Widget> petIcon = [
+    Image.asset("assets/icons/dog_icon.png"),
+    Image.asset("assets/icons/cat_icon.png"),
+    Image.asset("assets/icons/parrot_icon.png"),
   ];
 
   getUsersPets() async {
@@ -143,11 +149,11 @@ class _HomePageState extends State<HomePage> {
         },
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50.0),
+            preferredSize: Size.fromHeight(60.0),
             child: AppBar(
               actions: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 23, right: 23, top: 15),
+                  padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -172,15 +178,18 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               // SizedBox(width: 10),
-                              // RawMaterialButton(
-                              //   onPressed: () {},
-                              //   elevation: 2.0,
-                              //   fillColor: Colors.white,
-                              //   //padding: EdgeInsets.all(15.0),
-                              //   shape: CircleBorder(),
-                              //   //backgroundColor: Colors.blue,
-                              //   child: ImageIcon(
-                              //       AssetImage("assets/images/bg.jpg")),
+                              // Container(
+                              //   height: 35,
+                              //   width: 35,
+                              //   decoration: BoxDecoration(
+                              //     image: DecorationImage(
+                              //         image: AssetImage(
+                              //           "assets/icons/user.png",
+                              //         ),
+                              //         fit: BoxFit.cover),
+                              //     shape: BoxShape.circle,
+                              //     color: Colors.white,
+                              //   ),
                               // ),
                             ],
                           ),
@@ -264,19 +273,21 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-
-                          Container(
-                            height: size.height * 0.12,
-                            child: ListView.builder(
-                              //padding: EdgeInsets.only(left: 30),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: petTypes.length,
-                              itemBuilder: (context, index) {
-                                return buildPetIconList(index);
-                              },
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Container(
+                              height: size.height * 0.12,
+                              child: ListView.builder(
+                                //padding: EdgeInsets.only(left: 30),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: petTypes.length,
+                                itemBuilder: (context, index) {
+                                  return buildPetIconList(index);
+                                },
+                              ),
                             ),
                           ),
-                          //*/
+                          SizedBox(height: 10),
                           Expanded(
                             child: isSearchUsed(),
                             // ListView.builder(
@@ -301,7 +312,7 @@ class _HomePageState extends State<HomePage> {
   Widget buildPetIconList(int index) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.only(right: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -324,14 +335,10 @@ class _HomePageState extends State<HomePage> {
               elevation: 2.0,
               borderRadius: BorderRadius.circular(20.0),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 11.0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: .0),
                 child: Center(
-                  child: Icon(
-                    petIcons[index],
-                    size: size.height * .035,
-                    color: selectedPetIndex == index
-                        ? Colors.white
-                        : Colors.grey.shade300,
+                  child: Tab(
+                    icon: petIcon[index],
                   ),
                 ),
               ),

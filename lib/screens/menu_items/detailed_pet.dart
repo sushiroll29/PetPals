@@ -239,6 +239,7 @@ class _DetailedPetState extends State<DetailedPet> {
                                       Text(
                                         '${widget.pet.usersName}',
                                         style: TextStyle(
+                                          decoration: TextDecoration.underline,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.grey.shade800,

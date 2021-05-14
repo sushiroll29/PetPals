@@ -852,15 +852,3 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
     return await doc.delete();
   }
 }
-
-class BottomSheetEdit extends StatefulWidget {
-  @override
-  _BottomSheetEditState createState() => _BottomSheetEditState();
-}
-
-class _BottomSheetEditState extends State<BottomSheetEdit> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}

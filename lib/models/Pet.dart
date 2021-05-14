@@ -107,10 +107,21 @@ class Pet {
             Icon(FontAwesomeIcons.cat, size: 25, color: Colors.grey.shade500),
       };
 
-  Map<String, Icon> bigTypes() => {
-        "dog": Icon(FontAwesomeIcons.dog, size: 60, color: aDarkGreyColor),
-        "cat": Icon(FontAwesomeIcons.cat, size: 60, color: aDarkGreyColor),
-        "parrot":
-            Icon(FontAwesomeIcons.feather, size: 60, color: aDarkGreyColor)
+  Map<String, Widget> bigTypes() => {
+        "dog": Image.asset(
+          "assets/icons/dog_icon.png",
+          height: 50,
+          width: 50,
+        ),
+        "cat": Image.asset(
+          "assets/icons/cat_icon.png",
+          height: 50,
+          width: 50,
+        ),
+        "parrot": Image.asset(
+          "assets/icons/parrot_icon.png",
+          height: 50,
+          width: 50,
+        ),
       };
 }
