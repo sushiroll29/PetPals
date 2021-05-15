@@ -67,7 +67,7 @@ class _PetImagePageState extends State<PetImagePage> {
                           children: <Widget>[
                             Expanded(
                               child: Text(
-                                "Please select an image of your pet.",
+                                "Select an image of your pet.",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 17.5,
@@ -88,11 +88,46 @@ class _PetImagePageState extends State<PetImagePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RoundedButton(
-                                text: 'UPLOAD AN IMAGE',
+                                text: 'OPEN CAMERA',
                                 press: () async {
-                                  await uploadImage();
-                                  print("uploaded");
-                                  showAlertDialog(context);
+                                  await uploadCameraImage();
+                                  if (_imageUrl != null) {
+                                    print("uploaded");
+                                    showSuccessAlertDialog(context);
+                                  } else
+                                    showFailAlertDialog(context);
+                                }),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "or",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.normal)
+                                    .fontFamily,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedButton(
+                                text: 'CHOOSE FROM GALLERY',
+                                press: () async {
+                                  await uploadGalleryImage();
+                                  if (_imageUrl != null) {
+                                    print("uploaded");
+                                    showSuccessAlertDialog(context);
+                                  } else
+                                    showFailAlertDialog(context);
                                 }),
                           ],
                         ),
@@ -108,15 +143,15 @@ class _PetImagePageState extends State<PetImagePage> {
     );
   }
 
-  uploadImage() async {
+  uploadGalleryImage() async {
     final _picker = ImagePicker();
     PickedFile image;
     //check for permissions
     await Permission.photos.request();
+    var permissionPhotoStatus = await Permission.photos.status;
 
-    var permissionStatus = await Permission.photos.status;
-
-    if (permissionStatus.isGranted) {
+    if (permissionPhotoStatus.isGranted) {
+      //if (permissionCameraStatus.isGranted) {
       //select image
       image = await _picker.getImage(source: ImageSource.gallery);
 
@@ -134,7 +169,34 @@ class _PetImagePageState extends State<PetImagePage> {
     }
   }
 
-  showAlertDialog(BuildContext context) {
+  uploadCameraImage() async {
+    final _picker = ImagePicker();
+    PickedFile image;
+    //check for permissions
+    await Permission.camera.request();
+
+    var permissionCameraStatus = await Permission.camera.status;
+
+    if (permissionCameraStatus.isGranted) {
+      //if (permissionCameraStatus.isGranted) {
+      //select image
+      image = await _picker.getImage(source: ImageSource.camera);
+
+      //upload to firebase storage
+      if (image != null) {
+        var imageUrl =
+            await storageService.uploadPetImage(File(image.path), uuid.v4());
+
+        _imageUrl = imageUrl;
+      } else {
+        print('no path received');
+      }
+    } else {
+      print('grant permissions and try again');
+    }
+  }
+
+  showSuccessAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = RoundedButton(
       text: 'CONTINUE',
@@ -148,12 +210,62 @@ class _PetImagePageState extends State<PetImagePage> {
       },
     );
 
+    Widget goBackButton = RoundedButton(
+      text: 'CHOOSE ANOTHER IMAGE',
+      press: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30.0))),
+      content: Image.network(
+        '$_imageUrl',
+        width: 150,
+        height: 150,
+        fit: BoxFit.contain,
+      ),
+      //SizedBox(height: 5),
+      // Text(
+      //   "Your image has been uploaded.",
+      //   textAlign: TextAlign.center,
+      //   style: TextStyle(
+      //     color: Colors.grey.shade700,
+      //     fontFamily:
+      //         GoogleFonts.quicksand(fontWeight: FontWeight.w600).fontFamily,
+      //     fontSize: 16,
+      //   ),
+      // ),
+
+      actions: [okButton, goBackButton],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showFailAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = RoundedButton(
+      text: 'OK',
+      press: () {
+        Navigator.of(context).pop();
+      },
+    );
+
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30.0))),
       content: Text(
-        "Your image has been uploaded.",
+        "Please choose an image.",
         textAlign: TextAlign.center,
         style: TextStyle(
           color: Colors.grey.shade700,

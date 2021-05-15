@@ -6,6 +6,7 @@ import 'package:fl/screens/menu_items/detailed_pet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fl/models/Pet.dart';
 import 'package:intl/intl.dart';
@@ -21,6 +22,9 @@ class _HomePageState extends State<HomePage> {
 
   FirebaseUser user;
   String loggedUserName;
+  List<Address> results = [];
+  bool isLoading = false;
+
   Future<void> getUserData() async {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
     setState(() {
@@ -35,6 +39,11 @@ class _HomePageState extends State<HomePage> {
   List _dogResults = [];
   List _catResults = [];
   List _parrotResults = [];
+  List _guineaResults = [];
+  List _hamsterResults = [];
+  List _rabbitResults = [];
+  List _fishResults = [];
+  List _snakeResults = [];
 
   @override
   void initState() {
@@ -90,7 +99,12 @@ class _HomePageState extends State<HomePage> {
   petResultList() {
     var showDogResults = [];
     var showCatResults = [];
-    var showParrotRestults = [];
+    var showParrotResults = [];
+    var showGuineaResults = [];
+    var showHamsterResults = [];
+    var showRabbitResults = [];
+    var showFishResults = [];
+    var showSnakeResults = [];
 
     for (var petSnapshot in _allResults) {
       var type = Pet.fromSnapshot(petSnapshot).type.toLowerCase();
@@ -99,19 +113,43 @@ class _HomePageState extends State<HomePage> {
       } else if (type == "cat") {
         showCatResults.add(petSnapshot);
       } else if (type == "parrot") {
-        showParrotRestults.add(petSnapshot);
+        showParrotResults.add(petSnapshot);
+      } else if (type == "guinea") {
+        showGuineaResults.add(petSnapshot);
+      } else if (type == "hamster") {
+        showHamsterResults.add(petSnapshot);
+      } else if (type == "rabbit") {
+        showRabbitResults.add(petSnapshot);
+      } else if (type == "fish") {
+        showFishResults.add(petSnapshot);
+      } else if (type == "snake") {
+        showSnakeResults.add(petSnapshot);
       }
 
       setState(() {
         _dogResults = showDogResults;
         _catResults = showCatResults;
-        _parrotResults = showParrotRestults;
+        _parrotResults = showParrotResults;
+        _guineaResults = showGuineaResults;
+        _hamsterResults = showHamsterResults;
+        _rabbitResults = showRabbitResults;
+        _fishResults = showFishResults;
+        _snakeResults = showSnakeResults;
       });
     }
   }
 
   int selectedPetIndex = -1;
-  List<String> petTypes = ['Dogs', 'Cats', 'Parrots'];
+  List<String> petTypes = [
+    'Dogs',
+    'Cats',
+    'Parrots',
+    'Guinea pigs',
+    'Hamsters',
+    'Rabbits',
+    'Fish',
+    'Snakes'
+  ];
 
   // List<IconData> petIcons = [
   //   FontAwesomeIcons.dog,
@@ -123,6 +161,11 @@ class _HomePageState extends State<HomePage> {
     Image.asset("assets/icons/dog_icon.png"),
     Image.asset("assets/icons/cat_icon.png"),
     Image.asset("assets/icons/parrot_icon.png"),
+    Image.asset("assets/icons/guinea_icon.png"),
+    Image.asset("assets/icons/hamster_icon.png"),
+    Image.asset("assets/icons/rabbit_icon.png"),
+    Image.asset("assets/icons/fish_icon.png"),
+    Image.asset("assets/icons/snake_icon.png"),
   ];
 
   getUsersPets() async {
@@ -136,6 +179,29 @@ class _HomePageState extends State<HomePage> {
     searchResultsList();
     petResultList();
     return "complete";
+  }
+
+  Future getAddressFromCoords(_lat, _long) async {
+    this.setState(() {
+      this.isLoading = true;
+    });
+
+    try {
+      //var longitude, latitude;
+      var results = await Geocoder.local
+          .findAddressesFromCoordinates(new Coordinates(_lat, _long));
+      this.setState(() {
+        this.results = results;
+      });
+    } catch (e) {
+      print("Error occured: $e");
+    } finally {
+      this.setState(() {
+        this.isLoading = false;
+        // petAddress =
+        //     "${results[0].thoroughfare}, ${results[0].locality}, ${results[0].countryName}";
+      });
+    }
   }
 
   @override
@@ -167,30 +233,30 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(0),
                           child: Row(
                             children: [
-                              Text(
-                                "$loggedUserName",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey.shade700,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.w600)
-                                      .fontFamily,
-                                ),
-                              ),
-                              // SizedBox(width: 10),
-                              // Container(
-                              //   height: 35,
-                              //   width: 35,
-                              //   decoration: BoxDecoration(
-                              //     image: DecorationImage(
-                              //         image: AssetImage(
-                              //           "assets/icons/user.png",
-                              //         ),
-                              //         fit: BoxFit.cover),
-                              //     shape: BoxShape.circle,
-                              //     color: Colors.white,
+                              // Text(
+                              //   "$loggedUserName",
+                              //   style: TextStyle(
+                              //     fontSize: 20,
+                              //     color: Colors.grey.shade700,
+                              //     fontFamily: GoogleFonts.quicksand(
+                              //             fontWeight: FontWeight.w600)
+                              //         .fontFamily,
                               //   ),
                               // ),
+                              // SizedBox(width: 10),
+                              Container(
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                        "assets/icons/user.png",
+                                      ),
+                                      fit: BoxFit.cover),
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -215,7 +281,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 10.0),
             child: Column(
               children: <Widget>[
                 Expanded(
@@ -259,7 +325,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       border: OutlineInputBorder(
                                           borderSide: BorderSide.none),
-                                      hintText: 'Search for a pet to adopt',
+                                      hintText: 'Search for a pet',
                                     ),
                                     style: TextStyle(
                                       color: Colors.grey.shade700,
@@ -322,9 +388,7 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   selectedPetIndex = index;
                 });
-              else if (selectedPetIndex == 0 ||
-                  selectedPetIndex == 1 ||
-                  selectedPetIndex == 2) {
+              else if (selectedPetIndex != -1) {
                 setState(() {
                   selectedPetIndex = -1;
                 });
@@ -368,6 +432,11 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildPetsList(BuildContext context, DocumentSnapshot document) {
     final pet = Pet.fromSnapshot(document);
+    final coordinates =
+        Coordinates(pet.location.latitude, pet.location.longitude);
+
+    //getAddressFromCoords(pet.location.latitude, pet.location.longitude);
+    //print(coordinates);
     //final petType = pet.types();
     Size size = MediaQuery.of(context).size;
     if (pet.userId == user.uid) {
@@ -436,7 +505,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'Found on ${DateFormat('dd MMMM yyyy').format(pet.foundOn).toString()}',
+                              "${pet.location.latitude}, ${pet.location.longitude}",
+                              //'Found on ${DateFormat('dd MMMM yyyy').format(pet.foundOn).toString()}',
                               style: TextStyle(
                                 color: Colors.grey.shade600,
                                 fontFamily: GoogleFonts.quicksand(
@@ -498,6 +568,36 @@ class _HomePageState extends State<HomePage> {
         itemCount: _parrotResults.length,
         itemBuilder: (BuildContext context, int index) =>
             buildPetsList(context, _parrotResults[index]),
+      );
+    else if (selectedPetIndex == 3)
+      return ListView.builder(
+        itemCount: _guineaResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _guineaResults[index]),
+      );
+    else if (selectedPetIndex == 4)
+      return ListView.builder(
+        itemCount: _hamsterResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _hamsterResults[index]),
+      );
+    else if (selectedPetIndex == 5)
+      return ListView.builder(
+        itemCount: _rabbitResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _rabbitResults[index]),
+      );
+    else if (selectedPetIndex == 6)
+      return ListView.builder(
+        itemCount: _fishResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _fishResults[index]),
+      );
+    else if (selectedPetIndex == 7)
+      return ListView.builder(
+        itemCount: _snakeResults.length,
+        itemBuilder: (BuildContext context, int index) =>
+            buildPetsList(context, _snakeResults[index]),
       );
     else
       return ListView.builder(

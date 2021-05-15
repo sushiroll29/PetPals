@@ -6,6 +6,7 @@ import 'package:fl/widgets/constants.dart';
 import 'package:fl/services/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,9 +21,45 @@ class DetailedPet extends StatefulWidget {
 }
 
 class _DetailedPetState extends State<DetailedPet> {
+  Pet pet;
   Future<void> _launched;
   final db = Firestore.instance;
   bool isPressed = false;
+  var _long, _lat;
+  List<Address> results = [];
+  bool isLoading = false;
+  String petAddress;
+
+  @override
+  initState() {
+    super.initState();
+    _long = widget.pet.location.longitude;
+    _lat = widget.pet.location.latitude;
+    getAddressFromCoords(_lat, _long);
+  }
+
+  Future getAddressFromCoords(_lat, _long) async {
+    this.setState(() {
+      this.isLoading = true;
+    });
+
+    try {
+      //var longitude, latitude;
+      var results = await Geocoder.local
+          .findAddressesFromCoordinates(new Coordinates(_lat, _long));
+      this.setState(() {
+        this.results = results;
+      });
+    } catch (e) {
+      print("Error occured: $e");
+    } finally {
+      this.setState(() {
+        this.isLoading = false;
+        petAddress =
+            "${results[0].thoroughfare}, ${results[0].locality}, ${results[0].countryName}";
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -453,15 +490,35 @@ class _DetailedPetState extends State<DetailedPet> {
                         ],
                       ),
                       SizedBox(height: 15),
-                      Text(
-                        'Found on ${DateFormat('dd MMMM yyyy').format(widget.pet.foundOn).toString()}',
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontFamily:
-                              GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                                  .fontFamily,
+                      Row(children: [
+                        Icon(
+                          FontAwesomeIcons.mapMarkerAlt,
+                          color: Colors.grey.shade400,
+                          size: 15,
                         ),
-                      ),
+                        SizedBox(width: 5),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: GestureDetector(
+                              onTap: () {
+                                _launchMapsUrl(widget.pet.location.latitude,
+                                    widget.pet.location.longitude);
+                              },
+                              child: Text(
+                                //'Found on ${DateFormat('dd MMMM yyyy').format(widget.pet.foundOn).toString()}',
+                                "$petAddress",
+                                style: TextStyle(
+                                  color: Colors.grey.shade600,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w600)
+                                      .fontFamily,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ])
                     ],
                   ),
                 ),
@@ -506,5 +563,14 @@ class _DetailedPetState extends State<DetailedPet> {
         ),
       ),
     );
+  }
+
+  void _launchMapsUrl(double lat, double lon) async {
+    final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

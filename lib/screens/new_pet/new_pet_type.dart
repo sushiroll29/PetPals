@@ -42,9 +42,9 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 22.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: size.height * 0.25),
+              SizedBox(height: size.height * 0.2),
               AutoSizeText(
                 "Please choose the pet type",
                 maxLines: 1,
@@ -56,10 +56,10 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
                   fontSize: 20,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Expanded(
                   child: GridView.count(
-                crossAxisCount: 3,
+                crossAxisCount: 4,
                 scrollDirection: Axis.vertical,
                 primary: false,
                 children: List.generate(petTypes.length, (index) {

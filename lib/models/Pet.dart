@@ -123,5 +123,30 @@ class Pet {
           height: 50,
           width: 50,
         ),
+        "guinea pig": Image.asset(
+          "assets/icons/guinea_icon.png",
+          height: 50,
+          width: 50,
+        ),
+        "hamster": Image.asset(
+          "assets/icons/hamster_icon.png",
+          height: 50,
+          width: 50,
+        ),
+        "rabbit": Image.asset(
+          "assets/icons/rabbit_icon.png",
+          height: 50,
+          width: 50,
+        ),
+        "fish": Image.asset(
+          "assets/icons/fish_icon.png",
+          height: 50,
+          width: 50,
+        ),
+        "snake": Image.asset(
+          "assets/icons/snake_icon.png",
+          height: 50,
+          width: 50,
+        ),
       };
 }

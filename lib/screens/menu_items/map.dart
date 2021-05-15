@@ -89,10 +89,35 @@ class _MapPageState extends State<MapPage> {
           if (data.documents[i]['userId'] != "${user.uid}") {
             if (data.documents[i]['type'] == "dog") {
               initMarker(
-                  data.documents[i].data, data.documents[i].documentID, 180.0);
-            } else {
+                  data.documents[i].data, data.documents[i].documentID, 0.0);
+            }
+            if (data.documents[i]['type'] == "cat") {
               initMarker(
-                  data.documents[i].data, data.documents[i].documentID, 340.0);
+                  data.documents[i].data, data.documents[i].documentID, 17.0);
+            }
+            if (data.documents[i]['type'] == "parrot") {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 69.0);
+            }
+            if (data.documents[i]['type'] == "guinea pig") {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 117.0);
+            }
+            if (data.documents[i]['type'] == "hamster") {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 182.0);
+            }
+            if (data.documents[i]['type'] == "rabbit") {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 238.0);
+            }
+            if (data.documents[i]['type'] == "fish") {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 280.0);
+            }
+            if (data.documents[i]['type'] == "snake") {
+              initMarker(
+                  data.documents[i].data, data.documents[i].documentID, 332.0);
             }
           }
         }
