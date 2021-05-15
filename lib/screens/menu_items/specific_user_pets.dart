@@ -58,7 +58,10 @@ class _SpecificUserPetsPageState extends State<SpecificUserPetsPage> {
             brightness: Brightness.light,
             leading: IconButton(
               color: Colors.grey.shade400,
-              icon: Icon(FontAwesomeIcons.arrowLeft),
+              icon: Icon(
+                FontAwesomeIcons.arrowLeft,
+                size: 20,
+              ),
               onPressed: () {
                 //popmaybe?????
                 Navigator.pop(context);
@@ -74,14 +77,14 @@ class _SpecificUserPetsPageState extends State<SpecificUserPetsPage> {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: Colors.grey.withOpacity(0.03),
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(30),
                       topRight: const Radius.circular(30),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 3.0),
+                    padding: const EdgeInsets.only(top: 0),
                     child: Column(
                       children: <Widget>[
                         Expanded(

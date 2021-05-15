@@ -6,10 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddNewPetPage extends StatefulWidget {
-  final Function onMenuTap;
-
-  AddNewPetPage({this.onMenuTap});
-
   @override
   _AddNewPetPageState createState() => _AddNewPetPageState();
 }
@@ -52,7 +48,7 @@ class _AddNewPetPageState extends State<AddNewPetPage> {
             brightness: Brightness.light,
             leading: IconButton(
               color: Colors.grey.shade400,
-              icon: Icon(FontAwesomeIcons.bars),
+              icon: Icon(FontAwesomeIcons.bars, size: 20),
               onPressed: () {
                 Navigator.pop(context);
               },

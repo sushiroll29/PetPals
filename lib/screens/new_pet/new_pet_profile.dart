@@ -71,8 +71,11 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(FontAwesomeIcons.arrowLeft,
-                                color: Colors.grey.shade400)),
+                            child: Icon(
+                              FontAwesomeIcons.arrowLeft,
+                              color: Colors.grey.shade400,
+                              size: 20,
+                            )),
                       ],
                     ),
                   ),

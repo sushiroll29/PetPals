@@ -58,7 +58,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
             brightness: Brightness.light,
             leading: IconButton(
               color: Colors.grey.shade400,
-              icon: Icon(FontAwesomeIcons.bars),
+              icon: Icon(FontAwesomeIcons.bars, size: 20),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -68,7 +68,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         body: Padding(
           padding: const EdgeInsets
               //symmetric(vertical: 50.0),
-              .only(top: 20.0),
+              .only(top: 15.0),
           child: Column(
             children: <Widget>[
               /*
@@ -99,16 +99,15 @@ class _FavoritesPageState extends State<FavoritesPage> {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: Colors.grey.withOpacity(0.03),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 3.0),
+                    padding: const EdgeInsets.only(top: 0),
                     child: Column(
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 18.0, vertical: 15.0),
+                          padding: const EdgeInsets.only(top: 0),
                           child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.white,

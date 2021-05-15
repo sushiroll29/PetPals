@@ -72,7 +72,10 @@ class _NewPetPhonePageState extends State<NewPetPhonePage> {
               brightness: Brightness.light,
               leading: IconButton(
                 color: Colors.grey.shade400,
-                icon: Icon(FontAwesomeIcons.arrowLeft),
+                icon: Icon(
+                  FontAwesomeIcons.arrowLeft,
+                  size: 20,
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },

@@ -21,8 +21,6 @@ class _MyPetsPageState extends State<MyPetsPage> {
     //final _uid = await Provider.of(context).auth.getCurrentUID();
     yield* Firestore.instance
         .collection("petsStream")
-        //.document()
-        //.collection("pets")
         .orderBy('postDate', descending: true)
         .snapshots();
   }
@@ -64,7 +62,7 @@ class _MyPetsPageState extends State<MyPetsPage> {
             brightness: Brightness.light,
             leading: IconButton(
               color: Colors.grey.shade400,
-              icon: Icon(FontAwesomeIcons.bars),
+              icon: Icon(FontAwesomeIcons.bars, size: 20),
               onPressed: () {
                 //popmaybe?????
                 Navigator.pop(context);
@@ -74,20 +72,20 @@ class _MyPetsPageState extends State<MyPetsPage> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.only(top: 15.0),
           child: Column(
             children: <Widget>[
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: Colors.grey.withOpacity(0.03),
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(30),
                       topRight: const Radius.circular(30),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 3.0),
+                    padding: const EdgeInsets.only(top: 0),
                     child: Column(
                       children: <Widget>[
                         Expanded(
@@ -149,7 +147,7 @@ class _MyPetsPageState extends State<MyPetsPage> {
           children: <Widget>[
             Material(
               borderRadius: BorderRadius.circular(20.0),
-              elevation: 2.0,
+              elevation: 3.5,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 17.0, vertical: 20.0),
@@ -229,7 +227,7 @@ class _MyPetsPageState extends State<MyPetsPage> {
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                    color: aPrimaryLightColor,
+                    color: aLightGreyColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   height: 190,

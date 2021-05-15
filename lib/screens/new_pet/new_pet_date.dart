@@ -70,7 +70,10 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
             brightness: Brightness.light,
             leading: IconButton(
               color: Colors.grey.shade400,
-              icon: Icon(FontAwesomeIcons.bars),
+              icon: Icon(
+                FontAwesomeIcons.bars,
+                size: 20,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               },

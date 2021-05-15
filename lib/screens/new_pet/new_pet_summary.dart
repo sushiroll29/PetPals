@@ -49,8 +49,11 @@ class _NewPetSummaryPageState extends State<NewPetSummaryPage> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(FontAwesomeIcons.arrowLeft,
-                          color: Colors.grey.shade400)),
+                      child: Icon(
+                        FontAwesomeIcons.arrowLeft,
+                        color: Colors.grey.shade400,
+                        size: 20,
+                      )),
                 ],
               ),
               Container(

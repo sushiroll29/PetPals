@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                               // ),
                               // SizedBox(width: 10),
                               Container(
-                                height: 35,
+                                height: 25,
                                 width: 35,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -249,7 +249,7 @@ class _HomePageState extends State<HomePage> {
               brightness: Brightness.light,
               leading: IconButton(
                 color: Colors.grey.shade400,
-                icon: Icon(FontAwesomeIcons.bars),
+                icon: Icon(FontAwesomeIcons.bars, size: 20),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -260,29 +260,30 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.only(top: 0),
             child: Column(
               children: <Widget>[
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
+                      color: Colors.grey.withOpacity(0.03),
                       borderRadius: BorderRadius.only(
                         topLeft: const Radius.circular(30),
                         topRight: const Radius.circular(30),
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 3.0),
+                      padding: const EdgeInsets.only(top: 0),
                       child: Column(
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 18.0, vertical: 15.0),
+                            padding: EdgeInsets.only(
+                                left: 10.0, right: 10, top: 2, bottom: 10),
                             child: Container(
+                              height: 55,
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20.0)),
+                                  color: Colors.grey.shade100,
+                                  borderRadius: BorderRadius.circular(30.0)),
                               padding: EdgeInsets.symmetric(horizontal: 14.0),
                               child: Row(
                                 children: <Widget>[
@@ -319,7 +320,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
+                            padding: const EdgeInsets.only(left: 5.0),
                             child: Container(
                               height: size.height * 0.12,
                               child: ListView.builder(
@@ -374,11 +375,12 @@ class _HomePageState extends State<HomePage> {
               }
             },
             child: Material(
-              color: selectedPetIndex == index ? aPrimaryColor : Colors.white,
+              color:
+                  selectedPetIndex == index ? aPrimaryLightColor : Colors.white,
               elevation: 2.0,
               borderRadius: BorderRadius.circular(20.0),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: .0),
+                padding: EdgeInsets.symmetric(horizontal: 7.0, vertical: 0),
                 child: Center(
                   child: Tab(
                     icon: petIcon[index],
@@ -394,7 +396,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 petTypes[index],
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 11,
                   fontWeight: FontWeight.w600,
                   color: Colors.grey.shade400,
                   fontFamily:
@@ -439,7 +441,7 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Material(
                 borderRadius: BorderRadius.circular(20.0),
-                elevation: 2.0,
+                elevation: 3.5,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 17.0, vertical: 20.0),
@@ -519,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      color: aPrimaryLightColor,
+                      color: aLightGreyColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     height: 190,
