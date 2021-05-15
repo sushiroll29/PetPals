@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl/models/User.dart';
 import 'package:fl/components/announcement_container.dart';
@@ -166,7 +167,6 @@ class _NewPetPhonePageState extends State<NewPetPhonePage> {
                                           .collection('userData')
                                           .document(uid)
                                           .setData(_user.toJson());
-                                      //print(user.phoneNumber);
 
                                       Navigator.push(
                                           context,

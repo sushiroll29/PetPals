@@ -25,41 +25,6 @@ class _DetailedPetState extends State<DetailedPet> {
   Future<void> _launched;
   final db = Firestore.instance;
   bool isPressed = false;
-  var _long, _lat;
-  List<Address> results = [];
-  bool isLoading = false;
-  String petAddress;
-
-  @override
-  initState() {
-    super.initState();
-    _long = widget.pet.location.longitude;
-    _lat = widget.pet.location.latitude;
-    getAddressFromCoords(_lat, _long);
-  }
-
-  Future getAddressFromCoords(_lat, _long) async {
-    this.setState(() {
-      this.isLoading = true;
-    });
-
-    try {
-      //var longitude, latitude;
-      var results = await Geocoder.local
-          .findAddressesFromCoordinates(new Coordinates(_lat, _long));
-      this.setState(() {
-        this.results = results;
-      });
-    } catch (e) {
-      print("Error occured: $e");
-    } finally {
-      this.setState(() {
-        this.isLoading = false;
-        petAddress =
-            "${results[0].thoroughfare}, ${results[0].locality}, ${results[0].countryName}";
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -506,8 +471,7 @@ class _DetailedPetState extends State<DetailedPet> {
                                     widget.pet.location.longitude);
                               },
                               child: Text(
-                                //'Found on ${DateFormat('dd MMMM yyyy').format(widget.pet.foundOn).toString()}',
-                                "$petAddress",
+                                "${widget.pet.street}, ${widget.pet.city}, ${widget.pet.country}",
                                 style: TextStyle(
                                   color: Colors.grey.shade600,
                                   fontFamily: GoogleFonts.quicksand(

@@ -232,14 +232,30 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Text(
-                            'Found on ${DateFormat('dd/MM/yyyy').format(pet.foundOn).toString()}',
-                            style: TextStyle(
-                              color: Colors.grey.shade600,
-                              fontFamily: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.w600)
-                                  .fontFamily,
-                            ),
+                          Row(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.mapMarkerAlt,
+                                color: Colors.grey.shade400,
+                                size: 15,
+                              ),
+                              SizedBox(width: 5),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Text(
+                                    '${pet.city}, ${pet.country}',
+                                    //"${widget.pet.address}",
+                                    style: TextStyle(
+                                      color: Colors.grey.shade600,
+                                      fontFamily: GoogleFonts.quicksand(
+                                              fontWeight: FontWeight.w600)
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

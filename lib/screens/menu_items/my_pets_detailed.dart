@@ -374,15 +374,28 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                         ],
                       ),
                       SizedBox(height: 15),
-                      Text(
-                        'Found on ${DateFormat('dd/MM/yyyy').format(widget.pet.foundOn).toString()}',
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontFamily:
-                              GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                                  .fontFamily,
+                      Row(children: [
+                        Icon(
+                          FontAwesomeIcons.mapMarkerAlt,
+                          color: Colors.grey.shade400,
+                          size: 15,
                         ),
-                      ),
+                        SizedBox(width: 5),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Text(
+                              "${widget.pet.street}, ${widget.pet.city}, ${widget.pet.country}",
+                              style: TextStyle(
+                                color: Colors.grey.shade600,
+                                fontFamily: GoogleFonts.quicksand(
+                                        fontWeight: FontWeight.w600)
+                                    .fontFamily,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ])
                     ],
                   ),
                 ),

@@ -22,8 +22,6 @@ class _HomePageState extends State<HomePage> {
 
   FirebaseUser user;
   String loggedUserName;
-  List<Address> results = [];
-  bool isLoading = false;
 
   Future<void> getUserData() async {
     FirebaseUser userData = await FirebaseAuth.instance.currentUser();
@@ -78,10 +76,14 @@ class _HomePageState extends State<HomePage> {
         var name = Pet.fromSnapshot(petSnapshot).name.toLowerCase();
         var type = Pet.fromSnapshot(petSnapshot).type.toLowerCase();
         var gender = Pet.fromSnapshot(petSnapshot).gender.toLowerCase();
+        var country = Pet.fromSnapshot(petSnapshot).country.toLowerCase();
+        var city = Pet.fromSnapshot(petSnapshot).city.toLowerCase();
         //search by name/pet type/gender
         if (type.contains(_searchController.text.toLowerCase()) ||
                 name.contains(_searchController.text.toLowerCase()) ||
-                gender == _searchController.text.toLowerCase()
+                gender == _searchController.text.toLowerCase() ||
+                country.contains(_searchController.text.toLowerCase()) ||
+                city.contains(_searchController.text.toLowerCase())
             //gender.contains(_searchController.text.toLowerCase())
             ) {
           showResults.add(petSnapshot);
@@ -179,29 +181,6 @@ class _HomePageState extends State<HomePage> {
     searchResultsList();
     petResultList();
     return "complete";
-  }
-
-  Future getAddressFromCoords(_lat, _long) async {
-    this.setState(() {
-      this.isLoading = true;
-    });
-
-    try {
-      //var longitude, latitude;
-      var results = await Geocoder.local
-          .findAddressesFromCoordinates(new Coordinates(_lat, _long));
-      this.setState(() {
-        this.results = results;
-      });
-    } catch (e) {
-      print("Error occured: $e");
-    } finally {
-      this.setState(() {
-        this.isLoading = false;
-        // petAddress =
-        //     "${results[0].thoroughfare}, ${results[0].locality}, ${results[0].countryName}";
-      });
-    }
   }
 
   @override
@@ -504,15 +483,30 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(height: 10),
-                            Text(
-                              "${pet.location.latitude}, ${pet.location.longitude}",
-                              //'Found on ${DateFormat('dd MMMM yyyy').format(pet.foundOn).toString()}',
-                              style: TextStyle(
-                                color: Colors.grey.shade600,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w600)
-                                    .fontFamily,
-                              ),
+                            Row(
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.mapMarkerAlt,
+                                  color: Colors.grey.shade400,
+                                  size: 15,
+                                ),
+                                SizedBox(width: 5),
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                      '${pet.city}, ${pet.country}',
+                                      //"${widget.pet.address}",
+                                      style: TextStyle(
+                                        color: Colors.grey.shade600,
+                                        fontFamily: GoogleFonts.quicksand(
+                                                fontWeight: FontWeight.w600)
+                                            .fontFamily,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

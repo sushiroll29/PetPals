@@ -46,7 +46,7 @@ class _NewPetTypePageState extends State<NewPetTypePage> {
             children: <Widget>[
               SizedBox(height: size.height * 0.2),
               AutoSizeText(
-                "Please choose the pet type",
+                "Choose the pet category",
                 maxLines: 1,
                 textAlign: TextAlign.center,
                 style: TextStyle(
