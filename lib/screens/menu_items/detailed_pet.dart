@@ -299,6 +299,35 @@ class _DetailedPetState extends State<DetailedPet> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
+                      Expanded(
+                        child: Material(
+                          borderRadius: BorderRadius.circular(25),
+                          elevation: 4,
+                          color: aPrimaryColor,
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: TextButton(
+                              child: Text(
+                                'Adopt me',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w700)
+                                      .fontFamily,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _launched = _makePhoneCall(
+                                      'tel:${widget.pet.userPhoneNumber}');
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
                       Material(
                         borderRadius: BorderRadius.circular(25),
                         elevation: 4,
@@ -351,35 +380,6 @@ class _DetailedPetState extends State<DetailedPet> {
                                 });
                               }
                             },
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Expanded(
-                        child: Material(
-                          borderRadius: BorderRadius.circular(25),
-                          elevation: 4,
-                          color: aPrimaryColor,
-                          child: Padding(
-                            padding: EdgeInsets.all(8),
-                            child: TextButton(
-                              child: Text(
-                                'Adopt me',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontFamily: GoogleFonts.quicksand(
-                                          fontWeight: FontWeight.w700)
-                                      .fontFamily,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _launched = _makePhoneCall(
-                                      'tel:${widget.pet.userPhoneNumber}');
-                                });
-                              },
-                            ),
                           ),
                         ),
                       ),

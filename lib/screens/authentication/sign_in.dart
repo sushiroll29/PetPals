@@ -79,7 +79,7 @@ class _SignInState extends State<SignIn> {
                 AutoSizeText(
                   'SIGN IN',
                   style: TextStyle(
-                    color: aDarkGreyColor,
+                    color: aDarkGreyColor.withOpacity(0.8),
                     fontFamily:
                         GoogleFonts.quicksand(fontWeight: FontWeight.w600)
                             .fontFamily,
@@ -227,7 +227,7 @@ class _SignInState extends State<SignIn> {
         child: Text(
           "Forgot your password?",
           style: TextStyle(
-            color: aDarkGreyColor,
+            color: aDarkGreyColor.withOpacity(0.8),
             fontFamily:
                 GoogleFonts.quicksand(fontWeight: FontWeight.bold).fontFamily,
           ),

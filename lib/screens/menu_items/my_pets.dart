@@ -146,7 +146,7 @@ class _MyPetsPageState extends State<MyPetsPage> {
           alignment: Alignment.centerLeft,
           children: <Widget>[
             Material(
-              borderRadius: BorderRadius.circular(20.0),
+              borderRadius: BorderRadius.circular(40.0),
               elevation: 3.5,
               child: Padding(
                 padding: const EdgeInsets.symmetric(

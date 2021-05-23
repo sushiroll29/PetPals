@@ -80,11 +80,11 @@ class _SignUpState extends State<SignUp> {
                 AutoSizeText(
                   'SIGN UP',
                   style: TextStyle(
-                    fontFamily:
-                        GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                            .fontFamily,
-                    fontSize: 19,
-                  ),
+                      fontFamily:
+                          GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                              .fontFamily,
+                      fontSize: 19,
+                      color: aDarkGreyColor.withOpacity(0.8)),
                 ),
 
                 SizedBox(height: 50),

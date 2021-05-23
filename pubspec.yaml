@@ -53,6 +53,7 @@ dependencies:
   uuid: ^2.2.2
   photo_view: ^0.10.3
   geopoint: ^0.8.0
+  dart_lol: ^0.0.9
 
 dev_dependencies:
   flutter_test:

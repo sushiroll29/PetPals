@@ -5,6 +5,7 @@ import 'package:fl/screens/menu.dart';
 import 'package:fl/screens/menu_items/detailed_pet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -196,9 +197,19 @@ class _HomePageState extends State<HomePage> {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(60.0),
             child: AppBar(
+              title: Text(
+                "PetPals",
+                style: TextStyle(
+                  fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                      .fontFamily,
+                  color: aDarkGreyColor,
+                  fontSize: 19,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 23, right: 23, top: 20),
+                  padding: const EdgeInsets.only(left: 23, right: 12, top: 20),
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -211,6 +222,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.all(0),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               // Text(
                               //   "$loggedUserName",
@@ -223,19 +235,30 @@ class _HomePageState extends State<HomePage> {
                               //   ),
                               // ),
                               // SizedBox(width: 10),
-                              Container(
-                                height: 25,
-                                width: 35,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                        "assets/icons/user.png",
-                                      ),
-                                      fit: BoxFit.cover),
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
+                              // Container(
+                              //   height: 25,
+                              //   width: 35,
+                              //   decoration: BoxDecoration(
+                              //     image: DecorationImage(
+                              //         image: AssetImage(
+                              //           "assets/icons/user.png",
+                              //         ),
+                              //         fit: BoxFit.cover),
+                              //     shape: BoxShape.circle,
+                              //     color: Colors.white,
+                              //   ),
+                              // ),
+                              // Container(
+                              //   height: 25,
+                              //   width: 70,
+                              //   child: Text(
+                              //     "PetPals",
+                              //     style: TextStyle(
+                              //       color: aDarkGreyColor,
+                              //       fontSize: 17,
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -440,7 +463,7 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.centerLeft,
             children: <Widget>[
               Material(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(35.0),
                 elevation: 3.5,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -522,12 +545,12 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     decoration: BoxDecoration(
                       color: aLightGreyColor,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(35),
                     ),
                     height: 190,
                     width: size.width * 0.4,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(35),
                       child: Image.network(
                         "${pet.imageURL}",
                         //height: 190, width: size.width * 0.4,

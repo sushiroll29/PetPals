@@ -186,7 +186,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           alignment: Alignment.centerLeft,
           children: <Widget>[
             Material(
-              borderRadius: BorderRadius.circular(20.0),
+              borderRadius: BorderRadius.circular(35.0),
               elevation: 2.0,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -268,12 +268,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 Container(
                   decoration: BoxDecoration(
                     color: aPrimaryLightColor,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(35),
                   ),
                   height: 190,
                   width: size.width * 0.4,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(35),
                     child: Image.network(
                       "${pet.imageURL}",
                       //height: 190, width: size.width * 0.4,

@@ -260,33 +260,6 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Material(
-                        borderRadius: BorderRadius.circular(25),
-                        elevation: 4,
-                        color: aPrimaryColor,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: IconButton(
-                            icon: Icon(
-                              FontAwesomeIcons.solidHeart,
-                              color: (isPressed) ? Colors.red : Colors.white,
-                            ),
-                            onPressed: () async {
-                              //saves to Favorites collection in Firebase
-
-                              if (isPressed == true) {
-                                await deleteFromFavorites(context);
-                                print("deleted from favorites");
-
-                                setState(() {
-                                  isPressed = false;
-                                });
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20),
                       Expanded(
                         child: Material(
                           borderRadius: BorderRadius.circular(25),
@@ -312,6 +285,33 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                                 });
                               },
                             ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Material(
+                        borderRadius: BorderRadius.circular(25),
+                        elevation: 4,
+                        color: aPrimaryColor,
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.solidHeart,
+                              color: (isPressed) ? Colors.red : Colors.white,
+                            ),
+                            onPressed: () async {
+                              //saves to Favorites collection in Firebase
+
+                              if (isPressed == true) {
+                                await deleteFromFavorites(context);
+                                print("deleted from favorites");
+
+                                setState(() {
+                                  isPressed = false;
+                                });
+                              }
+                            },
                           ),
                         ),
                       ),

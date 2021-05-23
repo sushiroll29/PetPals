@@ -52,14 +52,33 @@ class _MapPageState extends State<MapPage> {
             ? GoogleMap(
                 markers: Set<Marker>.of(markers.values),
                 mapType: MapType.normal,
-                myLocationEnabled: true,
+                //myLocationEnabled: true,
                 onMapCreated: (GoogleMapController controller) {
                   myController = controller;
                 },
                 initialCameraPosition:
                     CameraPosition(target: _currentPosition, zoom: 15),
               )
-            : Container());
+            : Container(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Please provide access to location services in order to use the map functionality.",
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: aDarkGreyColor.withOpacity(0.9),
+                          fontFamily: GoogleFonts.quicksand(
+                                  fontWeight: FontWeight.normal)
+                              .fontFamily,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ));
   }
 
   Future<void> getUserData() async {

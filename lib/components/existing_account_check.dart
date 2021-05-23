@@ -19,7 +19,7 @@ class ExistingAccountCheck extends StatelessWidget {
         Text(
           login ? "Don’t have an account? " : "Already have an account? ",
           style: TextStyle(
-            color: aDarkGreyColor,
+            color: aDarkGreyColor.withOpacity(0.8),
             fontFamily:
                 GoogleFonts.quicksand(fontWeight: FontWeight.normal).fontFamily,
           ),
@@ -31,7 +31,7 @@ class ExistingAccountCheck extends StatelessWidget {
             style: TextStyle(
               fontFamily:
                   GoogleFonts.quicksand(fontWeight: FontWeight.bold).fontFamily,
-              color: aDarkGreyColor,
+              color: aDarkGreyColor.withOpacity(0.8),
               fontWeight: FontWeight.bold,
             ),
           ),

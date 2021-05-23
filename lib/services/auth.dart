@@ -88,6 +88,9 @@ class PasswordValidator {
     if (value.isEmpty) {
       return "password can't be empty";
     }
+    if (value.length < 8) {
+      return "must be at least 8 characters long";
+    }
     return null;
   }
 }
