@@ -241,7 +241,7 @@ class _PetImagePageState extends State<PetImagePage> {
       //     fontSize: 16,
       //   ),
       // ),
-
+      actionsPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
       actions: [okButton, goBackButton],
     );
 

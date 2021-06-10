@@ -467,7 +467,7 @@ class _HomePageState extends State<HomePage> {
                 elevation: 3.5,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 17.0, vertical: 20.0),
+                      horizontal: 17.0, vertical: 30.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

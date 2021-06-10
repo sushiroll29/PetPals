@@ -142,7 +142,7 @@ class _SpecificUserPetsPageState extends State<SpecificUserPetsPage> {
         children: <Widget>[
           Material(
             borderRadius: BorderRadius.circular(35.0),
-            elevation: 2.0,
+            elevation: 3.5,
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 17.0, vertical: 20.0),
@@ -186,14 +186,30 @@ class _SpecificUserPetsPageState extends State<SpecificUserPetsPage> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Text(
-                          'Found on ${DateFormat('dd MMMM yyyy').format(pet.foundOn).toString()}',
-                          style: TextStyle(
-                            color: Colors.grey.shade600,
-                            fontFamily: GoogleFonts.quicksand(
-                                    fontWeight: FontWeight.w600)
-                                .fontFamily,
-                          ),
+                        Row(
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.mapMarkerAlt,
+                              color: Colors.grey.shade400,
+                              size: 15,
+                            ),
+                            SizedBox(width: 5),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Text(
+                                  '${pet.city}, ${pet.country}',
+                                  //"${widget.pet.address}",
+                                  style: TextStyle(
+                                    color: Colors.grey.shade600,
+                                    fontFamily: GoogleFonts.quicksand(
+                                            fontWeight: FontWeight.w600)
+                                        .fontFamily,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

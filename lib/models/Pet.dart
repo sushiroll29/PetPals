@@ -94,7 +94,7 @@ class Pet {
         isSterilised = snapshot['isSterilised'],
         location = snapshot['location'],
         age = snapshot['age'],
-        foundOn = snapshot['foundOn'].toDate(),
+        //foundOn = snapshot['foundOn'].toDate(),
         postDate = snapshot['postDate'].toDate(),
         description = snapshot['description'],
         userId = snapshot['userId'],

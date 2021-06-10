@@ -26,7 +26,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
     FontAwesomeIcons.cat,
   ];
 
-  Stream<QuerySnapshot> getUsersPets(BuildContext context) async* {
+  Stream<QuerySnapshot> getUsersFavoritePets(BuildContext context) async* {
     final uid = await Provider.of(context).auth.getCurrentUID();
     yield* Firestore.instance
         .collection("userData")
@@ -49,6 +49,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey.shade500,
+                //color: Colors.grey.shade500,
                 fontFamily: GoogleFonts.quicksand(fontWeight: FontWeight.normal)
                     .fontFamily,
               ),
@@ -130,7 +131,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         ),*/
                         Expanded(
                             child: StreamBuilder(
-                                stream: getUsersPets(context),
+                                stream: getUsersFavoritePets(context),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData)
                                     return Text(
@@ -187,10 +188,10 @@ class _FavoritesPageState extends State<FavoritesPage> {
           children: <Widget>[
             Material(
               borderRadius: BorderRadius.circular(35.0),
-              elevation: 2.0,
+              elevation: 3.5,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 17.0, vertical: 20.0),
+                    horizontal: 17.0, vertical: 30.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

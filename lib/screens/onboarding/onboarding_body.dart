@@ -13,14 +13,14 @@ class _BodyState extends State<Body> {
   int pageIndex = 0;
   List<Map<String, String>> onboardingData = [
     {
-      "titleText": "*APP NAME HERE*",
-      "bodyText": "Welcome to *APP NAME*! Let's get started!",
+      "titleText": "Welcome to PetPals!",
+      "bodyText": "Let's get started!",
       "image": "assets/images/doodle_1.png",
     },
     {
       "titleText": "Browse through pets",
       "bodyText":
-          "See what types of cats and dogs are up for adoption at the moment.",
+          "See what types of animals are up for adoption at the moment.",
       "image": "assets/images/doodle_2.png",
     },
     {

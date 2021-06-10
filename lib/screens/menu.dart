@@ -50,7 +50,7 @@ class _MenuPageState extends State<MenuPage> {
   ];
 
   List<String> menuItems = [
-    'Adoption',
+    'Home',
     'My pets',
     'Favorites',
     'Add pet',
@@ -63,7 +63,7 @@ class _MenuPageState extends State<MenuPage> {
     FontAwesomeIcons.list,
     FontAwesomeIcons.solidHeart,
     FontAwesomeIcons.plus,
-    FontAwesomeIcons.solidMap,
+    FontAwesomeIcons.mapMarkedAlt,
     FontAwesomeIcons.userAlt,
   ];
 

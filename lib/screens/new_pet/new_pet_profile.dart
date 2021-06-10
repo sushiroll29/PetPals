@@ -38,6 +38,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
   List hasMicrochip = ["Yes", "No", "Don't know"];
   @override
   Widget build(BuildContext context) {
+    DateTime _postDate = DateTime.now();
     Size size = MediaQuery.of(context).size;
     _nameController.text = widget.pet.name;
     _descriptionController.text = widget.pet.description;
@@ -190,7 +191,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: AutoSizeText(
-                          "Size category (depending on pet category)",
+                          "Size category (depending on the pet type)",
                           maxLines: 1,
                           style: TextStyle(
                             color: Colors.grey.shade700,
@@ -313,7 +314,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: AutoSizeText(
-                          "If you don't know it, write down 'Mix'.",
+                          "If you don't know it, specify 'Mix'.",
                           maxLines: 1,
                           style: TextStyle(
                             color: Colors.grey.shade700,
@@ -543,6 +544,7 @@ class _NewPetNamePageState extends State<NewPetNamePage> {
                   RoundedButton(
                     text: 'CONTINUE',
                     press: () {
+                      widget.pet.postDate = _postDate;
                       widget.pet.petSize = _currentSelectedPetSizeValue;
                       widget.pet.usersName = _usersName;
                       widget.pet.name = _nameController.text;

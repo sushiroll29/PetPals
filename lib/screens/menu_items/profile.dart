@@ -16,7 +16,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   User user = User("");
-  TextEditingController _userPhoneNumberController = TextEditingController();
+  TextEditingController _userPhoneNumberController =
+      TextEditingController(text: "not set up");
 
   FirebaseUser _user;
   Future<void> _getUserData() async {
@@ -287,8 +288,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               _userPhoneNumberController.text =
                                   user.phoneNumber;
                             });
-                            final uid =
-                                await Provider.of(context).auth.getCurrentUID();
+                            final uid = _user.uid;
+                            //await Provider.of(context).auth.getCurrentUID();
                             await Provider.of(context)
                                 .db
                                 .collection('userData')

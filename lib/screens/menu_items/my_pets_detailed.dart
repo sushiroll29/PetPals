@@ -91,12 +91,13 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: IconButton(
+                                  iconSize: 20,
                                   icon: Icon(FontAwesomeIcons.chevronLeft),
-                                  color: aPrimaryColor,
+                                  color: aDarkGreyColor,
                                   onPressed: () {
                                     Navigator.pop(context);
                                   }),
@@ -105,12 +106,13 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: IconButton(
+                                  iconSize: 20,
                                   icon: Icon(FontAwesomeIcons.ellipsisH),
-                                  color: aPrimaryColor,
+                                  color: aDarkGreyColor,
                                   onPressed: () {
                                     //print(widget.pet.documentId);
                                     _petEditModalBottomSheet(context);
@@ -128,7 +130,7 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
                   child: Container(
                     color: Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 2, right: 2, top: 90),
+                      padding: EdgeInsets.only(left: 2, right: 2, top: 70),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -309,9 +311,9 @@ class _MyPetsDetailedState extends State<MyPetsDetailed> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: Material(
-              elevation: 10,
+              elevation: 4,
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 height: 125,

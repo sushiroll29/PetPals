@@ -54,6 +54,20 @@ class _NewPetSummaryPageState extends State<NewPetSummaryPage> {
                         color: Colors.grey.shade400,
                         size: 20,
                       )),
+                  Center(
+                    child: Text(
+                      "Summary",
+                      style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.grey.shade500,
+                        fontFamily:
+                            GoogleFonts.quicksand(fontWeight: FontWeight.normal)
+                                .fontFamily,
+                      ),
+                    ),
+                  ),
+                  Text("aa", style: TextStyle(color: Colors.white)),
                 ],
               ),
               Container(
@@ -62,29 +76,30 @@ class _NewPetSummaryPageState extends State<NewPetSummaryPage> {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Column(
                     children: <Widget>[
-                      Image(
-                        image: AssetImage('assets/images/cat_doodle.png'),
-                        height: size.width * 0.6,
-                      ),
-                      SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              "These are your pet's details.\nPlease check if the information is correct.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 17.5,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey.shade600,
-                                fontFamily: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.normal)
-                                    .fontFamily,
-                              ),
-                            ),
-                          ),
+                          // Expanded(
+                          //   child: Text(
+                          //     "Please check if the information you have provided is correct.",
+                          //     textAlign: TextAlign.center,
+                          //     style: TextStyle(
+                          //       fontSize: 17.5,
+                          //       fontWeight: FontWeight.w600,
+                          //       color: Colors.grey.shade600,
+                          //       fontFamily: GoogleFonts.quicksand(
+                          //               fontWeight: FontWeight.normal)
+                          //           .fontFamily,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
+                      ),
+                      SizedBox(height: 25),
+                      Image(
+                        image: NetworkImage(widget.pet.imageURL),
+                        //image: AssetImage('assets/images/cat_doodle.png'),
+                        height: size.width * 0.6,
                       ),
                       SizedBox(height: 60),
                       Row(

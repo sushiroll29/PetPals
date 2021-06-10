@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fl/services/provider.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/screens/menu_items/my_pets_detailed.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,11 @@ class _MyPetsPageState extends State<MyPetsPage> {
         .collection("petsStream")
         .orderBy('postDate', descending: true)
         .snapshots();
+    // .collection("userData")
+    // .document(_uid)
+    // .collection("pets")
+    // .orderBy('postDate', descending: true)
+    // .snapshots();
   }
 
   FirebaseUser user;
@@ -65,8 +71,9 @@ class _MyPetsPageState extends State<MyPetsPage> {
               icon: Icon(FontAwesomeIcons.bars, size: 20),
               onPressed: () {
                 //popmaybe?????
+                //Navigator.pop(context);
                 Navigator.pop(context);
-                //Navigator.pushReplacementNamed(context, '/menu');
+                //)(context, '/menu');
               },
             ),
           ),
@@ -102,7 +109,6 @@ class _MyPetsPageState extends State<MyPetsPage> {
                                             .fontFamily,
                                       ),
                                     );
-
                                   return new ListView.builder(
                                     padding: EdgeInsets.only(top: 10),
                                     itemCount: snapshot.data.documents.length,
@@ -126,6 +132,7 @@ class _MyPetsPageState extends State<MyPetsPage> {
 
   Widget buildMyPetsList(BuildContext context, DocumentSnapshot document) {
     final pet = Pet.fromSnapshot(document);
+
     //final petType = pet.types();
     Size size = MediaQuery.of(context).size;
     if (pet.userId != user.uid) {
@@ -146,11 +153,11 @@ class _MyPetsPageState extends State<MyPetsPage> {
           alignment: Alignment.centerLeft,
           children: <Widget>[
             Material(
-              borderRadius: BorderRadius.circular(40.0),
+              borderRadius: BorderRadius.circular(35.0),
               elevation: 3.5,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 17.0, vertical: 20.0),
+                    horizontal: 17.0, vertical: 30.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -228,12 +235,12 @@ class _MyPetsPageState extends State<MyPetsPage> {
                 Container(
                   decoration: BoxDecoration(
                     color: aLightGreyColor,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(35),
                   ),
                   height: 190,
                   width: size.width * 0.4,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(35),
                     child: Image.network(
                       "${pet.imageURL}",
                       //height: 190, width: size.width * 0.4,

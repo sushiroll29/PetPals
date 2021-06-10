@@ -85,7 +85,7 @@ class CreditsPage extends StatelessWidget {
                 text: new TextSpan(
                   children: [
                     new TextSpan(
-                      text: 'Icon made by ',
+                      text: 'App and splash icon made by ',
                       style: TextStyle(
                         color: Colors.grey.shade700,
                         fontFamily:
@@ -134,7 +134,50 @@ class CreditsPage extends StatelessWidget {
                         },
                     ),
                     new TextSpan(
-                      text: '. (also used on splashscreen).',
+                      text: '.',
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontFamily:
+                            GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                                .fontFamily,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(
+                thickness: 1,
+              ),
+              RichText(
+                text: new TextSpan(
+                  children: [
+                    new TextSpan(
+                      text: 'Home screen and "Pet category" icons are from ',
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontFamily:
+                            GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                                .fontFamily,
+                        fontSize: 18,
+                      ),
+                    ),
+                    new TextSpan(
+                      text: 'icons8',
+                      style: TextStyle(
+                        color: Colors.blue.shade400,
+                        fontFamily:
+                            GoogleFonts.quicksand(fontWeight: FontWeight.w600)
+                                .fontFamily,
+                        fontSize: 18,
+                      ),
+                      recognizer: new TapGestureRecognizer()
+                        ..onTap = () {
+                          launch('https://icons8.com');
+                        },
+                    ),
+                    new TextSpan(
+                      text: '.',
                       style: TextStyle(
                         color: Colors.grey.shade700,
                         fontFamily:

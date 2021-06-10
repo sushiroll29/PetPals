@@ -10,6 +10,7 @@ class User {
         'phoneNumber': phoneNumber,
       };
 
+  //formatting for getting a Firebase snapshot
   User.fromSnapshot(DocumentSnapshot snapshot)
       : phoneNumber = snapshot['phoneNumber'];
 }

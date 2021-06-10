@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/models/Pet.dart';
+import 'package:fl/screens/menu_items/specific_user_pets.dart';
 import 'package:fl/widgets/constants.dart';
 import 'package:fl/services/provider.dart';
 import 'package:flutter/material.dart';
@@ -51,25 +52,55 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 55),
+                    padding:
+                        const EdgeInsets.only(left: 8.0, top: 55, right: 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Container(
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: IconButton(
+                                  iconSize: 20,
                                   icon: Icon(FontAwesomeIcons.chevronLeft),
-                                  color: aPrimaryColor,
+                                  color: aDarkGreyColor,
                                   onPressed: () {
                                     Navigator.pop(context);
                                   }),
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: IconButton(
+                                iconSize: 20,
+                                icon: Icon(
+                                  FontAwesomeIcons.heart,
+                                  color:
+                                      (isPressed) ? Colors.red : aDarkGreyColor,
+                                ),
+                                onPressed: () async {
+                                  //saves to Favorites collection in Firebase
+                                  if (isPressed == true) {
+                                    await deleteFromFavorites(context);
+                                    print("deleted from favorites");
+
+                                    setState(() {
+                                      isPressed = false;
+                                    });
+                                  }
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -83,7 +114,8 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                   child: Container(
                     color: Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 2, right: 2, top: 90),
+                      padding: EdgeInsets.only(left: 2, right: 2, top: 70),
+                      //padding: EdgeInsets.only(left: 20, right: 20, top: 90),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -99,6 +131,28 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                                       spacing: 3,
                                       runSpacing: 3,
                                       children: [
+                                        Container(
+                                          height: 35,
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 10),
+                                          decoration: BoxDecoration(
+                                              color: aPrimaryLightColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: Text(
+                                            'Size category: ${widget.pet.petSize}',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.grey.shade600,
+                                              fontFamily: GoogleFonts.quicksand(
+                                                      fontWeight:
+                                                          FontWeight.normal)
+                                                  .fontFamily,
+                                            ),
+                                          ),
+                                        ),
                                         Container(
                                           height: 35,
                                           alignment: Alignment.center,
@@ -195,31 +249,45 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                           Padding(
                             padding:
                                 EdgeInsets.only(left: 10, right: 10, top: 30),
+                            //padding: EdgeInsets.only(top: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      '${widget.pet.usersName}',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.grey.shade600,
-                                        fontFamily: GoogleFonts.quicksand(
-                                                fontWeight: FontWeight.normal)
-                                            .fontFamily,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SpecificUserPetsPage(
+                                                  pet: widget.pet)),
+                                    );
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text(
+                                        '${widget.pet.usersName}',
+                                        style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey.shade800,
+                                          fontFamily: GoogleFonts.quicksand(
+                                                  fontWeight: FontWeight.normal)
+                                              .fontFamily,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 Text(
-                                  '${DateFormat('dd MMMM yyyy   hh:mm a').format(widget.pet.postDate).toString()}',
+                                  '',
+                                  //'${DateFormat('dd MMMM yyyy   hh:mm a').format(widget.pet.postDate).toString()}',
                                   style: TextStyle(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.grey.shade600,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey.shade800,
                                     fontFamily: GoogleFonts.quicksand(
                                             fontWeight: FontWeight.normal)
                                         .fontFamily,
@@ -252,7 +320,7 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
               Container(
                 height: 130,
                 decoration: BoxDecoration(
-                  color: aLightGreyColor.withOpacity(0.4),
+                  //color: aLightGreyColor.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
@@ -288,33 +356,6 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Material(
-                        borderRadius: BorderRadius.circular(25),
-                        elevation: 4,
-                        color: aPrimaryColor,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: IconButton(
-                            icon: Icon(
-                              FontAwesomeIcons.solidHeart,
-                              color: (isPressed) ? Colors.red : Colors.white,
-                            ),
-                            onPressed: () async {
-                              //saves to Favorites collection in Firebase
-
-                              if (isPressed == true) {
-                                await deleteFromFavorites(context);
-                                print("deleted from favorites");
-
-                                setState(() {
-                                  isPressed = false;
-                                });
-                              }
-                            },
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -322,9 +363,9 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: Material(
-              elevation: 10,
+              elevation: 4,
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 height: 125,
@@ -355,19 +396,8 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                                   .fontFamily,
                             ),
                           ),
-                          Icon(
-                              widget.pet.gender == 'Male'
-                                  ? FontAwesomeIcons.mars
-                                  : FontAwesomeIcons.venus,
-                              color: Colors.grey.shade400),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
                           Text(
-                            '${widget.pet.breed}',
+                            ', ${widget.pet.breed}',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontFamily: GoogleFonts.quicksand(
@@ -375,6 +405,12 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                                   .fontFamily,
                             ),
                           ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Text(
                             '${widget.pet.age} old',
                             style: TextStyle(
@@ -384,18 +420,42 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
                                   .fontFamily,
                             ),
                           ),
+                          Icon(
+                              widget.pet.gender == 'Male'
+                                  ? FontAwesomeIcons.mars
+                                  : FontAwesomeIcons.venus,
+                              color: Colors.grey.shade400),
                         ],
                       ),
                       SizedBox(height: 15),
-                      Text(
-                        'Found on ${DateFormat('dd MMMM yyyy').format(widget.pet.foundOn).toString()}',
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontFamily:
-                              GoogleFonts.quicksand(fontWeight: FontWeight.w600)
-                                  .fontFamily,
+                      Row(children: [
+                        Icon(
+                          FontAwesomeIcons.mapMarkerAlt,
+                          color: Colors.grey.shade400,
+                          size: 15,
                         ),
-                      ),
+                        SizedBox(width: 5),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: GestureDetector(
+                              onTap: () {
+                                _launchMapsUrl(widget.pet.location.latitude,
+                                    widget.pet.location.longitude);
+                              },
+                              child: Text(
+                                "${widget.pet.street}, ${widget.pet.city}, ${widget.pet.country}",
+                                style: TextStyle(
+                                  color: Colors.grey.shade600,
+                                  fontFamily: GoogleFonts.quicksand(
+                                          fontWeight: FontWeight.w600)
+                                      .fontFamily,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ])
                     ],
                   ),
                 ),
@@ -448,5 +508,14 @@ class _FavoritesDetailedState extends State<FavoritesDetailed> {
         ),
       ),
     );
+  }
+
+  void _launchMapsUrl(double lat, double lon) async {
+    final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

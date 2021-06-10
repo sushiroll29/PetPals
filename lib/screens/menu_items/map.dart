@@ -107,35 +107,35 @@ class _MapPageState extends State<MapPage> {
           //data.documents[i]['favoritesID'] == data.documents[i].documentID;
           if (data.documents[i]['userId'] != "${user.uid}") {
             if (data.documents[i]['type'] == "dog") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 0.0);
             }
             if (data.documents[i]['type'] == "cat") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 17.0);
             }
             if (data.documents[i]['type'] == "parrot") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 69.0);
             }
             if (data.documents[i]['type'] == "guinea pig") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 117.0);
             }
             if (data.documents[i]['type'] == "hamster") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 182.0);
             }
             if (data.documents[i]['type'] == "rabbit") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 238.0);
             }
             if (data.documents[i]['type'] == "fish") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 280.0);
             }
             if (data.documents[i]['type'] == "snake") {
-              initMarker(
+              createMarker(
                   data.documents[i].data, data.documents[i].documentID, 332.0);
             }
           }
@@ -144,46 +144,46 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  void initMarker(specify, specifyId, markerHue) async {
-    var markerIdVal = specifyId;
+  void createMarker(document, documentId, markerHue) async {
+    var markerIdVal = documentId;
     final MarkerId markerId = MarkerId(markerIdVal);
     final Marker marker = Marker(
       icon: BitmapDescriptor.defaultMarkerWithHue(markerHue),
       markerId: markerId,
       position:
-          LatLng(specify['location'].latitude, specify['location'].longitude),
+          LatLng(document['location'].latitude, document['location'].longitude),
       infoWindow: InfoWindow(
-          title: specify['name'],
+          title: document['name'],
           snippet:
-              "${specify['type']}, ${specify['gender'].toString().toLowerCase()}",
+              "${document['type']}, ${document['gender'].toString().toLowerCase()}",
           onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => DetailedPet(
                         pet: Pet(
-                            specify['type'],
-                            specify['name'],
-                            specify['breed'],
-                            specify['gender'],
-                            specify['isVaccinated'],
-                            specify['isStreilised'],
-                            specify['location'],
-                            specify['age'],
-                            specify['foundOn'].toDate(),
-                            specify['postDate'].toDate(),
-                            specify['userId'],
-                            specify['description'],
-                            specify['userPhoneNumber'],
-                            specify['usersName'],
-                            specify['requiresSpecialCare'],
-                            specify['hasMicrochip'],
-                            specify['favoritesId'],
-                            specify['petSize'],
-                            specify['imageURL'],
-                            specify['street'],
-                            specify['city'],
-                            specify['country']))));
+                            document['type'],
+                            document['name'],
+                            document['breed'],
+                            document['gender'],
+                            document['isVaccinated'],
+                            document['isStreilised'],
+                            document['location'],
+                            document['age'],
+                            document['foundOn'].toDate(),
+                            document['postDate'].toDate(),
+                            document['userId'],
+                            document['description'],
+                            document['userPhoneNumber'],
+                            document['usersName'],
+                            document['requiresSpecialCare'],
+                            document['hasMicrochip'],
+                            document['favoritesId'],
+                            document['petSize'],
+                            document['imageURL'],
+                            document['street'],
+                            document['city'],
+                            document['country']))));
           }),
     );
     setState(() {

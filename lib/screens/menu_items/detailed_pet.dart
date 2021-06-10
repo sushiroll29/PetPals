@@ -54,25 +54,89 @@ class _DetailedPetState extends State<DetailedPet> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 55),
+                    padding:
+                        const EdgeInsets.only(left: 8.0, top: 55, right: 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Container(
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.7),
+                                color: Colors.white.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: IconButton(
+                                  iconSize: 20,
                                   icon: Icon(FontAwesomeIcons.chevronLeft),
-                                  color: aPrimaryColor,
+                                  color: aDarkGreyColor,
                                   onPressed: () {
                                     Navigator.pop(context);
                                   }),
+                            ),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: IconButton(
+                                iconSize: 20,
+                                icon: Icon(
+                                  FontAwesomeIcons.heart,
+                                  color:
+                                      (isPressed) ? Colors.red : aDarkGreyColor,
+                                ),
+                                onPressed: () async {
+                                  //saves to Favorites collection in Firebase
+                                  if (isPressed == false) {
+                                    final uid = await Provider.of(context)
+                                        .auth
+                                        .getCurrentUID();
+
+                                    DocumentReference ref = Firestore.instance
+                                        .collection("userData")
+                                        .document(uid)
+                                        .collection("favorites")
+                                        .document();
+                                    ref.setData({
+                                      "age": widget.pet.age,
+                                      "breed": widget.pet.breed,
+                                      "city": widget.pet.city,
+                                      "country": widget.pet.country,
+                                      "description": widget.pet.description,
+                                      "documentId": widget.pet.documentId,
+                                      "favoritesId": ref.documentID,
+                                      "foundOn": widget.pet.foundOn,
+                                      "gender": widget.pet.gender,
+                                      "hasMicrochip": widget.pet.hasMicrochip,
+                                      "imageURL": widget.pet.imageURL,
+                                      "isSterilised": widget.pet.isSterilised,
+                                      "isVaccinated": widget.pet.isVaccinated,
+                                      "location": widget.pet.location,
+                                      "name": widget.pet.name,
+                                      "postDate": widget.pet.postDate,
+                                      "requiresSpecialCare":
+                                          widget.pet.requiresSpecialCare,
+                                      "street": widget.pet.street,
+                                      "type": widget.pet.type,
+                                      "userId": widget.pet.userId,
+                                      "userPhoneNumber":
+                                          widget.pet.userPhoneNumber,
+                                      "usersName": widget.pet.usersName,
+                                      "isFavorite": isPressed,
+                                    });
+
+                                    setState(() {
+                                      isPressed = true;
+                                    });
+                                  }
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -86,7 +150,7 @@ class _DetailedPetState extends State<DetailedPet> {
                   child: Container(
                     color: Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 2, right: 2, top: 90),
+                      padding: EdgeInsets.only(left: 2, right: 2, top: 70),
                       //padding: EdgeInsets.only(left: 20, right: 20, top: 90),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -254,7 +318,8 @@ class _DetailedPetState extends State<DetailedPet> {
                                   ),
                                 ),
                                 Text(
-                                  '${DateFormat('dd MMMM yyyy   hh:mm a').format(widget.pet.postDate).toString()}',
+                                  '',
+                                  //'${DateFormat('dd MMMM yyyy   hh:mm a').format(widget.pet.postDate).toString()}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -291,7 +356,7 @@ class _DetailedPetState extends State<DetailedPet> {
               Container(
                 height: 130,
                 decoration: BoxDecoration(
-                  color: aLightGreyColor.withOpacity(0.4),
+                  //color: aLightGreyColor.withOpacity(0.4),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
@@ -327,62 +392,6 @@ class _DetailedPetState extends State<DetailedPet> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Material(
-                        borderRadius: BorderRadius.circular(25),
-                        elevation: 4,
-                        color: aPrimaryColor,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: IconButton(
-                            icon: Icon(
-                              FontAwesomeIcons.solidHeart,
-                              color: (isPressed) ? Colors.red : Colors.white,
-                            ),
-                            onPressed: () async {
-                              //saves to Favorites collection in Firebase
-                              if (isPressed == false) {
-                                final uid = await Provider.of(context)
-                                    .auth
-                                    .getCurrentUID();
-
-                                DocumentReference ref = Firestore.instance
-                                    .collection("userData")
-                                    .document(uid)
-                                    .collection("favorites")
-                                    .document();
-                                ref.setData({
-                                  "age": widget.pet.age,
-                                  "breed": widget.pet.breed,
-                                  "description": widget.pet.description,
-                                  "documentId": widget.pet.documentId,
-                                  "favoritesId": ref.documentID,
-                                  "foundOn": widget.pet.foundOn,
-                                  "gender": widget.pet.gender,
-                                  "hasMicrochip": widget.pet.hasMicrochip,
-                                  "imageURL": widget.pet.imageURL,
-                                  "isSterilised": widget.pet.isSterilised,
-                                  "isVaccinated": widget.pet.isVaccinated,
-                                  "location": widget.pet.location,
-                                  "name": widget.pet.name,
-                                  "postDate": widget.pet.postDate,
-                                  "requiresSpecialCare":
-                                      widget.pet.requiresSpecialCare,
-                                  "type": widget.pet.type,
-                                  "userId": widget.pet.userId,
-                                  "userPhoneNumber": widget.pet.userPhoneNumber,
-                                  "usersName": widget.pet.usersName,
-                                  "isFavorite": isPressed,
-                                });
-
-                                setState(() {
-                                  isPressed = true;
-                                });
-                              }
-                            },
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -390,9 +399,9 @@ class _DetailedPetState extends State<DetailedPet> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: Material(
-              elevation: 10,
+              elevation: 4,
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 height: 125,
@@ -423,19 +432,8 @@ class _DetailedPetState extends State<DetailedPet> {
                                   .fontFamily,
                             ),
                           ),
-                          Icon(
-                              widget.pet.gender == 'Male'
-                                  ? FontAwesomeIcons.mars
-                                  : FontAwesomeIcons.venus,
-                              color: Colors.grey.shade400),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
                           Text(
-                            '${widget.pet.breed}',
+                            ', ${widget.pet.breed}',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontFamily: GoogleFonts.quicksand(
@@ -443,6 +441,12 @@ class _DetailedPetState extends State<DetailedPet> {
                                   .fontFamily,
                             ),
                           ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Text(
                             '${widget.pet.age} old',
                             style: TextStyle(
@@ -452,6 +456,11 @@ class _DetailedPetState extends State<DetailedPet> {
                                   .fontFamily,
                             ),
                           ),
+                          Icon(
+                              widget.pet.gender == 'Male'
+                                  ? FontAwesomeIcons.mars
+                                  : FontAwesomeIcons.venus,
+                              color: Colors.grey.shade400),
                         ],
                       ),
                       SizedBox(height: 15),
@@ -494,11 +503,11 @@ class _DetailedPetState extends State<DetailedPet> {
     );
   }
 
-  Future<void> _makePhoneCall(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    if (await canLaunch(phoneNumber)) {
+      await launch(phoneNumber);
     } else {
-      throw 'Could not launch $url';
+      throw 'Could not launch $phoneNumber';
     }
   }
 

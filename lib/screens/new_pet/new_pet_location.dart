@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl/screens/new_pet/new_pet_date.dart';
+import 'package:fl/screens/new_pet/new_pet_phone.dart';
 import 'package:flutter/material.dart';
 import 'package:fl/models/Pet.dart';
 import 'package:geocoder/geocoder.dart';
@@ -40,7 +41,7 @@ class _MapScreenState extends State<MapScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => NewPetDatePage(pet: widget.pet)));
+                    builder: (context) => NewPetPhonePage(pet: widget.pet)));
           }
 
           /*
