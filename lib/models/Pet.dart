@@ -12,7 +12,7 @@ class Pet {
   String isSterilised;
   GeoPoint location;
   String age;
-  DateTime foundOn;
+  //DateTime foundOn;
   DateTime postDate;
   String description;
   String documentId;
@@ -38,7 +38,7 @@ class Pet {
       this.isSterilised,
       this.location,
       this.age,
-      this.foundOn,
+      //this.foundOn,
       this.postDate,
       this.userId,
       this.description,
@@ -65,7 +65,7 @@ class Pet {
         'isSterilised': isSterilised,
         'location': location,
         'age': age,
-        'foundOn': foundOn,
+        //'foundOn': foundOn,
         'postDate': postDate,
         'description': description,
         'documentId': documentId,

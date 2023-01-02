@@ -111,7 +111,7 @@ class _DetailedPetState extends State<DetailedPet> {
                                       "description": widget.pet.description,
                                       "documentId": widget.pet.documentId,
                                       "favoritesId": ref.documentID,
-                                      "foundOn": widget.pet.foundOn,
+                                      //"foundOn": widget.pet.foundOn,
                                       "gender": widget.pet.gender,
                                       "hasMicrochip": widget.pet.hasMicrochip,
                                       "imageURL": widget.pet.imageURL,

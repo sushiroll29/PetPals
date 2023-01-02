@@ -140,7 +140,7 @@ class _NewPetDatePageState extends State<NewPetDatePage> {
                         RoundedButton(
                           text: 'CONTINUE',
                           press: () {
-                            widget.pet.foundOn = _foundOn;
+                            //widget.pet.foundOn = _foundOn;
                             widget.pet.postDate = _postDate;
                             Navigator.push(
                               context,

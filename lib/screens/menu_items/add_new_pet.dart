@@ -11,29 +11,8 @@ class AddNewPetPage extends StatefulWidget {
 }
 
 class _AddNewPetPageState extends State<AddNewPetPage> {
-  final newPet = new Pet(
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null);
+  final newPet = new Pet(null, null, null, null, null, null, null, null, null,
+      null, null, null, null, null, null, null, null, null, null, null, null);
 
   @override
   Widget build(BuildContext context) {
